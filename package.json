@@ -1,0 +1,31 @@
+{
+  "name": "cms-front",
+  "version": "1.0.0",
+  "description": "cms前端项目",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LangDonHJJ/cms-Front.git"
+  },
+  "keywords": [
+    "cms"
+  ],
+  "author": "HA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LangDonHJJ/cms-Front/issues"
+  },
+  "homepage": "https://github.com/LangDonHJJ/cms-Front#readme",
+  "dependencies": {
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0"
+  }
+}
