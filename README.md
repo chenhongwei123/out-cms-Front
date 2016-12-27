@@ -2,6 +2,7 @@
 
 #### 文件结构说明
 
+```javascript
 cms-Front---
            |
           dist(gulp压缩后的文件,此文件不会上传github)
@@ -27,3 +28,4 @@ cms-Front---
            |
            |
           package.json(node初始文件)
+```
