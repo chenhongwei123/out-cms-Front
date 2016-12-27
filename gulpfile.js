@@ -61,8 +61,9 @@ gulp.task('scripts',function () {
 gulp.task('styles',function () {
 
     return gulp.src('styles/**/*.css')
-        .pipe(minifyCss())
-        .pipe(gulp.dest('dist/styles'));
+        .pipe(concat('style.css')) //合并css文件
+        .pipe(minifyCss()) //压缩css文件
+        .pipe(gulp.dest('dist/styles')); //输出
 });
 
 //设置图片压缩
