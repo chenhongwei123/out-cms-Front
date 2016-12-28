@@ -29,4 +29,9 @@ cms-Front---
            |
           package.json(node初始文件)
 ```
+#### 启动说明
 
+```sheel
+gulp
+```
+gulp后会生成一个dist文件夹
