@@ -35,6 +35,10 @@
     </div>
 </div>
 <div class="container">
+    <div class="alert alert-warning alert-dismissible state" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span id="warning-content"><strong>Warning!</strong>&nbsp;</span>
+    </div>
     <form class="form-horizontal wrap" role="form">
         <div class="form-group">
             <label for="mobile" class="col-sm-2 control-label">手机号</label>
@@ -62,4 +66,15 @@
 <script src="../scripts/js/checkLogin.js"></script>
 <script src="../scripts/bootstrap/bootstrap.min.js"></script>
 <script src="../scripts/jQuery/jquery.md5.js"></script>
+<script>
+    /**
+     * 可以关闭的警告框
+     */
+    $(document).ready(function () {
+        $('.close').click(function () {
+            $('.alert-warning').hide(500);
+            $(this).css('display','none');
+        })
+    })
+</script>
 </html>
