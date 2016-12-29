@@ -76,12 +76,16 @@ $(document).ready(function () {
                             $.cookie('token',data.data.token);
                             break;
                         case 'A00001':
-                            $('#warning-content').text('哇哦,token失效啦!T~T');
+                            $('#warning-content').text('呜呜,token失效啦!T~T');
+                            $('.alert-warning').fadeIn();
+                            $(this).css('display','block');
                             break;
                     }
                 }
 
             })
+        } else {
+            $(".spa2").text('');
         }
 
         
