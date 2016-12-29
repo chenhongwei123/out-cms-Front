@@ -61,12 +61,14 @@ $(document).ready(function () {
          */
         //使用ajax判断密码是否符合
         if($(this).is('#pwd')){ //判断密码
+            alert($.md5($('#pwd').val()));
             $.ajax({
                 type: 'post',
-                url: 'http://admin.honganjk.com/bz/login.action',
+                url: 'http://admin.honganjk.com/admin/login.action',
                 data:{
-                    'mobile':$('#mobile').val, //获取手机号
-                    'pwd':$.md5($('#pwd').val) //获取MD5加密后的密码
+                    'mobile':$('#mobile').val(), //获取手机号
+                    'pwd':$.md5($('#pwd').val()) //获取MD5加密后的密码
+
                 },
                 dataType:'json',
                 success: function(data){
@@ -74,16 +76,29 @@ $(document).ready(function () {
                         case 'A00000':
                             $.cookie('code',data.data.code);
                             $.cookie('token',data.data.token);
+                            alert('success');
                             break;
                         case 'A00001':
                             $('#warning-content').text('呜呜,token失效啦!T~T');
                             $('.alert-warning').fadeIn();
                             $(this).css('display','block');
                             break;
+                        default:
+                            $('.alert-warning').css('display','block');
+                            $('.alert-warning').fadeIn();
+                            $('#warning-content').text('用户名或者密码错误');
+
+
+                            // alert("用户名或密码错误");
                     }
+
+                },
+
+                error: function (msg) {
+                    sweetAlert("请求失败");
                 }
 
-            })
+            });
         } else {
             $(".spa2").text('');
         }
