@@ -55,56 +55,60 @@ $(document).ready(function () {
             }
         }
 
-
+});
         /**
          * 判断密码
          */
         //使用ajax判断密码是否符合
-        if($(this).is('#pwd')){ //判断密码
-            alert($.md5($('#pwd').val()));
+//      if($("input").is('#pwd')){ //判断密码
+           // alert($.md5($('#pwd').val()));
+         //  function Save(){
+           $(".btn-default").on("click",function(){
+          
             $.ajax({
                 type: 'post',
-                url: 'http://admin.honganjk.com/admin/login.action',
+                url: "http://admin.honganjk.com/admin/login.action",
                 data:{
                     'mobile':$('#mobile').val(), //获取手机号
                     'pwd':$.md5($('#pwd').val()) //获取MD5加密后的密码
 
                 },
-                dataType:'json',
+                dataType:"json",
                 success: function(data){
-                    switch(JSON.stringify(data.code)){
-                        case 'A00000':
+                	//alert("11111")
+                	console.log(data.data)
+                    switch(JSON.stringify(data.code))
+                    {
+                        case '"A00000"':
+                        
                             $.cookie('code',data.data.code);
                             $.cookie('token',data.data.token);
-                            alert('success');
+                            alert("登录成功")
+                            $('.alert-warning').css('display','none');
                             break;
-                        case 'A00001':
+                        case '"A00001"':
                             $('#warning-content').text('呜呜,token失效啦!T~T');
                             $('.alert-warning').fadeIn();
-                            $(this).css('display','block');
+//                          $(this).css('display','block');
+                               
                             break;
                         default:
                             $('.alert-warning').css('display','block');
                             $('.alert-warning').fadeIn();
                             $('#warning-content').text('用户名或者密码错误');
-
-
-                            // alert("用户名或密码错误");
                     }
 
                 },
 
                 error: function (msg) {
-                    sweetAlert("请求失败");
+                    alert("请求失败")
                 }
 
             });
-        } else {
-            $(".spa2").text('');
-        }
+         })  
 
         
-    });
+    
 
     /**
      * 聚焦显示
@@ -115,9 +119,9 @@ $(document).ready(function () {
             $(this).css("border","1px solid #D4D3D1");
         }
 
-        if($(this).is('#pwd')){
-            $('.spa2').text('记得输入正确的密码哦^_^').css('color','#D4D3D1');
-            $(this).css('border','1px solid #D4D3D1');
-        }
+//      if($(this).is('#pwd')){
+//          $('.spa2').text('记得输入正确的密码哦^_^').css('color','#D4D3D1');
+//          $(this).css('border','1px solid #D4D3D1');
+//      }
     });
 });
