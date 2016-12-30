@@ -24,9 +24,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>cms控制台</title>
+    <title>菜品管理</title>
     <link href="../styles/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="../styles/index-style.css" rel="stylesheet">
+    <link href="../styles/dish-style.css" rel="stylesheet">
+    <link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 <body>
 <!--创建导航条-->
@@ -67,18 +68,22 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar ul-style">
                 <li class="active">
+
                     <a href="dish.html">
+                        <img src="../images/dishmin.png">
                         <span class="text">菜品管理</span>
                     </a>
 
                 </li>
                 <li class="active">
                     <a href="banner.html">
+                        <img src="../images/banner.png">
                         <span class="text">Banner管理</span>
                     </a>
                 </li>
                 <li class="active">
                     <a href="vision.html">
+                        <img src="../images/vision.png">
                         <span class="text">版本管理</span>
                     </a>
                 </li>
@@ -91,42 +96,58 @@
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header">
-                    <img src="../images/wxbmain.png">
-                    Dashboard
+                    <img src="../images/dish.png">
+                    菜品管理
                 </h3>
-                <ol class="breadcrumb">
+                <ol class="breadcrumb breadcrumb-bg">
                     <li>
-                        <img src="../images/1.png">
-                        <span>Dashboard</span>
+                        <img src="../images/web.png">
+                        <span>Home</span>
+                    </li>
+                    <li>
+                        <img src="../images/dishmin.png">
+                        <span>菜品管理</span>
                     </li>
                 </ol>
             </div>
         </div>
-        <!--数据显示-->
+        <!--表格显示-->
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <!--可以显示用户数-->
-                <div class="info-box red-bg">
-                    <img src="../images/user.png">
-                    <div class="count">1000</div>
-                    <div class="title">用户统计</div>
-                </div>
+            <div class="col-md-12">
+                <button type="button" class="btn btn-sm btn-success">添加条目</button>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <!--可以显示订单数-->
-                <div class="info-box green-bg">
-                    <img src="../images/orders.png">
-                    <div class="count">20000</div>
-                    <div class="title">订单统计</div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <!--显示注册店铺数-->
-                <div class="info-box blue-bg">
-                    <img src="../images/shop.png">
-                    <div class="count">3000</div>
-                    <div class="title">店铺统计</div>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -134,4 +155,39 @@
 </body>
 <script src="../scripts/jQuery/jquery.min.js"></script>
 <script src="../scripts/bootstrap/bootstrap.min.js"></script>
+<script src="../scripts/sweetalert/sweetalert-dev.js"></script>
+<script>
+    /**
+     * 添加菜品弹出框
+     */
+    $(document).ready(function () {
+
+
+    document.querySelector('div.row .col-md-12 button').onclick = function () {
+        swal({
+                    title: '添加菜品',
+                    type: "input",
+                    type: "input",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    animation: 'slide-from-top',
+                    inputPlaceholder2: '条目类型',
+                    inputPlaceholder: '条目名称'
+                },
+                function (inputValue) {
+                    if(inputValue == false){
+                        return false;
+                    }
+
+                    if(inputValue === ''){
+                        swal.showInputError('不能为空');
+                        return false;
+                    }
+
+                    swal('Nice');
+                });
+    };
+
+    });
+</script>
 </html>
