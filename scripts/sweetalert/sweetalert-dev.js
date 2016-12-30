@@ -918,7 +918,7 @@ var injectedHTML =
 "<div class=\"sa-icon sa-success\">\n      <span class=\"sa-line sa-tip\"></span>\n      <span class=\"sa-line sa-long\"></span>\n\n      <div class=\"sa-placeholder\"></div>\n      <div class=\"sa-fix\"></div>\n    </div>" + "<div class=\"sa-icon sa-custom\"></div>" +
 
 // Title, text and input
-"<h2>Title</h2>\n    <p>Text</p>\n    <fieldset>\n      <input placeholder='条目类型' type=\"text\" tabIndex=\"3\" /><input id='twoInput' placeholder='条目名称' type=\"text\" tabIndex=\"3\" />\n      <div class=\"sa-input-error\"></div>\n    </fieldset>" +
+"<h2>Title</h2>\n    <p>Text</p>\n    <fieldset>\n      <input placeholder='' type=\"text\" tabIndex=\"3\" /><input id='two' placeholder='条目名称' type=\"text\" tabIndex=\"3\" />\n      <div class=\"sa-input-error\"></div>\n    </fieldset>" +
 
 // Input errors
 "<div class=\"sa-error-container\">\n      <div class=\"icon\">!</div>\n      <p>Not valid!</p>\n    </div>" +
@@ -1043,6 +1043,7 @@ var setParameters = function setParameters(params) {
         case 'prompt':
           $input.setAttribute('type', params.inputType);
           $input.value = params.inputValue;
+          $("#two").value = params.inputValue;
           $input.setAttribute('placeholder', params.inputPlaceholder);
           $input.setAttribute('placeholder',params.inputPlaceholder2);
           (0, _handleDom.addClass)(modal, 'show-input');

@@ -175,16 +175,16 @@
                     inputPlaceholder: '条目名称'
                 },
                 function (inputValue) {
-                    if(inputValue == false){
+                    if(inputValue === false){
                         return false;
                     }
 
-                    if(inputValue === ''){
+                    if(inputValue === ""){
                         swal.showInputError('不能为空');
                         return false;
                     }
 
-                    swal('Nice');
+                    swal('添加成功','','success');
                 });
     };
 
