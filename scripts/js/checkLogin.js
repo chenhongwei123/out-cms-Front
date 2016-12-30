@@ -80,11 +80,13 @@ $(document).ready(function () {
                     switch(JSON.stringify(data.code))
                     {
                         case '"A00000"':
-                        
+                            $('.alert-warning').css('display','none');
                             $.cookie('code',data.data.code);
                             $.cookie('token',data.data.token);
-                            alert("登录成功")
-                            $('.alert-warning').css('display','none');
+                            $.cookie("name",$('#mobile').val(), { expires: 1})
+                            document.location.href ="index1.html"
+                           // alert("登录成功")
+                           
                             break;
                         case '"A00001"':
                             $('#warning-content').text('呜呜,token失效啦!T~T');

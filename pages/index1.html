@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../styles/PCreset.css"/>
+		<link rel="stylesheet" type="text/css" href="../styles/bootstrap/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../styles/remodal.css"/>
+		<link rel="stylesheet" type="text/css" href="../styles/remodal-default-theme.css"/>
+		<style type="text/css">
+		    
+			/*#amend{cursor: pointer;color:blue;}
+			#amend:hover{color:red  ;}*/
+			a{color: blue;}
+			a:hover{color: red;}
+			.adddishesUl li{padding:0 10px;line-height:66px;padding-left:60px;text-align: left;}
+			.adddishesUl li span{display:inline-block;width:84px;text-align: left;font-size:16px;}
+			.adddishesUl li .vTop{vertical-align: top;}
+			.adddishesUl li input[type="text"]{height:43px;width:352px;font-size:16px;text-indent:6px;}
+		</style>
+	</head>
+	<body>
+		
+		<span class="n1"></span>
+		<span class="n2" style="display: none;cursor: pointer;">退出</span>
+		<div class="container">
+			<table class="table table-hover">
+		      <thead>
+		         
+		          <th>id</th>
+		          <th>条目名字</th>
+		          <th>是否弃用</th>
+		          <th>创建时间</th>
+		          <th>更新时间</th>
+		          <th>操作</th>
+		        </tr>
+		      </thead>
+		      <tbody id="tbody1">
+		        <!--<tr id="tr1">-->
+		          <!--<th scope="row">1</th>-->
+		          <!--<td>Mark</td>
+		          <td>Otto</td>
+		          <td>@mdo</td>
+		          <td>Mark</td>
+		          <td>Otto</td>-->
+		          
+		        <!--</tr>-->
+		      </tbody>
+		    </table>
+			
+		</div>
+		
+		<div class="remodal" data-remodal-id="modal">
+		    <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+		    <ul class="adddishesUl">
+		    	<li>
+		    		<span>条目名字</span>
+		    		<input type="text" name="name" />
+		    	</li>
+		    	<li>
+		    		<span>菜品分类</span>
+		    		<select name="type" >
+		    			<option>启用</option>
+		    			<option>弃用</option>
+		    		</select>
+		    	</li>
+		    </ul>
+		    
+		   
+		    <a class="remodal-confirm" href="#">保存</a>
+		</div>
+	</body>
+</html>
+<script src="../scripts/jQuery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/bootstrap/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/jQuery/jquery.cookie.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/jQuery/jquery.md5.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/jQuery/jquery-time.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/jQuery/remodal.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+	//----------------------验证登录---------------------------------------------	
+		if( $.cookie("name") && $.cookie("name")!==null){
+			//alert("1111")
+			console.log($.cookie("name"))
+			$(".n1").text($.cookie("name"))
+			$(".n2").css("display","block")
+		}else{
+			 document.location.href ="login.html"
+		}
+    //--------------------------------退出------------------------------
+		$(".n2").on("click",function(){
+			    $.cookie("name","", { expires: -1})
+			  document.location.href ="login.html"
+			
+		})
+		
+	//-----------------------浏览菜品条目------------------------------------------	
+		  $.ajax({
+		  	type:"get",
+		  	url:"http://admin.honganjk.com/admin/items.action",
+		  	
+		  	headers:{
+						"code":$.cookie("code"),
+						"token":$.cookie("token")
+					},
+			dataType: "json",
+			data: {
+//					
+					"start":0,
+					"size":20
+					},
+			success:function(data){
+				//console.log(data.data.objs[0].id)
+//				console.log(data.data.objs[1].title)
+			    $.each(data.data.objs, function(i, item) {
+	            	   var a=item.id
+	            	   console.log(a)
+//			        $("#list3").append("<li><div style='background-image:url(" + item.img + ")'><span>" + item.name + "</span><input type='hidden' class='qwa' value=" + item.id +  ">" + "</div></li>");
+                    $("#tbody1").append("<tr><td goodid=" + a + ">"+item.id+"</td><td>"+item.title+"</td><td>"+menutime(item.state)+"</td><td>"+formatDate(item.createTime)+"</td><td>"+formatDate(item.updateTime)+"</td><td id='amend' ><a href='#modal' >修改</a></td></tr>")
+			    });
+//			    console.log($("#amend").attr('goodid'))
+                $("#amend").on("click",function(){
+                	  console.log($("#amend").attr('a'))
+                })
+			}
+		});
+//		 function upstop(e){
+////                	  console.log('goodid')
+//                      alert("11111")
+//                }
+		function menutime(e) {
+				switch(e) {
+				    case 0:
+					   return '弃用'
+					   break;
+					case 1: 
+					   return '启用'
+					   break;
+				};
+      	};
+      	
+      	 function formatDate(data) {
+           		return $.myTime.UnixToDate(data,true,8);
+      		}//时间戳
+//		 function getLocalTime(nS) {     
+//     return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");      
+//         }     
+//      function getLocalTime(nS) {     
+//		   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+//		}  
+
+	})
+</script>
