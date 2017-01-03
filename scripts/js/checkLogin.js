@@ -83,7 +83,9 @@ $(document).ready(function () {
                         
                             $.cookie('code',data.data.code);
                             $.cookie('token',data.data.token);
-                            alert("登录成功")
+                            $.cookie("name",$('#mobile').val(), { expires: 1})
+                            document.location.href ="index.html"
+                            // alert("登录成功")
                             $('.alert-warning').css('display','none');
                             break;
                         case '"A00001"':
