@@ -257,6 +257,30 @@ sweetAlert.showInputError = swal.showInputError = function (errorMessage) {
   modal.querySelector('input').focus();
 };
 
+    /**
+     *提示信息
+     */
+    sweetAlert.showInput = swal.showInput = function (Message) {
+      var modal = (0, _modulesHandleSwalDom.getModal)();
+
+
+      var $Container = modal.querySelector('.sa-container');
+      (0, _modulesHandleDom.addClass)($Container, 'show');
+
+      $Container.querySelector('p').innerHTML = Message;
+
+      setTimeout(function () {
+        sweetAlert.enableButtons();
+      }, 1);
+
+      modal.querySelector('input').focus();
+    };
+
+
+
+
+
+
 /*
  * Reset input error DOM elements
  */
@@ -274,6 +298,10 @@ sweetAlert.resetInputError = swal.resetInputError = function (event) {
   var $errorContainer = $modal.querySelector('.sa-error-container');
   (0, _modulesHandleDom.removeClass)($errorContainer, 'show');
 };
+
+/*
+ * Reset input infos DOM elements
+ */
 
 /*
  * Disable confirm and cancel buttons
@@ -922,6 +950,9 @@ var injectedHTML =
 
 // Input errors
 "<div class=\"sa-error-container\">\n      <div class=\"icon\">!</div>\n      <p>Not valid!</p>\n    </div>" +
+
+//Input infos
+"<div class=\"sa-container\">\n<p></p>\n    </div>" +
 
 // Cancel and confirm buttons
 "<div class=\"sa-button-container\">\n      <button class=\"cancel\" tabIndex=\"2\">Cancel</button>\n      <div class=\"sa-confirm-button-container\">\n        <button class=\"confirm\" tabIndex=\"1\">OK</button>" +
