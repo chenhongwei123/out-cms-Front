@@ -43,7 +43,7 @@ const rename = require('gulp-rename');
 
 //默认task
 gulp.task('default',['clean'],function () {
-   gulp.start('styles','scripts','pages');
+   gulp.start('styles','scripts','pages','images');
 });
 
 //设置压缩js文件

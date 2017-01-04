@@ -107,7 +107,7 @@ $(document).ready(function () {
                 }
 
             });
-         })  
+         });
 
         
     
@@ -125,5 +125,13 @@ $(document).ready(function () {
 //          $('.spa2').text('记得输入正确的密码哦^_^').css('color','#D4D3D1');
 //          $(this).css('border','1px solid #D4D3D1');
 //      }
+    });
+
+    /**
+     * 可以关闭警告框
+     */
+    $('.close').click(function () {
+        $('.alert-warning').fadeOut();
+        $(this).css('display','none');
     });
 });

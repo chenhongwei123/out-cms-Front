@@ -172,7 +172,7 @@ exports['default'] = sweetAlert = swal = function () {
 };
 
 /*
- * Set default params for each popup
+ * Set default params for each popup,默认弹出框
  * @param {Object} userParams
  */
 sweetAlert.setDefaults = swal.setDefaults = function (userParams) {
@@ -231,6 +231,9 @@ sweetAlert.close = swal.close = function () {
   }
   lastFocusedButton = undefined;
   clearTimeout(modal.timeout);
+
+  //弹出框后刷新页面
+  location.reload();
 
   return true;
 };
