@@ -127,11 +127,6 @@ $(document).ready(function () {
 //      }
     });
 
-    /**
-     * 可以关闭警告框
-     */
-    $('.close').click(function () {
-        $('.alert-warning').fadeOut();
-        $(this).css('display','none');
-    });
+
+
 });

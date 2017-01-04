@@ -27,7 +27,6 @@
     <title>菜品管理</title>
     <link href="../styles/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../styles/base.css" rel="stylesheet">
-    <link href="../styles/dish-style.css" rel="stylesheet">
     <link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 <body>
@@ -83,8 +82,14 @@
                     </a>
                 </li>
                 <li class="active">
+                    <a href="banner.html">
+                        <img src="../images/shopMini.png">
+                        <span class="text">商户认证</span>
+                    </a>
+                </li>
+                <li class="active">
                     <a href="vision.html">
-                        <img src="../images/vision.png">
+                        <img src="../images/visionMini.png">
                         <span class="text">版本管理</span>
                     </a>
                 </li>
@@ -97,8 +102,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header h3-style">
-                    <img src="../images/bannerMax.png">
-                    Banner管理
+                    <img src="../images/visionMax.png">
+                    版本管理
                 </h3>
                 <ol class="breadcrumb breadcrumb-bg">
                     <li>
@@ -106,8 +111,8 @@
                         <span>Home</span>
                     </li>
                     <li>
-                        <img src="../images/banner.png">
-                        <span>Banner管理</span>
+                        <img src="../images/visionMini.png">
+                        <span>版本管理</span>
                     </li>
                 </ol>
             </div>
@@ -124,39 +129,17 @@
                     <thead>
                     <tr>
                         <th>id</th>
-                        <th>类型</th>
-                        <th>图片</th>
-                        <th>排序值</th>
-                        <th>所属平台</th>
-                        <th>点击事件超链接</th>
+                        <th>版本号</th>
+                        <th>版本类型</th>
+                        <th>地址</th>
+                        <th>描述</th>
+                        <th>创建时间</th>
+                        <th>修改时间</th>
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>添加</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
+                    <tbody id="tbody1">
+
                     </tbody>
                 </table>
             </div>
@@ -166,7 +149,10 @@
 </body>
 <script src="../scripts/jQuery/jquery.min.js"></script>
 <script src="../scripts/bootstrap/bootstrap.min.js"></script>
+<script src="../scripts/jQuery/jquery.cookie.min.js"></script>
+<script src="../scripts/jQuery/jquery-time.js"></script>
 <script src="../scripts/sweetalert/sweetalert-dev.js"></script>
+<script src="../scripts/js/vision.js"></script>
 <script>
     /**
      * 添加菜品弹出框
