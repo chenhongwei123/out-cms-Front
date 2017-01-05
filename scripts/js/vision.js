@@ -52,9 +52,6 @@ $(document).ready(function () {
         },
         dataType: "json",
         success:function (json) {
-            console.log(json);
-            var typeData = json.Module;
-
             $.each(json.data, function (index,item) {
                 console.log(json.data[index].id);
                 // console.log(json.objs[index].id);

@@ -180,7 +180,10 @@ $(document).ready(function () {
                            "</td>" +
                            "<td>" + formatDate(data.data.objs[index].createTime) + "</td>" +
                            "<td>" + formatDate(data.data.objs[index].updateTime) + "</td>" +
-                           "<td class='amend' ><a  class='a1'>修改</a><a class='a2' >保存</a></td></tr>");
+                           "<td class='amend' >" +
+                           "<a class='a1'>修改</a>" +
+                           "<a class='a2'>保存</a>" +
+                           "</td></tr>");
                 $("#tbody1").append($tr)
             });
 

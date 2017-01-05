@@ -65,5 +65,33 @@
     background-color: #e6e8ea;
 }
 
+.a1{
+    border-radius: 2px;
+    border: 1px solid #18BC9C;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+}
+
+.a1:hover{
+    border: 1px solid white;
+    background: #18BC9C;
+    color: white;
+}
+
+.a2{
+    display: none;
+    cursor: pointer;
+    border: 1px solid #18BC9C;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.a2:hover{
+    border: 1px solid white;
+    background: #18BC9C;
+    color: white;
+}
+
 
 
