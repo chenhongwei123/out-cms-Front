@@ -29,16 +29,5 @@ cms-Front---
            |
           package.json(node初始文件)
 ```
-#### 启动说明
 
-```sheel
-gulp
-```
-gulp后会生成一个dist文件夹
-
-
-### 修改记录
- 添加菜品弹出框:
- * 修改fieldset,添加了一个input
- * 框中的提示文字添加了一个
 

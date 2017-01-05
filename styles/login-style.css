@@ -1,0 +1,12 @@
+/*登录样式*/
+.wrap{
+    width: 50%;
+    margin-left: 20%;
+    margin-top: 10%;
+}
+
+/*警告框*/
+.state{
+    display: none;
+}
+

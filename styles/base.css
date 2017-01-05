@@ -1,0 +1,17 @@
+.h3-style{
+    color: #18BC9C;
+}
+
+tbody tr{
+    vertical-align: middle;
+    border-top: 1px solid #DDDDDD;
+}
+
+tr td{
+    vertical-align: middle;
+}
+
+a{
+    text-decoration: none;
+}
+
