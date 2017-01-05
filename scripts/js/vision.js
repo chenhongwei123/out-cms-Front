@@ -77,6 +77,53 @@ $(document).ready(function () {
         }
 
     });
+
+    /**
+     * 添加版本
+     */
+    $('.add-version').on("click",function () {
+        console.log('aaaa'+changeStr($('#select option:selected').val()));
+        $.ajax({
+            type:'post',
+            url:'http://admin.honganjk.com/admin/addVersion.action',
+            headers:{
+                "code":$.cookie("code"),
+                "token":$.cookie("token")
+            },
+            dataType: "json",
+            data:{
+                "version":$("#version").val() ,
+                "type":changeStr($('#select option:selected').val()),
+                "url":$("#url").val(),
+                "descs":$("#descs").val()
+            },
+            success: function(data){
+                console.log(data);
+                switch(JSON.stringify(data.code))
+                {
+                    case '"A00000"':
+                        // alert("添加成功")
+                        swal('添加成功','','success');
+                        location.reload();
+                        break;
+                    default:
+                        swal('请求失败','','false');
+                }
+            },
+            error:function(XmlHttpRequest,textStatus, errorThrown){
+                console.log("请求失败"+XmlHttpRequest.responseText);
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
     /**
      * 类型转换
      */
@@ -87,6 +134,21 @@ $(document).ready(function () {
                 break;
             case 2:
                 return '商户'
+                break;
+        };
+    };
+
+
+    /**
+     * 转换2
+     */
+    function changeStr(str) {
+        switch(str) {
+            case '用户':
+                return 1
+                break;
+            case '商户':
+                return 2
                 break;
         };
     };

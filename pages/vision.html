@@ -166,18 +166,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="col-sm-6">
-                                    <label for="dropdown">类型</label>
+                                    <label for="select">类型</label>
                                 </div>
                                 <div class="col-sm-6">
-                                <div class="dropdown" id="dropdown">
-                                    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Dropdown trigger
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                        ...
-                                    </ul>
-                                </div>
+                                    <select class="form-control" name="typeSelect" id="select">
+                                        <option>用户</option>
+                                        <option>商户</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -222,8 +217,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary">
-                        提交更改
+                    <button type="button" class="btn btn-primary add-version">
+                        提交添加
                     </button>
                 </div>
             </div><!-- /.modal-content -->
