@@ -67,11 +67,11 @@ $(document).ready(function () {
                 } else
                 //验证条目类型
                 if(/^[0-9]*[1-9][0-9]*$/.test(inputValue) == false){
-                    swal.showInputError('请输入正整数');
+                    swal.showInputError('请输入小于127的正整数');
                     return false;
                 } else
                 if(parseInt(inputValue,10) > 127){
-                    swal.showInputError('请输入小于128的正整数');
+                    swal.showInputError('请输入小于127的正整数');
                     return false;
                 }
                 /**
@@ -206,37 +206,49 @@ $(document).ready(function () {
 
             $(".a2").on("click",function(e){
                 /**
-                 * 修改名字
+                 * 判断title是否为空
                  */
-                $.ajax({
-                    type:"post",
-                    url:"http://admin.honganjk.com/admin/editItemTitle.action",
-                    headers:{
-                        "code":$.cookie("code"),
-                        "token":$.cookie("token")
-                    },
-                    dataType: "json",
-                    data:{
-                        "title": $(this).parents('tr').children("td").eq(1).children('input').eq(0).val(),
-                        "id":$(this).parents('tr').children("td").eq(0).attr('goodid')
-                    },
-                    success: function(data){
-                        console.log(data)
-                        switch(JSON.stringify(data.code))
-                        {
-                            case '"A00000"':
-                                swal('修改成功');
-                                // setTimeout(location.reload(),2000);
-                                break;
-                            default:
-                                console.log("请求失败");
+                // console.log($(this).parents('tr').children("td").eq(1).children('input').eq(0).val());
+                if($(this).parents('tr').children("td").eq(1).children('input').eq(0).val() == ''){
+                    $(this).parents('tr').children("td").eq(1).children('input').css('border','1px solid red');
+                    return;
+                }else {
 
+                    /**
+                     * 修改名字
+                     */
+                    $.ajax({
+                        type: "post",
+                        url: "http://admin.honganjk.com/admin/editItemTitle.action",
+                        headers: {
+                            "code": $.cookie("code"),
+                            "token": $.cookie("token")
+                        },
+                        dataType: "json",
+                        data: {
+                            "title": $(this).parents('tr').children("td").eq(1).children('input').eq(0).val(),
+                            "id": $(this).parents('tr').children("td").eq(0).attr('goodid')
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            switch (JSON.stringify(data.code)) {
+                                case '"A00000"':
+                                    swal('修改成功');
+                                    $('.confirm').on('click',function () {
+                                        location.reload();
+                                    });
+                                    // location.reload();
+                                    break;
+                                default:
+                                    console.log("请求失败");
+
+                            }
+                        },
+                        error: function (XmlHttpRequest, textStatus, errorThrown) {
+                            console.log("请求失败" + XmlHttpRequest.responseText);
                         }
-                    },
-                    error:function(XmlHttpRequest,textStatus, errorThrown){
-                        console.log("请求失败"+XmlHttpRequest.responseText);
-                    }
-                });
+                    });
+                }
 
                 /**
                  * 判断是否弃用或者启用
@@ -263,6 +275,9 @@ $(document).ready(function () {
                                 case '"A00000"':
                                     swal('修改成功');
                                     console.log("修改成功");
+                                    $('.confirm').on('click',function () {
+                                        location.reload();
+                                    });
                                     break;
                                 default:
                                     console.log("请求失败")
@@ -298,6 +313,10 @@ $(document).ready(function () {
                                     console.log("请求失败")
 
                             }
+                            swal('修改成功');
+                            $('.confirm').on('click',function () {
+                                location.reload();
+                            });
                         },
                         error:function(XmlHttpRequest,textStatus, errorThrown){
                             console.log("请求失败"+XmlHttpRequest.responseText);
@@ -333,6 +352,8 @@ $(document).ready(function () {
     function formatDate(data) {
         return $.myTime.UnixToDate(data,true,8);
     }
+
+
 
 
 

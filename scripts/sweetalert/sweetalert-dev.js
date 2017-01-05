@@ -232,12 +232,12 @@ sweetAlert.close = swal.close = function () {
   lastFocusedButton = undefined;
   clearTimeout(modal.timeout);
 
-  //弹出框后刷新页面
-  location.reload();
+
 
   return true;
-};
 
+};
+    
 /*
  * Validation of the input field is done by user
  * If something is wrong => call showInputError with errorMessage
