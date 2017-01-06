@@ -53,7 +53,8 @@ $(document).ready(function () {
         dataType: "json",
         success:function (json) {
             $.each(json.data, function (index,item) {
-                console.log(json.data[index].id);
+                console.log(json.data[index].id)
+                console.log(json);
                 // console.log(json.objs[index].id);
                 var a = json.data[index].id;
                 var $tr = ("<tr>" +
@@ -67,12 +68,15 @@ $(document).ready(function () {
                 "</select>" +
                 "</td>" +
                 "<td><input class='input1'  style='border: none;' type='text' value='" + json.data[index].url + "' disabled='disabled'  /></td>" +
-                "<td><input class='input1'  style='border: none;' type='text' value='" + json.data[index].descs + "' disabled='disabled'  /></td>" +
+                "<td><input class='input1' id='inputDesc'  style='border: none;' type='text' value='" + json.data[index].descs + "' disabled='disabled'  /></td>" +
                 "<td>" + formatDate(json.data[index].create_time) + "</td>" +
                 "<td>" + formatDate(json.data[index].update_time) + "</td>" +
                 "<td class='amend' ><a  class='a1'>修改</a><a class='a2' >保存</a></td></tr>");
                 $("#tbody1").append($tr)
-
+                // if($('#inputDesc').val().toString() == 'null'){
+                //     $('#inputDesc').html('');
+                //     console.log('aaa');
+                // }
             });
         }
 
@@ -83,6 +87,7 @@ $(document).ready(function () {
      */
     $('.add-version').on("click",function () {
         console.log('aaaa'+changeStr($('#select option:selected').val()));
+        console.log('aaaaa'+""+$("#descs").val());
         $.ajax({
             type:'post',
             url:'http://admin.honganjk.com/admin/addVersion.action',
@@ -95,16 +100,22 @@ $(document).ready(function () {
                 "version":$("#version").val() ,
                 "type":changeStr($('#select option:selected').val()),
                 "url":$("#url").val(),
-                "descs":$("#descs").val()
+                "desc":$("#descs").val()
             },
             success: function(data){
+
                 console.log(data);
+                console.log(data.code);
                 switch(JSON.stringify(data.code))
                 {
                     case '"A00000"':
                         // alert("添加成功")
                         swal('添加成功','','success');
-                        location.reload();
+
+                        // location.reload();
+                        break;
+                    case '"A00001"':
+                        swal('此类型版本已经存在!');
                         break;
                     default:
                         swal('请求失败','','false');
@@ -116,6 +127,10 @@ $(document).ready(function () {
         });
     });
 
+    /**
+     * 修改版本
+     */
+    
 
 
 
@@ -153,14 +168,11 @@ $(document).ready(function () {
         };
     };
 
+
     /**
      * 去除null
      */
-    // function killNull(str) {
-    //     if($('input').text(null)){
-    //         input.text='';
-    //     }
-    // }
+
 
     /**
      * 时间戳
