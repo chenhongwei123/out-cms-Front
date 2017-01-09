@@ -34,27 +34,27 @@
     <link rel="stylesheet" type="text/css" href="../styles/remodal.css"/>
     <link rel="stylesheet" type="text/css" href="../styles/remodal-default-theme.css"/>
     <style>
-        /*img {*/
-            /*width: 200px;*/
-            /*height: 100px;*/
-        /*}*/
-        /*.adddishesUl li{padding:0 10px;line-height:66px;padding-left:60px;text-align: left;}*/
-        /*.adddishesUl li span{display:inline-block;width:84px;text-align: left;font-size:16px;}*/
-        /*.adddishesUl li .vTop{vertical-align: top;}*/
-        /*.adddishesUl li input[type="text"]{height:43px;width:352px;font-size:16px;text-indent:6px;}*/
-        /*table input{border: none;}*/
-        /*table select{border: none;}*/
-        /*table .file{display: none;}*/
+        #upload-img {
+            width: 200px;
+            height: 100px;
+        }
+        .adddishesUl li{padding:0 10px;line-height:66px;padding-left:60px;text-align: left;}
+        .adddishesUl li span{display:inline-block;width:84px;text-align: left;font-size:16px;}
+        .adddishesUl li .vTop{vertical-align: top;}
+        .adddishesUl li input[type="text"]{height:43px;width:352px;font-size:16px;text-indent:6px;}
+        table input{border: none;}
+        table select{border: none;}
+        table .file{display: none;}
         /*a{color: blue;cursor: pointer;}*/
         /*a:hover{color: red;}*/
-        /*.a2{display: none;color: red;}*/
-        /*.add{cursor: pointer;}*/
-        /*.add:hover{color: red;}*/
-        /*.file1{*/
-            /*position: absolute;*/
-            /*top: 32%;*/
-            /*left: 56%;*/
-        /*}*/
+        .a2{display: none;color: red;}
+        .add{cursor: pointer;}
+        .add:hover{color: red;}
+        .file1{
+            position: absolute;
+            top: 13%;
+            left: 40%;
+        }
     </style>
 </head>
 <body>
@@ -81,7 +81,7 @@
                         <li><a href="#">个人中心</a></li>
                         <li><a href="#">权限配置</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a class="logout">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -121,6 +121,12 @@
                         <span class="text">版本管理</span>
                     </a>
                 </li>
+                <li class="active">
+                    <a href="activity.html">
+                        <img src="../images/actMin.png">
+                        <span class="text">充送活动</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -148,7 +154,7 @@
         <!--表格显示-->
         <div class="row">
             <div class="col-md-12">
-                <button type="button" class="btn btn-sm btn-success">添加条目</button>
+                <h4 class="addBanner" ><a href="#modal">新增banner</a></h4>
             </div>
         </div>
         <div class="row">
@@ -170,7 +176,7 @@
 
                     </tbody>
                 </table>
-                <h4 class="add" ><a href="#modal">新增banner</a></h4>
+
             </div>
             <div class="remodal" data-remodal-id="modal">
                 <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
@@ -183,7 +189,7 @@
                     </li>
                     <li>
                         <span>图片：</span>
-                        <img  id="img" />
+                        <img  id="upload-img" />
                         <input type="file" class="file1"  />
                     </li>
                     <li>
@@ -217,26 +223,26 @@
 <script src="../scripts/jQuery/remodal.js" type="text/javascript" charset="utf-8"></script>
 <script src="../scripts/jQuery/upfile.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+    /**
+     *  读取cookie,添加到显示位置
+     */
+    //读取cookie放在变量中
+    var name = $.cookie('name');
+    $('.admin-name').text(name);
+
+    /**
+     * 退出
+     */
+    $('.logout').on('click',function () {
+        $.cookie("name","", { expires: -1}); //清除cookie
+        document.location.href ="login.html";
+    });
+
+
+
     $(document).ready(function () {
-        //-----------------------------------------验证阿里百川---------------------------------------
-        $.ajax({
-            type: "get",
-            url: "https://bzapi.honganjk.com/common/getToken.action",
-            data: {
-                "key":"23384196",
-                "secret":"7b484f801524af3bb7f6abb0dbe63459",
-                "namespace":"hajk",
-            },
-            dataType: "json",
-            success: function (data) {
-                console.log(data)
-                window.imgtoken = data.data;
-            },
-            error:function(XmlHttpRequest,textStatus, errorThrown)
-            {
-                console.log("请求失败"+XmlHttpRequest.responseText);
-            }
-        });
+
+
 //-----------------------浏览菜品条目------------------------------------------
         $.ajax({
             type:"get",
@@ -260,6 +266,27 @@
                     var a=data.data.objs[index].id
                     var $tr=("<tr> <td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td><select  disabled='disabled'><option>"+active(data.data.objs[index].type)+"</option><option>1-充值优惠</option></select></td> <td><img id='ctrl-img' src='"+data.data.objs[index].img+"'/><input class='file' type='file'  /></td> <td><input disabled type='text' value='"+data.data.objs[index].sort+"'/></td> <td><select disabled><option>"+terrace(data.data.objs[index].kind)+"</option><option>1-护工平台</option><option>2-用户app</option><option>3-订餐商户平台</option></select></td> <td><input disabled type='text' value='"+data.data.objs[index].url+"'/></td> <td>"+formatDate(data.data.objs[index].createTime)+"</td> <td>"+formatDate(data.data.objs[index].updateTime)+"</td> <td class='amend' ><a  class='a1'>修改</a><a class='a2' >保存</a></td></td> <td class='a3'><a >删除</a></td> </tr>")
                     $("#tbody1").append($tr)
+                });
+
+                //-----------------------------------------验证阿里百川---------------------------------------
+                $.ajax({
+                    type: "get",
+                    url: "https://bzapi.honganjk.com/common/getToken.action",
+                    data: {
+                        "key":"23384196",
+                        "secret":"7b484f801524af3bb7f6abb0dbe63459",
+                        "namespace":"hajk",
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+                        window.imgtoken = data.data;
+                        console.log(imgtoken);
+                    },
+                    error:function(XmlHttpRequest,textStatus, errorThrown)
+                    {
+                        console.log("请求失败"+XmlHttpRequest.responseText);
+                    }
                 });
 
                 //-------------------上传图片--------------------------------------------------
@@ -400,7 +427,7 @@
         //-------------------上传图片--------------------------------------------------
         var uploader = uploadJSSDK;
         $(".file1").on("change",function(e){
-            $("#img").attr('src',"../images/jiazai0.gif")
+            $("#upload-img").attr('src',"../images/jiazai0.gif")
             var files = e.target.files;
             for(var i=0;i<files.length;i++){
                 uploader({
@@ -412,7 +439,7 @@
                         if(percent==100){
                             console.log(percent)
                             console.log(result.url)
-                            $("#img").attr('src', result.url)
+                            $("#upload-img").attr('src', result.url)
                         }
 
                     }
@@ -421,7 +448,7 @@
         })
 //-------------------新增banner条目-----------------------------------------------------------------------
         $(".remodal-confirm").on("click",function(){
-            console.log($("#name2").val())
+//            console.log($("#name2").val())
             $.ajax({
                 type:"post",
                 url:"http://admin.honganjk.com/admin/addBanner.action",
@@ -433,7 +460,7 @@
                 dataType: "json",
                 data:{
                     "type":$("#type").val().substring(0,1),
-                    "img":$("#img").attr("src"),
+                    "img":$("#upload-img").attr("src"),
                     "sort":$("#sort").val(),
                     "kind":$("#kind").val().substring(0,1),
                     "url":$("#url").val()

@@ -21,15 +21,14 @@
 
 -->
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>菜品管理</title>
     <link href="../styles/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../styles/base.css" rel="stylesheet">
-    <link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../styles/dish-style.css" rel="stylesheet">
-    <link href="../styles/version-style.css" rel="stylesheet">
+    <link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 <body>
 <!--创建导航条-->
@@ -48,7 +47,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><p class="navbar-text">你好<span class="admin-name">admin</span></p></li>
+                <li><p class="navbar-text">你好<span class="admin-name"></span></p></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -110,8 +109,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header h3-style">
-                    <img src="../images/visionMax.png">
-                    版本管理
+                    <img src="../images/actMax.png">
+                    充送活动
                 </h3>
                 <ol class="breadcrumb breadcrumb-bg">
                     <li>
@@ -119,8 +118,8 @@
                         <span>Home</span>
                     </li>
                     <li>
-                        <img src="../images/visionMini.png">
-                        <span>版本管理</span>
+                        <img src="../images/actMin.png">
+                        <span>充送活动</span>
                     </li>
                 </ol>
             </div>
@@ -136,14 +135,14 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>id</th>
-                        <th>版本号</th>
-                        <th>类型</th>
-                        <th>地址</th>
-                        <th>描述</th>
+                        <th>数据id</th>
+                        <th>优惠信息介绍</th>
+                        <th>真正的充钱金额（单位元，精确到分）</th>
+                        <th>额外获得的金额（单位元，精确到分）</th>
                         <th>创建时间</th>
-                        <th>修改时间</th>
+                        <th>更新时间</th>
                         <th>操作</th>
+                        <th>删除</th>
                     </tr>
                     </thead>
                     <tbody id="tbody1">
@@ -153,7 +152,6 @@
             </div>
         </div>
     </div>
-
     <!--创建模态框-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -161,60 +159,45 @@
                 <div class="modal-header">
                     <div class="jumbotron">
                         <div class="container">
-                            <h3>新增版本</h3>
+                            <h3>新增活动</h3>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <!--模态框显示内容-->
                     <div class="container">
-                        <!--版本类型-->
+                        <!--真正充钱的金额-->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="col-sm-6">
-                                    <label for="select">类型</label>
+                                    <label for="reality">用户需充钱金额</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <select class="form-control" name="typeSelect" id="select">
-                                        <option>用户</option>
-                                        <option>商户</option>
-                                    </select>
+                                    <input type="text" id="reality">
                                 </div>
                             </div>
                         </div>
                         </br>
-                        <!--版本号-->
+                        <!--额外获得的金额-->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="col-sm-6">
-                                    <label for="version">版本号</label>
+                                    <label for="extra">活动赠送金额</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" id="version">
+                                    <input type="text" id="extra">
                                 </div>
                             </div>
                         </div>
                         </br>
-                        <!--下载地址-->
+                        <!--活动描述-->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="col-sm-6">
-                                    <label for="url">APP下载地址</label>
+                                    <label for="desc">活动描述</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" id="url">
-                                </div>
-                            </div>
-                        </div>
-                        </br>
-                        <!--描述-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="col-sm-6">
-                                    <label for="descs">APP描述</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <textarea id="descs" type="text" class="form-control" rows="3"></textarea>
+                                    <textarea id="desc" type="text" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +206,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary add-version">
+                    <button type="button" class="btn btn-primary add-activity">
                         提交添加
                     </button>
                 </div>
@@ -234,43 +217,32 @@
 </body>
 <script src="../scripts/jQuery/jquery.min.js"></script>
 <script src="../scripts/bootstrap/bootstrap.min.js"></script>
+<!--<script src="../scripts/sweetalert/sweetalert-dev.js"></script>-->
 <script src="../scripts/jQuery/jquery.cookie.min.js"></script>
 <script src="../scripts/jQuery/jquery-time.js"></script>
-<script src="../scripts/sweetalert/sweetalert-dev.js"></script>
-<script src="../scripts/js/vision.js"></script>
+<script src="../scripts/js/activity.js"></script>
 <script>
-//    /**
-//     * 添加菜品弹出框
-//     */
-//    $(document).ready(function () {
-//
-//
-//    document.querySelector('div.row .col-md-12 button').onclick = function () {
-//        swal({
-//                    title: '添加菜品',
-//                    type: "input",
-//                    type: "input",
-//                    showCancelButton: true,
-//                    closeOnConfirm: false,
-//                    animation: 'slide-from-top',
-//                    inputPlaceholder: '条目名称',
-//                    inputPlaceholder2: '条目类型'
-//
-//                },
-//                function (inputValue) {
-//                    if(inputValue === false){
-//                        return false;
-//                    }
-//
-//                    if(inputValue === ""){
-//                        swal.showInputError('不能为空');
-//                        return false;
-//                    }
-//
-//                    swal('添加成功','','success');
-//                });
-//    };
-//
-//    });
+
+    /**
+     * ajax
+     */
+    $(document).ready(function () {
+//----------------------验证登录---------------------------------------------
+        if( $.cookie("name") && $.cookie("name")!==null){
+            //alert("1111")
+            console.log($.cookie("name"))
+            $(".n1").text($.cookie("name"))
+            $(".n2").css("display","block")
+        }else{
+            document.location.href ="login.html"
+        };
+
+        //--------------------------------退出------------------------------
+        $(".dropdown-menu li .n2").on("click",function(){
+            $.cookie("name","", { expires: -1})
+            document.location.href ="login.html"
+        });
+    });
+
 </script>
 </html>

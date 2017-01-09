@@ -128,11 +128,78 @@ $(document).ready(function () {
         });
     });
 
+
+    /**
+     * 点击事件
+     */
+    $(".amend").on('click', function (e) {
+
+        index1 = $(this).parents('tr').children("td").eq(0).attr('goodid')
+        console.log(index1)
+        //alert("111")
+        console.log($(this).parent().children("td").eq(5).children('a').eq(1))
+        $(this).parent().children("td").eq(1).children('input').eq(0).attr("disabled", false)
+        $(this).parent().children("td").eq(3).children('select').eq(0).css("display", "block");
+        $(this).parent().children("td").eq(3).children('span').eq(0).css("display", "none");
+        $(this).parent().children("td").eq(6).children('a').eq(1).css("display", "block");
+        $(this).parent().children("td").eq(6).children('a').eq(0).css("display", "none");
+
+    });
+
+
     /**
      * 修改版本
      */
+    $(".a2").on("click",function(e){
+        /**
+         * 判断title是否为空
+         */
+        // console.log($(this).parents('tr').children("td").eq(1).children('input').eq(0).val());
+        if($(this).parents('tr').children("td").eq(1).children('input').eq(0).val() == ''){
+            $(this).parents('tr').children("td").eq(1).children('input').css('border','1px solid red');
+            return;
+        }else {
 
+            /**
+             * 修改版本号
+             */
+            $.ajax({
+                type: "post",
+                url: "http://admin.honganjk.com/admin/editItemTitle.action",
+                headers: {
+                    "code": $.cookie("code"),
+                    "token": $.cookie("token")
+                },
+                dataType: "json",
+                data: {
+                    "version": $(this).parents('tr').children("td").eq(1).children('input').eq(0).val(),
+                    "id": $(this).parents('tr').children("td").eq(0).attr('goodid'),
+                    "url":$(this).parents('tr').children("td").eq(3).children('input').eq(0).val(),
+                    "descs":$(this).parents('tr').children("td").eq(4).children('input').eq(0).val()
+                },
+                success: function (data) {
+                    console.log(data)
+                    switch (JSON.stringify(data.code)) {
+                        case '"A00000"':
+                            swal('修改成功');
+                            $('.confirm').on('click',function () {
+                                location.reload();
+                            });
+                            // location.reload();
+                            break;
+                        default:
+                            console.log("请求失败");
 
+                    }
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    console.log("请求失败" + XmlHttpRequest.responseText);
+                }
+            });
+        }
+
+    });
+        
 
 
 
