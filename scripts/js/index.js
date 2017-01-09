@@ -36,6 +36,94 @@ $(document).ready(function () {
      */
     $('.logout').on('click',function () {
         $.cookie("name","", { expires: -1}); //清除cookie
-        document.location.href ="login.html";
+        $.cookie("code","", { expires: -1});
+        $.cookie("token","", { expires: -1});
+        document.location.href ="../login.html";
     });
+
+    /**
+     * 用户统计
+     */
+    $.ajax({
+        type:"get",
+        url:"http://admin.honganjk.com/admin/users.action",
+        async:true,
+        headers:{
+            "code":$.cookie("code"),
+            "token":$.cookie("token")
+        },
+
+        dataType: "json",
+
+        data: {
+            "start":0,
+            "size":10
+        },
+        success:function(data){
+            var totla = data.data.total;
+            $('.user-count').append(totla)
+            console.log(totla);
+        },
+        error: function (msg) {
+            alert("请求失败")
+        }
+    });
+
+    /**
+     * 食堂统计
+     */
+    $.ajax({
+        type:'get',
+        url:'http://admin.honganjk.com/admin/business.action',
+        async:true,
+        headers:{
+            "code":$.cookie("code"),
+            "token":$.cookie("token")
+        },
+        dataType: "json",
+
+        data: {
+            "start":0,
+            "size":10
+        },
+        success:function(data){
+            var totla = data.data.total;
+            $('.shop-count').append(totla)
+            console.log(totla);
+        },
+        error: function (msg) {
+            alert("请求失败")
+        }
+
+    });
+
+    /**
+     * 订单统计
+     */
+    $.ajax({
+        type:'get',
+        url:'http://admin.honganjk.com/admin/orders.action',
+        async:true,
+        headers:{
+            "code":$.cookie("code"),
+            "token":$.cookie("token")
+        },
+        dataType: "json",
+
+        data: {
+            "start":0,
+            "size":10
+        },
+        success:function(data){
+            var totla = data.data.total;
+            $('.order-count').append(totla)
+            console.log(totla);
+        },
+        error: function (msg) {
+            alert("请求失败")
+        }
+
+    });
+
+
 });

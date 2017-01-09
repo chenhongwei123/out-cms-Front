@@ -38,7 +38,7 @@ $(document).ready(function () {
         $.cookie("name","", { expires: -1}); //清除cookie
         $.cookie("code","", { expires: -1});
         $.cookie("token","", { expires: -1});
-        document.location.href ="login.html";
+        document.location.href ="../login.html";
     });
 
     /**

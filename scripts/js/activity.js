@@ -24,6 +24,23 @@
 
  */
 $(document).ready(function () {
+    /**
+     *  读取cookie,添加到显示位置
+     */
+    //读取cookie放在变量中
+    var name = $.cookie('name');
+    $('.admin-name').text(name);
+
+    /**
+     * 退出
+     */
+    $('.logout').on('click',function () {
+        $.cookie("name","", { expires: -1}); //清除cookie
+        $.cookie("code","", { expires: -1});
+        $.cookie("token","", { expires: -1});
+        document.location.href ="../login.html";
+    });
+
     $.ajax({
         type:"get",
         url:"http://admin.honganjk.com/admin/recharges.action",
