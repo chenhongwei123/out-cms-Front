@@ -49,6 +49,14 @@
 
 }
 
+@media (min-width: 1280px){
+    .main{
+        padding-right: 2%;
+        padding-left: 3%;
+    }
+
+}
+
 .main .page-header{
     margin-top: 0;
 }

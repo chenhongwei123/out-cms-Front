@@ -49,7 +49,7 @@ gulp.task('default',['clean'],function () {
 //设置压缩js文件
 gulp.task('scripts',function () {
 
-    return gulp.src('scripts/**/*.js')
+    return gulp.src('scripts/js/*.js')
         .pipe(concat('main.js')) //输出到main.js
         .pipe(gulp.dest('dist/scripts')) //输出路径
         .pipe(rename({suffix: '.min'})) //重命名

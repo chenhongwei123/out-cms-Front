@@ -1,0 +1,14 @@
+.sidebar-banner{
+    width: 10%;
+}
+
+.main-banner{
+    margin-left: 6%;
+    width: 95%;
+    overflow-x: auto;
+}
+
+#ctrl-img{
+    width: 100px;
+    height: 50px;
+}

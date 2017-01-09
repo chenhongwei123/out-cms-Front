@@ -71,7 +71,8 @@ $(document).ready(function () {
                 "<td><input class='input1' id='inputDesc'  style='border: none;' type='text' value='" + json.data[index].descs + "' disabled='disabled'  /></td>" +
                 "<td>" + formatDate(json.data[index].create_time) + "</td>" +
                 "<td>" + formatDate(json.data[index].update_time) + "</td>" +
-                "<td class='amend' ><a  class='a1'>修改</a><a class='a2' >保存</a></td></tr>");
+                "<td class='amend' ><a  class='a1'>修改</a><a class='a2'>保存</a></td>" +
+                "</tr>");
                 $("#tbody1").append($tr)
                 // if($('#inputDesc').val().toString() == 'null'){
                 //     $('#inputDesc').html('');
@@ -112,7 +113,7 @@ $(document).ready(function () {
                         // alert("添加成功")
                         swal('添加成功','','success');
 
-                        // location.reload();
+                        location.reload();
                         break;
                     case '"A00001"':
                         swal('此类型版本已经存在!');
@@ -130,7 +131,6 @@ $(document).ready(function () {
     /**
      * 修改版本
      */
-    
 
 
 
@@ -170,9 +170,11 @@ $(document).ready(function () {
 
 
     /**
-     * 去除null
+     * 调用模态框
      */
-
+    $('.a1').on('click',function () {
+        $('#updateModal').modal();
+    });
 
     /**
      * 时间戳

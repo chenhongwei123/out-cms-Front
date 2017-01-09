@@ -224,6 +224,83 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+
+    <!--修改数据模态框-->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="jumbotron">
+                        <div class="container">
+                            <h3>修改版本</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <!--模态框显示内容-->
+                    <div class="container">
+                        <!--版本类型-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-sm-6">
+                                    <label for="select">类型</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select class="form-control" name="typeSelect" id="updateSelect">
+                                        <option>用户</option>
+                                        <option>商户</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <!--版本号-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-sm-6">
+                                    <label for="version">版本号</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" id="updateVersion">
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <!--下载地址-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-sm-6">
+                                    <label for="url">APP下载地址</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" id="updateUrl">
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <!--描述-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-sm-6">
+                                    <label for="descs">APP描述</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <textarea id="updateDescs" type="text" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary add-version">
+                        提交修改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 </div>
 </body>
 <script src="../scripts/jQuery/jquery.min.js"></script>
