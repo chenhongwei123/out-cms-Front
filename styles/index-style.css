@@ -100,12 +100,24 @@
     font-weight: 600;
 }
 
-.info-box .count {
-    float: right;
-    margin-right: 25%;
-    margin-top: 20%;
-    font-size: 30px;
+@media screen and (max-width: 1280px) {
+    .info-box .count {
+        float: right;
+        margin-right: 25%;
+        margin-top: 20%;
+        font-size: 30px;
+    }
 }
+
+@media screen and (min-width: 1903px) {
+    .info-box .count {
+        float: right;
+        margin-right: 25%;
+        margin-top: 12%;
+        font-size: 30px;
+    }
+}
+
 
 
 
