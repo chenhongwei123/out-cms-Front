@@ -197,6 +197,7 @@ $(document).ready(function () {
     //----------------------------搜索-------------------------------------------------
 
     $("#searchOrder").on("click",function(){
+        $("#Paging").css("display","none")
         $("#tbody1").empty($tr)
         if($(".select1").val()=="通过昵称搜索"){
             //alert("111")
@@ -205,7 +206,7 @@ $(document).ready(function () {
                 url: "http://admin.honganjk.com/admin/users.action",
                 data: {
                     "start":0,
-                    "size":10,
+                    "size":1000,
                     "name":$(".wd").val(),
                 },
                 dataType: "json",
@@ -249,7 +250,7 @@ $(document).ready(function () {
                 url: "http://admin.honganjk.com/admin/users.action",
                 data: {
                     "start":0,
-                    "size":10,
+                    "size":1000,
                     "mobile":$(".wd").val(),
                 },
                 dataType: "json",

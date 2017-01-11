@@ -26,9 +26,52 @@
     <meta charset="UTF-8">
     <title>菜品管理</title>
     <link href="../styles/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="../styles/remodal-default-theme.css" rel="stylesheet">
+    <link href="../styles/remodal.css" rel="stylesheet">
     <link href="../styles/base.css" rel="stylesheet">
     <link href="../styles/dish-style.css" rel="stylesheet">
-    <link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">
+    <style>
+        .xx{width: 25px; height: 25px;cursor: pointer;}
+        .adddishesUl{
+            border: 1px solid black;
+        }
+        .adddishesUl li{padding:0 10px;line-height:66px;padding-left:60px;text-align: left;}
+        .adddishesUl li span{display:inline-block;width:100px;text-align: left;font-size:16px;font-weight: 900;}
+        .adddishesUl li .vTop{vertical-align: top;}
+        .adddishesUl li input[type="text"]{height:43px;width:352px;font-size:16px;text-indent:6px;}
+        table input{border: none;}
+        table select{border: none;}
+        table .file{display: none;}
+        table{position: relative;}
+        .box1{width: 50%; height:700px;overflow:auto;display: none;position: absolute;left: 25%;top: 10%;background-color:#ffffff ;z-index: 10000;}
+        .info{
+            background-color: rgb(0, 0, 0);
+            filter: alpha(opacity=60);
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .cover1{
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            display: none;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            background: #000 none repeat scroll 0% 0%;
+        }
+        textarea{
+            max-width: 330px;
+            max-height: 120px;
+            min-width: 352px;
+            min-height: 100px;
+            line-height: 24px;
+            font-size: 14px;
+            /*margin-left: 7px;*/
+            padding: 10px;
+
+        }
+    </style>
 </head>
 <body>
 <!--创建导航条-->
@@ -54,7 +97,7 @@
                         <li><a href="#">个人中心</a></li>
                         <li><a href="#">权限配置</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a class="logout">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -83,7 +126,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="banner.html">
+                    <a href="shop.html">
                         <img src="../images/shopMini.png">
                         <span class="text">商户认证</span>
                     </a>
@@ -115,8 +158,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header h3-style">
-                    <img src="../images/bannerMax.png">
-                    Banner管理
+                    <img src="../images/shopMax.png">
+                    商户认证
                 </h3>
                 <ol class="breadcrumb breadcrumb-bg">
                     <li>
@@ -124,8 +167,8 @@
                         <span>Home</span>
                     </li>
                     <li>
-                        <img src="../images/banner.png">
-                        <span>Banner管理</span>
+                        <img src="../images/shopMini.png">
+                        <span>商户认证</span>
                     </li>
                 </ol>
             </div>
@@ -133,7 +176,12 @@
         <!--表格显示-->
         <div class="row">
             <div class="col-md-12">
-                <button type="button" class="btn btn-sm btn-success">添加条目</button>
+                <select id="type1">
+                    <option>请点击下拉选择类型</option>
+                    <option>0-未审核食堂</option>
+                    <option>1-杭州地区食堂(已审核)</option>
+                    <option>2-暂无</option>
+                </select>
             </div>
         </div>
         <div class="row">
@@ -141,42 +189,38 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>id</th>
-                        <th>类型</th>
-                        <th>图片</th>
-                        <th>排序值</th>
-                        <th>所属平台</th>
-                        <th>点击事件超链接</th>
+                        <th>数据id</th>
+                        <th>商户类型</th>
+                        <th>食堂名称</th>
+                        <th>区域</th>
+                        <th>联系电话</th>
+                        <th>联系人</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th>详情</th>
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>添加</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
+                    <tbody id="tbody1">
+
                     </tbody>
                 </table>
+            </div>
+
+            <div class="remodal" data-remodal-id="modal">
+                <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+                <ul class="adddishesUl">
+
+                    <h3>如果审核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />
+                    <select id="select1"><option>1-审核通过为杭州食堂</option></select><br /><br />
+                    <input type="button" id="button1" class="remodal-confirm" value="审核成功"></input>
+                    <br /><br /><br />
+                    <p>==================================================================</p>
+                    <h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>
+                    <textarea id="textarea1" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>
+                    <input type="button" id="button2" class="remodal-confirm" value="审核失败"></input>
+
+                </ul>
             </div>
         </div>
     </div>
@@ -184,39 +228,252 @@
 </body>
 <script src="../scripts/jQuery/jquery.min.js"></script>
 <script src="../scripts/bootstrap/bootstrap.min.js"></script>
-<script src="../scripts/sweetalert/sweetalert-dev.js"></script>
+<script src="../scripts/jQuery/jquery.cookie.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/jQuery/jquery.md5.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/jQuery/jquery-time.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/jQuery/remodal.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/jQuery/upfile.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    /**
-     * 添加菜品弹出框
-     */
     $(document).ready(function () {
 
 
-    document.querySelector('div.row .col-md-12 button').onclick = function () {
-        swal({
-                    title: '添加菜品',
-                    type: "input",
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: 'slide-from-top',
-                    inputPlaceholder: '条目名称',
-                    inputPlaceholder2: '条目类型'
+        /**
+         *  读取cookie,添加到显示位置
+         */
+        //读取cookie放在变量中
+        var name = $.cookie('name');
+        $('.admin-name').text(name);
 
+        /**
+         * 退出
+         */
+        $('.logout').on('click',function () {
+            $.cookie("name","", { expires: -1}); //清除cookie
+            $.cookie("code","", { expires: -1});
+            $.cookie("token","", { expires: -1});
+            document.location.href ="../login.html";
+        });
+
+
+        $("#type1").on("change",function(){
+            var $tr=null;
+            $("#tbody1").empty($tr)
+            //console.log($("#type1").val().substring(0,1))
+
+            $.ajax({
+                type:"get",
+                url:"http://admin.honganjk.com/admin/business.action",
+                async:true,
+                headers:{
+                    "code":$.cookie("code"),
+                    "token":$.cookie("token")
                 },
-                function (inputValue) {
-                    if(inputValue === false){
-                        return false;
-                    }
 
-                    if(inputValue === ""){
-                        swal.showInputError('不能为空');
-                        return false;
-                    }
+                dataType: "json",
 
-                    swal('添加成功','','success');
-                });
-    };
+                data: {
+                    "start":0,
+                    "size":100,
+                    "type":$("#type1").val().substring(0,1)
+                    //"type":0
+                },
+                success:function(data){
+                    console.log(data)
+
+                    $.each(data.data.objs, function(index) {
+                        var a=data.data.objs[index].id
+                        var b=data.data.objs[index].type
+//			            	  console.log(a)
+//			            	  console.log(b)
+
+                        $tr=("<tr >"+
+                        "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
+                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='shop-a2' href='#modal'></a></td>"
+                        +"<td><div class='box1'>"
+                        +"<ul class='adddishesUl'>"
+                        +"<img class='xx' src='../images/xxfont.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
+                        +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"
+                        +"<li><span>状态类型:</span><input type='text'value='"+zhuangtai(data.data.objs[index].ctype)+"'/></li>"
+                        +"<li><span>区域:</span><input type='text'value='"+data.data.objs[index].area+"'/></li>"
+                        +"<li><span>地址:</span><input type='text'value='"+data.data.objs[index].address+"'/></li>"
+                        +"<li><span>经度:</span><input type='text'value='"+data.data.objs[index].longitude+"'/></li>"
+                        +"<li><span>纬度:</span><input type='text'value='"+data.data.objs[index].latitude+"'/></li>"
+                        +"<li><span>简介:</span><textarea>"+data.data.objs[index].descs+"</textarea></li>"
+                        +"<li><span>服务范围:</span><input type='text'value='"+data.data.objs[index].extent+"'/>公里</li>"
+                        +"<li><span>联系电话:</span><input type='text'value='"+data.data.objs[index].contact+"'/></li>"
+                        +"<li><span>营业时间:</span><input type='text'value='"+data.data.objs[index].hours+"'/></li>"
+                        +"<li><span>起送价:</span><input type='text'value='"+data.data.objs[index].lowest+"'/></li>"
+                        +"<li><span>配送费:</span><input type='text'value='"+data.data.objs[index].fare+"'/></li>"
+                        +"<li><span>公告:</span><textarea>"+data.data.objs[index].bulletin+"</textarea></li>"
+                        +"<li><span>商户联系人:</span><input type='text'value='"+data.data.objs[index].owner+"'/></li>"
+                        +"<li><span>联系人号码:</span><input type='text'value='"+data.data.objs[index].mobile+"'/></li>"
+                        +"<li><span>银行卡号:</span><input type='text'value='"+data.data.objs[index].card+"'/></li>"
+                        +"<li><span>支行信息:</span><input type='text'value='"+data.data.objs[index].bank+"'/></li>"
+                        +"<li><span>账号:</span><input type='text'value='"+data.data.objs[index].account+"'/></li>"
+                        +"<li><span>密码:</span><input type='text'value='"+data.data.objs[index].password+"'/></li>"
+                        +"<li><span>备注:</span><textarea>"+data.data.objs[index].remark+"</textarea></li>"
+                        +"<li><span>营业执照图:</span><img id='flexible-img' src='"+data.data.objs[index].license_img_url+"'/></li><br>"
+                        +"<li><span>许可证图片:</span><img id='flexible-img' src='"+data.data.objs[index].permit_img_url+"'/></li><br>"
+                        +"<li><span>身份证正面:</span><img id='flexible-img' src='"+data.data.objs[index].positive_img_url+"'/></li><br>"
+                        +"<li><span>身份证反面:</span><img id='flexible-img' src='"+data.data.objs[index].obverse_img_url+"'/></li><br>"
+                        +"<li><span>商户图片:</span><img id='flexible-img' src='"+data.data.objs[index].img+"'/></li><br>"
+                        +"<li><span>商户头像:</span><img id='flexible-img' src='"+data.data.objs[index].head+"'/></li><br>"
+
+                        +"</ul>"
+                        +"</div></td>"
+                        +"</tr>")
+                        $("#tbody1").append($tr)
+                        if($("#type1").val().substring(0,1)==0){
+                            $(".shop-a2").html("审核")
+//		                       	 $(".a2").attr("href","#modal")
+//		                       	 console.log($('.a2').parents('tr').children("td").eq(0).attr('goodid'))
+                        }else{
+                            $(".shop-a2").html("已审核")
+//                            $(".a2").css("color","green")
+//                            $(".a2").attr("href","#")
+                        }
+
+
+                    });
+                    //------------------------------------进行审核-------------------------------------------------
+                    $(".jump").on('click',function(){
+                        $(".remodal-wrapper").css("display","block")
+                        $(".remodal-overlay").css("display","block")
+                        var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
+                        console.log($("#select1").val().substring(0,1))
+
+                        $("#button1").on("click",function(){
+                            $.ajax({
+                                type:"post",
+                                url:"http://admin.honganjk.com/admin/verifyBusiness.action",
+                                headers:{
+                                    "code":$.cookie("code"),
+                                    "token":$.cookie("token")
+                                },
+                                dataType: "json",
+                                data:{
+
+                                    "id":index1,
+                                    "type":$("#select1").val().substring(0,1)
+                                },
+                                success: function(data){
+                                    console.log(data)
+                                    switch(JSON.stringify(data.code))
+                                    {
+                                        case '"A00000"':
+                                            alert("审核成功")
+                                            $(".remodal-wrapper").css("display","none")
+                                            $(".remodal-overlay").css("display","none")
+                                            location.reload()
+                                            break;
+                                        default:
+                                            alert("请求失败")
+
+                                    }
+                                },
+                                error:function(XmlHttpRequest,textStatus, errorThrown){
+                                    console.log("请求失败"+XmlHttpRequest.responseText);
+                                }
+                            });//审核成功
+                        })
+
+                        $("#button2").on("click",function(){
+                            if($("#textarea1").val()==''){
+                                alert("请填写审核失败的原因")
+                            }else{
+                                $.ajax({
+                                    type:"post",
+                                    url:"http://admin.honganjk.com/admin/forbidBusiness.action",
+                                    headers:{
+                                        "code":$.cookie("code"),
+                                        "token":$.cookie("token")
+                                    },
+                                    dataType: "json",
+                                    data:{
+
+                                        "id":index1,
+                                        "reason":$("#textarea1").val()
+                                    },
+                                    success: function(data){
+                                        console.log(data)
+                                        switch(JSON.stringify(data.code))
+                                        {
+                                            case '"A00000"':
+
+                                                alert("短信已发送至客户")
+                                                $(".remodal-wrapper").css("display","none")
+                                                $(".remodal-overlay").css("display","none")
+                                                location.reload()
+                                                break;
+                                            default:
+                                                alert("请求失败")
+
+                                        }
+                                    },
+                                    error:function(XmlHttpRequest,textStatus, errorThrown){
+                                        console.log("请求失败"+XmlHttpRequest.responseText);
+                                    }
+                                });//审核失败
+                            }
+
+                        })
+
+                    })
+                    //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
+                    $(".a1").on("click",function(){
+                        $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
+                        $("#cover").addClass("cover1")
+                    })
+                    $(".xx").on("click",function(){
+                        $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
+                        $("#cover").removeClass("cover1")
+                    })
+
+                }
+            })
+        })
+
+
+        //-------------------------------商户类型转换-------------------------------------------------
+
+        function shanghu(e) {
+            switch(e) {
+
+                case 1:
+                    return '食堂'
+                    break;
+                case 2:
+                    return '营养餐'
+                    break;
+
+            };
+        };
+
+        //-------------------------------状态类型转换-------------------------------------------------
+
+        function zhuangtai(e) {
+            switch(e) {
+
+                case 0:
+                    return '未审核食堂'
+                    break;
+                case 1:
+                    return '杭州地区食堂(已审核)'
+                    break;
+                case 2:
+                    return '暂无'
+                    break;
+
+            };
+        };
+
+        //---------------------时间戳-------------------------------------------
+
+        function formatDate(data) {
+            return $.myTime.UnixToDate(data,true,8);
+        }
+
+
 
     });
 </script>

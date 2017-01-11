@@ -24,6 +24,10 @@
  */
 
 $(document).ready(function () {
+
+    var dataArray = [];
+
+
     /**
      *  读取cookie,添加到显示位置
      */
@@ -124,6 +128,34 @@ $(document).ready(function () {
         }
 
     });
+    
+    $.ajax({
 
+        type:'get',
+        url:'http://admin.honganjk.com/admin/business.action',
+        async:true,
+        headers:{
+            "code":$.cookie("code"),
+            "token":$.cookie("token")
+        },
+        dataType: "json",
 
+        data: {
+            "start":0,
+            "size":10
+        },
+        success:function(data){
+            // console.log(data.data.objs);
+            dataArray = data.data.objs;
+            //数据存储在localStorage
+            window.localStorage.setItem("dataArray",dataArray);
+            console.log(dataArray);
+        },
+        error: function (msg) {
+            alert("请求失败")
+        }
+
+    });
+    
+    // console.log(dataArray);
 });
