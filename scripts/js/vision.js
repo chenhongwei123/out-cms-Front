@@ -85,10 +85,33 @@ $(document).ready(function () {
 
     });
 
+    //-----------------------------------------验证阿里百川---------------------------------------
+    $.ajax({
+        type: "get",
+        url: "https://bzapi.honganjk.com/common/getToken.action",
+        data: {
+            "key":"23384196",
+            "secret":"7b484f801524af3bb7f6abb0dbe63459",
+            "namespace":"hajk",
+        },
+        dataType: "json",
+        success: function (data) {
+            console.log(data)
+            window.imgtoken = data.data;
+            console.log(imgtoken);
+        },
+        error:function(XmlHttpRequest,textStatus, errorThrown)
+        {
+            console.log("请求失败"+XmlHttpRequest.responseText);
+        }
+    });
+
+
     /**
      * 添加版本
      */
     $('.add-version').on("click",function () {
+        checkoutUrl($("#app-url").val());
         console.log('aaaa'+changeStr($('#select option:selected').val()));
         console.log('aaaaa'+""+$("#descs").val());
         $.ajax({
@@ -250,6 +273,16 @@ $(document).ready(function () {
      */
     function formatDate(data) {
         return $.myTime.UnixToDate(data,true,8);
+    }
+
+    /**
+     * 判断输入的url是否是https
+     */
+    function checkoutUrl(str) {
+        var headerStr = str.trim().substring(0,5);
+            if(headerStr !== 'https'){
+                $('#errinfo-url').html("请输入https开头的网址").css('color','red');
+            }
     }
 
 });

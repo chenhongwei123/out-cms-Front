@@ -63,8 +63,8 @@ $(document).ready(function () {
                 var $tr=("<tr>"
                 +"<td goodid=" + a + ">"+data.data.objs[index].id+"</td>"
                 +"<td><input disabled type='text' value='"+data.data.objs[index].descs+"'></td>"
-                +"<td><input disabled type='text' value='"+data.data.objs[index].reality+"'></td>"
-                +"<td><input disabled type='text' value='"+data.data.objs[index].extra+"'></td>"
+                +"<td><input id='addMoney' disabled type='text' value='"+data.data.objs[index].reality+"'></td>"
+                +"<td><input id='extraMoney' disabled type='text' value='"+data.data.objs[index].extra+"'></td>"
                 +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                 +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                 +"<td class='q'><a class='a1'>修改</a><a class='a2'>保存</a></td> <td class='jump'><a class='a3'>删除</a></td>"
@@ -198,4 +198,10 @@ $(document).ready(function () {
     function formatDate(data) {
         return $.myTime.UnixToDate(data,true,8);
     }
-})
+
+    /**
+     * 判断输入是否为正整数
+     */
+
+
+});
