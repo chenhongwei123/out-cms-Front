@@ -27,7 +27,7 @@
     <title>菜品管理</title>
     <link href="../styles/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../styles/base.css" rel="stylesheet">
-    <link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">
+    <!--<link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">-->
     <link href="../styles/dish-style.css" rel="stylesheet">
     <link href="../styles/version-style.css" rel="stylesheet">
 </head>
@@ -105,6 +105,12 @@
                     <a href="user.html">
                         <img src="../images/userMin.png">
                         <span class="text">用户管理</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="order.html">
+                        <img src="../images/orderMin.png">
+                        <span class="text">订单管理</span>
                     </a>
                 </li>
             </ul>
@@ -246,39 +252,4 @@
 <script src="../scripts/jQuery/jquery-time.js"></script>
 <script src="../scripts/sweetalert/sweetalert-dev.js"></script>
 <script src="../scripts/js/vision.js"></script>
-<script>
-//    /**
-//     * 添加菜品弹出框
-//     */
-//    $(document).ready(function () {
-//
-//
-//    document.querySelector('div.row .col-md-12 button').onclick = function () {
-//        swal({
-//                    title: '添加菜品',
-//                    type: "input",
-//                    type: "input",
-//                    showCancelButton: true,
-//                    closeOnConfirm: false,
-//                    animation: 'slide-from-top',
-//                    inputPlaceholder: '条目名称',
-//                    inputPlaceholder2: '条目类型'
-//
-//                },
-//                function (inputValue) {
-//                    if(inputValue === false){
-//                        return false;
-//                    }
-//
-//                    if(inputValue === ""){
-//                        swal.showInputError('不能为空');
-//                        return false;
-//                    }
-//
-//                    swal('添加成功','','success');
-//                });
-//    };
-//
-//    });
-</script>
 </html>

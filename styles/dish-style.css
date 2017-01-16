@@ -87,7 +87,7 @@
     color: white;
 }
 
-.a2{
+.a2-dish{
     display: none;
     cursor: pointer;
     border: 1px solid #18BC9C;
@@ -95,7 +95,7 @@
     text-align: center;
 }
 
-.a2:hover{
+.a2-dish:hover{
     border: 1px solid white;
     background: #18BC9C;
     color: white;

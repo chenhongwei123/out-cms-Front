@@ -32,8 +32,11 @@
     <link href="../styles/dish-style.css" rel="stylesheet">
     <style>
         .xx{width: 25px; height: 25px;cursor: pointer;}
+        .adddishesUl li img{width: 200px;height: 100px;}
         .adddishesUl{
             border: 1px solid black;
+            /*width: 700px;*/
+            /*height: 500px;*/
         }
         .adddishesUl li{padding:0 10px;line-height:66px;padding-left:60px;text-align: left;}
         .adddishesUl li span{display:inline-block;width:100px;text-align: left;font-size:16px;font-weight: 900;}
@@ -69,11 +72,11 @@
             font-size: 14px;
             /*margin-left: 7px;*/
             padding: 10px;
-
         }
     </style>
 </head>
 <body>
+
 <!--创建导航条-->
 <nav class="navbar navbar-fixed-top navbar-inverse navbar-styles" role="navigation">
     <div class="container-fluid">
@@ -149,11 +152,20 @@
                         <span class="text">用户管理</span>
                     </a>
                 </li>
+                <li class="active">
+                    <a href="order.html">
+                        <img src="../images/orderMin.png">
+                        <span class="text">订单管理</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
     <!--创建操作面板-->
     <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main">
+        <div style="display: block;" id="cover">
+
+        </div>
         <!--当前位置显示-->
         <div class="row">
             <div class="col-lg-12">
@@ -176,12 +188,23 @@
         <!--表格显示-->
         <div class="row">
             <div class="col-md-12">
-                <select id="type1">
+                <select id="type1" class="stateSelect">
                     <option>请点击下拉选择类型</option>
                     <option>0-未审核食堂</option>
                     <option>1-杭州地区食堂(已审核)</option>
                     <option>2-暂无</option>
                 </select>
+
+                    <select class="select1 stateSelect select" >
+                        <!--  <option>点击下拉显示需要搜索的类型</option>-->
+                        <option>通过食堂名称搜索</option>
+                        <option>通过手机号搜索</option>
+                    </select>
+                    <div class="form-group serch-input">
+                        <input type="text" class="form-control wd" name="wd" placeholder="输入要搜索的值">
+                    </div>
+                    <button class="btn btn-default searchsub" id="searchOrder" onclick="return false">搜索</button>
+
             </div>
         </div>
         <div class="row">
@@ -205,6 +228,16 @@
 
                     </tbody>
                 </table>
+                <div id="Paging">
+                    <input type="button" id="PrevPage" value="上一页"/>
+                    <input type="button" id="NextPage" value="下一页">
+                    <input type="text" value="0" style="display: none;" id="dishpageval"/>
+                    <div id="pagination" style="text-align: center;">
+                        <span>第</span>
+                        <b id="change1">1</b>
+                        <span>页</span>
+                    </div>
+                </div>
             </div>
 
             <div class="remodal" data-remodal-id="modal">
@@ -221,6 +254,30 @@
                     <input type="button" id="button2" class="remodal-confirm" value="审核失败"></input>
 
                 </ul>
+                <ul class="adddishesUl" id="audit2" style="display: none;">
+
+                    <h3>如果审核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />
+                    <select id="select2"><option>1-审核通过为杭州食堂</option></select><br /><br />
+                    <input type="button" id="button1-2" class="remodal-confirm" value="审核成功"></input>
+                    <br /><br /><br />
+                    <p>==================================================================</p>
+                    <h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>
+                    <textarea id="textarea2" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>
+                    <input type="button" id="button2-2" class="remodal-confirm" value="审核失败"></input>
+
+                </ul>
+                <ul class="adddishesUl" id="audit3" style="display: none;">
+
+                    <h3>如果审核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />
+                    <select id="select3"><option>1-审核通过为杭州食堂</option></select><br /><br />
+                    <input type="button" id="button1-3" class="remodal-confirm" value="审核成功"></input>
+                    <br /><br /><br />
+                    <p>==================================================================</p>
+                    <h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>
+                    <textarea id="textarea3" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>
+                    <input type="button" id="button2-3" class="remodal-confirm" value="审核失败"></input>
+
+                </ul>
             </div>
         </div>
     </div>
@@ -233,248 +290,5 @@
 <script src="../scripts/jQuery/jquery-time.js" type="text/javascript" charset="utf-8"></script>
 <script src="../scripts/jQuery/remodal.js" type="text/javascript" charset="utf-8"></script>
 <script src="../scripts/jQuery/upfile.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    $(document).ready(function () {
-
-
-        /**
-         *  读取cookie,添加到显示位置
-         */
-        //读取cookie放在变量中
-        var name = $.cookie('name');
-        $('.admin-name').text(name);
-
-        /**
-         * 退出
-         */
-        $('.logout').on('click',function () {
-            $.cookie("name","", { expires: -1}); //清除cookie
-            $.cookie("code","", { expires: -1});
-            $.cookie("token","", { expires: -1});
-            document.location.href ="../login.html";
-        });
-
-
-        $("#type1").on("change",function(){
-            var $tr=null;
-            $("#tbody1").empty($tr)
-            //console.log($("#type1").val().substring(0,1))
-
-            $.ajax({
-                type:"get",
-                url:"http://admin.honganjk.com/admin/business.action",
-                async:true,
-                headers:{
-                    "code":$.cookie("code"),
-                    "token":$.cookie("token")
-                },
-
-                dataType: "json",
-
-                data: {
-                    "start":0,
-                    "size":100,
-                    "type":$("#type1").val().substring(0,1)
-                    //"type":0
-                },
-                success:function(data){
-                    console.log(data)
-
-                    $.each(data.data.objs, function(index) {
-                        var a=data.data.objs[index].id
-                        var b=data.data.objs[index].type
-//			            	  console.log(a)
-//			            	  console.log(b)
-
-                        $tr=("<tr >"+
-                        "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='shop-a2' href='#modal'></a></td>"
-                        +"<td><div class='box1'>"
-                        +"<ul class='adddishesUl'>"
-                        +"<img class='xx' src='../images/xxfont.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
-                        +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"
-                        +"<li><span>状态类型:</span><input type='text'value='"+zhuangtai(data.data.objs[index].ctype)+"'/></li>"
-                        +"<li><span>区域:</span><input type='text'value='"+data.data.objs[index].area+"'/></li>"
-                        +"<li><span>地址:</span><input type='text'value='"+data.data.objs[index].address+"'/></li>"
-                        +"<li><span>经度:</span><input type='text'value='"+data.data.objs[index].longitude+"'/></li>"
-                        +"<li><span>纬度:</span><input type='text'value='"+data.data.objs[index].latitude+"'/></li>"
-                        +"<li><span>简介:</span><textarea>"+data.data.objs[index].descs+"</textarea></li>"
-                        +"<li><span>服务范围:</span><input type='text'value='"+data.data.objs[index].extent+"'/>公里</li>"
-                        +"<li><span>联系电话:</span><input type='text'value='"+data.data.objs[index].contact+"'/></li>"
-                        +"<li><span>营业时间:</span><input type='text'value='"+data.data.objs[index].hours+"'/></li>"
-                        +"<li><span>起送价:</span><input type='text'value='"+data.data.objs[index].lowest+"'/></li>"
-                        +"<li><span>配送费:</span><input type='text'value='"+data.data.objs[index].fare+"'/></li>"
-                        +"<li><span>公告:</span><textarea>"+data.data.objs[index].bulletin+"</textarea></li>"
-                        +"<li><span>商户联系人:</span><input type='text'value='"+data.data.objs[index].owner+"'/></li>"
-                        +"<li><span>联系人号码:</span><input type='text'value='"+data.data.objs[index].mobile+"'/></li>"
-                        +"<li><span>银行卡号:</span><input type='text'value='"+data.data.objs[index].card+"'/></li>"
-                        +"<li><span>支行信息:</span><input type='text'value='"+data.data.objs[index].bank+"'/></li>"
-                        +"<li><span>账号:</span><input type='text'value='"+data.data.objs[index].account+"'/></li>"
-                        +"<li><span>密码:</span><input type='text'value='"+data.data.objs[index].password+"'/></li>"
-                        +"<li><span>备注:</span><textarea>"+data.data.objs[index].remark+"</textarea></li>"
-                        +"<li><span>营业执照图:</span><img id='flexible-img' src='"+data.data.objs[index].license_img_url+"'/></li><br>"
-                        +"<li><span>许可证图片:</span><img id='flexible-img' src='"+data.data.objs[index].permit_img_url+"'/></li><br>"
-                        +"<li><span>身份证正面:</span><img id='flexible-img' src='"+data.data.objs[index].positive_img_url+"'/></li><br>"
-                        +"<li><span>身份证反面:</span><img id='flexible-img' src='"+data.data.objs[index].obverse_img_url+"'/></li><br>"
-                        +"<li><span>商户图片:</span><img id='flexible-img' src='"+data.data.objs[index].img+"'/></li><br>"
-                        +"<li><span>商户头像:</span><img id='flexible-img' src='"+data.data.objs[index].head+"'/></li><br>"
-
-                        +"</ul>"
-                        +"</div></td>"
-                        +"</tr>")
-                        $("#tbody1").append($tr)
-                        if($("#type1").val().substring(0,1)==0){
-                            $(".shop-a2").html("审核")
-//		                       	 $(".a2").attr("href","#modal")
-//		                       	 console.log($('.a2').parents('tr').children("td").eq(0).attr('goodid'))
-                        }else{
-                            $(".shop-a2").html("已审核")
-//                            $(".a2").css("color","green")
-//                            $(".a2").attr("href","#")
-                        }
-
-
-                    });
-                    //------------------------------------进行审核-------------------------------------------------
-                    $(".jump").on('click',function(){
-                        $(".remodal-wrapper").css("display","block")
-                        $(".remodal-overlay").css("display","block")
-                        var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
-                        console.log($("#select1").val().substring(0,1))
-
-                        $("#button1").on("click",function(){
-                            $.ajax({
-                                type:"post",
-                                url:"http://admin.honganjk.com/admin/verifyBusiness.action",
-                                headers:{
-                                    "code":$.cookie("code"),
-                                    "token":$.cookie("token")
-                                },
-                                dataType: "json",
-                                data:{
-
-                                    "id":index1,
-                                    "type":$("#select1").val().substring(0,1)
-                                },
-                                success: function(data){
-                                    console.log(data)
-                                    switch(JSON.stringify(data.code))
-                                    {
-                                        case '"A00000"':
-                                            alert("审核成功")
-                                            $(".remodal-wrapper").css("display","none")
-                                            $(".remodal-overlay").css("display","none")
-                                            location.reload()
-                                            break;
-                                        default:
-                                            alert("请求失败")
-
-                                    }
-                                },
-                                error:function(XmlHttpRequest,textStatus, errorThrown){
-                                    console.log("请求失败"+XmlHttpRequest.responseText);
-                                }
-                            });//审核成功
-                        })
-
-                        $("#button2").on("click",function(){
-                            if($("#textarea1").val()==''){
-                                alert("请填写审核失败的原因")
-                            }else{
-                                $.ajax({
-                                    type:"post",
-                                    url:"http://admin.honganjk.com/admin/forbidBusiness.action",
-                                    headers:{
-                                        "code":$.cookie("code"),
-                                        "token":$.cookie("token")
-                                    },
-                                    dataType: "json",
-                                    data:{
-
-                                        "id":index1,
-                                        "reason":$("#textarea1").val()
-                                    },
-                                    success: function(data){
-                                        console.log(data)
-                                        switch(JSON.stringify(data.code))
-                                        {
-                                            case '"A00000"':
-
-                                                alert("短信已发送至客户")
-                                                $(".remodal-wrapper").css("display","none")
-                                                $(".remodal-overlay").css("display","none")
-                                                location.reload()
-                                                break;
-                                            default:
-                                                alert("请求失败")
-
-                                        }
-                                    },
-                                    error:function(XmlHttpRequest,textStatus, errorThrown){
-                                        console.log("请求失败"+XmlHttpRequest.responseText);
-                                    }
-                                });//审核失败
-                            }
-
-                        })
-
-                    })
-                    //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
-                    $(".a1").on("click",function(){
-                        $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
-                        $("#cover").addClass("cover1")
-                    })
-                    $(".xx").on("click",function(){
-                        $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
-                        $("#cover").removeClass("cover1")
-                    })
-
-                }
-            })
-        })
-
-
-        //-------------------------------商户类型转换-------------------------------------------------
-
-        function shanghu(e) {
-            switch(e) {
-
-                case 1:
-                    return '食堂'
-                    break;
-                case 2:
-                    return '营养餐'
-                    break;
-
-            };
-        };
-
-        //-------------------------------状态类型转换-------------------------------------------------
-
-        function zhuangtai(e) {
-            switch(e) {
-
-                case 0:
-                    return '未审核食堂'
-                    break;
-                case 1:
-                    return '杭州地区食堂(已审核)'
-                    break;
-                case 2:
-                    return '暂无'
-                    break;
-
-            };
-        };
-
-        //---------------------时间戳-------------------------------------------
-
-        function formatDate(data) {
-            return $.myTime.UnixToDate(data,true,8);
-        }
-
-
-
-    });
-</script>
+<script src="../scripts/js/shop.js"></script>
 </html>

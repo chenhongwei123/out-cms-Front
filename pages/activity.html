@@ -29,6 +29,21 @@
     <link href="../styles/base.css" rel="stylesheet">
     <link href="../styles/dish-style.css" rel="stylesheet">
     <link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">
+    <style>
+        .save{
+            display: none;
+            cursor: pointer;
+            border: 1px solid #18BC9C;
+            border-radius: 2px;
+            text-align: center;
+        }
+
+        .save:hover{
+            border: 1px solid white;
+            background: #18BC9C;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <!--创建导航条-->
@@ -104,6 +119,12 @@
                     <a href="user.html">
                         <img src="../images/userMin.png">
                         <span class="text">用户管理</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="order.html">
+                        <img src="../images/orderMin.png">
+                        <span class="text">订单管理</span>
                     </a>
                 </li>
             </ul>

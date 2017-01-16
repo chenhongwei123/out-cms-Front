@@ -67,7 +67,7 @@ $(document).ready(function () {
                 +"<td><input id='extraMoney' disabled type='text' value='"+data.data.objs[index].extra+"'></td>"
                 +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                 +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                +"<td class='q'><a class='a1'>修改</a><a class='a2'>保存</a></td> <td class='jump'><a class='a3'>删除</a></td>"
+                +"<td class='q'><a class='a1'>修改</a><a class='save'>保存</a></td> <td class='jump'><a class='a3'>删除</a></td>"
                 +"</tr>")
                 $("#tbody1").append($tr)
             });
@@ -83,7 +83,7 @@ $(document).ready(function () {
 
             })
             //-----------------------保存--------------------------
-            $(".a2").on("click",function(){
+            $(".save").on("click",function(){
                 index1 = $(this).parents('tr').children("td").eq(0).attr('goodid')
                 console.log($(this).parents('tr').children("td").eq(2).children('input').eq(0).val())
                 console.log(index1)
@@ -189,7 +189,7 @@ $(document).ready(function () {
                 console.log("请求失败"+XmlHttpRequest.responseText);
             }
         });
-    })
+    });
 
 
 
@@ -202,6 +202,6 @@ $(document).ready(function () {
     /**
      * 判断输入是否为正整数
      */
-
+    console.log($("#addmoney").val());
 
 });

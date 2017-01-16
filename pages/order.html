@@ -21,33 +21,17 @@
 
 -->
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>菜品管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="../styles/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../styles/base.css" rel="stylesheet">
     <link href="../styles/dish-style.css" rel="stylesheet">
-    <link href="../styles/user-style.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../styles/remodal.css"/>
-    <link rel="stylesheet" type="text/css" href="../styles/remodal-default-theme.css"/>
-    <style>
-        #box,#box1{width: 80%; height:700px;overflow:auto;display: none;position: absolute;left: 10%;top: 10%;background-color:#ffffff ;z-index: 10000;}
-        .cover1{
-            position: fixed;
-            z-index: 9999;
-            top: 0;
-            left: 0;
-            display: none;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-            background: #000 none repeat scroll 0% 0%;
-        }
-    </style>
+    <link href="../styles/order-style.css" rel="stylesheet">
 </head>
 <body>
-
 <!--创建导航条-->
 <nav class="navbar navbar-fixed-top navbar-inverse navbar-styles" role="navigation">
     <div class="container-fluid">
@@ -133,59 +117,13 @@
         </div>
     </div>
     <!--创建操作面板-->
-    <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main">
-        <div style="display: block;" id="cover">
-            <!--遮罩层-->
-        </div>
-        <div id="box" style="display: none;">
-            <img class='xx' src='../images/xxafter.png'/>
-            <table  class="table" >
-                <thead>
-                <th>收货地址id</th>
-                <th>收货人名字</th>
-                <th>收货人性别</th>
-                <th>收货联系电话</th>
-                <th>收货地址经度</th>
-                <th>收货地址纬度</th>
-                <th>收货地址</th>
-                <th>地址创建时间</th>
-                </thead>
-                <tbody id="tbody2">
-
-                </tbody>
-            </table>
-        </div>
-        <div id="box1" style="display: none;">
-            <img class='xx' src='../images/xxafter.png'/>
-            <table  class="table" >
-                <thead>
-                <th>收货地址id</th>
-                <th>商户名称</th>
-                <th>公告</th>
-                <th>商户图片</th>
-                <th>商户评分</th>
-                <th>收藏的类型</th>
-                <th>评分排行</th>
-                <th>当月销量</th>
-                <th>送达时间(分钟)</th>
-                <th>商户的纬度</th>
-                <th>商户的经度</th>
-                <th>起送价</th>
-                <th>配送费</th>
-                </thead>
-                <tbody id="tbody3">
-
-                </tbody>
-            </table>
-        </div>
-
-
+    <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main main-order">
         <!--当前位置显示-->
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header h3-style">
-                    <img src="../images/userMax.png">
-                    用户管理
+                    <img src="../images/orderMax.png">
+                    订单管理
                 </h3>
                 <ol class="breadcrumb breadcrumb-bg">
                     <li>
@@ -193,27 +131,44 @@
                         <span>Home</span>
                     </li>
                     <li>
-                        <img src="../images/userMin.png">
-                        <span>用户管理</span>
+                        <img src="../images/orderMin.png">
+                        <span>订单管理</span>
                     </li>
                 </ol>
             </div>
         </div>
         <!--表格显示-->
         <div class="row">
-            <div class="col-md-12">
-                <form class="navbar-form navbar-left" role="search">
-                    <select class="select1 stateSelect" >
-                        <!--  <option>点击下拉显示需要搜索的类型</option>-->
-                        <option>通过昵称搜索</option>
-                        <option>通过手机号搜索</option>
-
+            <div class="col-md-6">
+                <!--下拉框-->
+                    <select class="select2 stateSelect" >
+                        <option>点击下拉查看订单状态</option>
+                        <option>0待支付</option>
+                        <option>1已接单</option>
+                        <option>2在配送</option>
+                        <option>3退款中</option>
+                        <option>4已完成</option>
+                        <option>5待评价</option>
+                        <option>6用户删除</option>
                     </select>
-                    <div class="form-group">
-                        <input type="text" class="form-control wd" name="wd" placeholder="输入要搜索的值">
-                    </div>
-                    <button class="btn btn-default searchsub" id="searchOrder" onclick="return false">搜索</button>
-                </form>
+            </div>
+
+            <!--搜索设置-->
+            <div class="col-md-6">
+                <div class="col-md-12">
+                <select class="select1 stateSelect" >
+                    <!--  <option>点击下拉显示需要搜索的类型</option>-->
+                    <option>通过订单号搜索</option>
+                    <option>通过收货人名字搜索</option>
+                    <option>通过收货人手机号搜索</option>
+                    <option>通过订餐商户名字搜索</option>
+                    <option>通过订餐商户电话搜索</option>
+                </select>
+                <div class="form-group serch-input">
+                    <input type="text" class="form-control wd" name="wd" placeholder="输入要搜索的值">
+                </div>
+                <button class="btn btn-default searchsub" id="searchOrder" onclick="return false">搜索</button>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -222,16 +177,24 @@
                     <thead>
                     <tr>
                         <th>数据id</th>
-                        <th>昵称</th>
-                        <th>账号</th>
-                        <th>头像</th>
-                        <th>账户余额</th>
-                        <th>手机号</th>
+                        <th>订单号</th>
+                        <th>名字</th>
+                        <th>联系电话</th>
+                        <th>用户id</th>
+                        <th>打印次数</th>
+                        <th>商家名称</th>
+                        <th>商家电话</th>
+                        <th>性别</th>
+                        <th>送达时间</th>
+                        <th>送餐地址</th>
+                        <th>备注</th>
+                        <th>订单价格</th>
+                        <th>付款方式</th>
+                        <th>订单状态</th>
+                        <th>配送费</th>
+                        <th>day</th>
                         <th>注册时间</th>
                         <th>更新时间</th>
-                        <th>关联微信</th>
-                        <th>收货地址</th>
-                        <th>收藏的商户</th>
                     </tr>
                     </thead>
                     <tbody id="tbody1">
@@ -249,9 +212,7 @@
                         <span>页</span>
 
                     </div>
-
                 </div>
-            </div>
         </div>
     </div>
 </div>
@@ -260,7 +221,29 @@
 <script src="../scripts/bootstrap/bootstrap.min.js"></script>
 <script src="../scripts/jQuery/jquery.cookie.min.js"></script>
 <script src="../scripts/jQuery/jquery-time.js"></script>
-<script src="../scripts/jQuery/remodal.js" type="text/javascript" charset="utf-8"></script>
-<script src="../scripts/jQuery/upfile.js" type="text/javascript" charset="utf-8"></script>
-<script src="../scripts/js/user.js"></script>
+<script src="../scripts/js/order.js"></script>
+<script>
+
+    /**
+     * ajax
+     */
+    $(document).ready(function () {
+//----------------------验证登录---------------------------------------------
+        if( $.cookie("name") && $.cookie("name")!==null){
+            //alert("1111")
+            console.log($.cookie("name"))
+            $(".n1").text($.cookie("name"))
+            $(".n2").css("display","block")
+        }else{
+            document.location.href ="login.html"
+        };
+
+        //--------------------------------退出------------------------------
+        $(".dropdown-menu li .n2").on("click",function(){
+            $.cookie("name","", { expires: -1})
+            document.location.href ="login.html"
+        });
+    });
+
+</script>
 </html>

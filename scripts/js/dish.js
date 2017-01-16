@@ -182,7 +182,7 @@ $(document).ready(function () {
                            "<td>" + formatDate(data.data.objs[index].updateTime) + "</td>" +
                            "<td class='amend' >" +
                            "<a class='a1'>修改</a>" +
-                           "<a class='a2'>保存</a>" +
+                           "<a class='a2-dish'>保存</a>" +
                            "</td></tr>");
                 $("#tbody1").append($tr)
             });
@@ -204,7 +204,7 @@ $(document).ready(function () {
 
             });
 
-            $(".a2").on("click",function(e){
+            $(".a2-dish").on("click",function(e){
                 /**
                  * 判断title是否为空
                  */
