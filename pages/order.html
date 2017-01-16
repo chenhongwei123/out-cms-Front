@@ -30,6 +30,30 @@
     <link href="../styles/base.css" rel="stylesheet">
     <link href="../styles/dish-style.css" rel="stylesheet">
     <link href="../styles/order-style.css" rel="stylesheet">
+    <style>
+        #PrevPage1,#NextPage1 {
+            float: left;
+            width: 50%;
+            text-align: center;
+            border: 0;
+            line-height: 46px;
+            font-size: 16px;
+            color: #008000;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        input#searchOrder1 {
+            margin-left: -2%;
+        }
+        #Paging1 input:disabled, #PrevPage1 input:disabled {
+            color: #cacaca;
+        }
+        #Paging1{
+            display: none;
+        }
+    </style>
+
 </head>
 <body>
 <!--创建导航条-->
@@ -210,10 +234,19 @@
                         <!--	 <input type="text" value="1" id="change1" />-->
                         <b id="change1">1</b>
                         <span>页</span>
-
                     </div>
                 </div>
-        </div>
+                <div id="Paging1" >
+                    <input type="button" id="PrevPage1" value="上一页"/>
+                    <input type="button" id="NextPage1" value="下一页">
+                    <input type="text" value="0" style="display: none;" id="dishpageval1"/>
+                    <div id="pagination1" style="text-align: center;">
+                        <span>第</span>
+                        <b id="change2">1</b>
+                        <span>页</span>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 </body>
