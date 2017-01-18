@@ -1,105 +1,96 @@
-/**控制台基础样式**/
+/*!**控制台基础样式**!*/
 
-/*
- *侧边栏样式
- *
- */
-.sidebar{
-    float: left;
-    position: fixed;
-    top: 60px;
-    width: 10%;
-    height: 100%;
-    overflow:hidden;
-    background-color: #F5F5F5;
-    z-index: 12;
-}
-
-.nav-sidebar{
-    margin-right: -21px;
-    margin-bottom: 60px;
-    margin-left: -20px;
-}
-
-.ul-style li > a:hover{
-    color: black;
-}
+/*!**/
+ /**侧边栏样式*/
+ /***/
+ /**!*/
 
 
-/*
- *操作面板样式
- *
- */
+/*!*.nav-sidebar{*!*/
+    /*!*margin-right: -21px;*!*/
+    /*!*margin-bottom: 60px;*!*/
+    /*!*margin-left: -20px;*!*/
+/*!*}*!*/
 
-.main{
+/*!*.ul-style li > a:hover{*!*/
+    /*!*color: black;*!*/
+/*!*}*!*/
 
-    position: absolute;
-    margin-top: 55px;
-    padding: 20px;
-    overflow-y:auto;
-    overflow-x:hidden;
-    height: 100%;
-}
 
-@media (min-width: 768px){
-    .main{
-        padding-right: 2%;
-        padding-left: 3%;
-    }
+/*!**/
+ /**操作面板样式*/
+ /***/
+ /**!*/
 
-}
+/*!*.main{*!*/
 
-@media (min-width: 1280px){
-    .main{
-        padding-right: 2%;
-        padding-left: 3%;
-    }
+    /*!*position: absolute;*!*/
+    /*!*margin-top: 55px;*!*/
+    /*!*padding: 20px;*!*/
+    /*!*overflow-y:auto;*!*/
+    /*!*overflow-x:hidden;*!*/
+    /*!*height: 100%;*!*/
+/*!*}*!*/
 
-}
+/*!*@media (min-width: 768px){*!*/
+    /*!*.main{*!*/
+        /*!*padding-right: 2%;*!*/
+        /*!*padding-left: 3%;*!*/
+    /*!*}*!*/
 
-.main .page-header{
-    margin-top: 0;
-}
+/*!*}*!*/
 
-/*.breadcrumb{*/
-    /*height: 34px;*/
-    /*position: relative;*/
-    /*margin: 0 0 19px 0;*/
-    /*overflow: hidden;*/
-    /*background-color: white;*/
+/*!*@media (min-width: 1280px){*!*/
+    /*!*.main{*!*/
+        /*!*padding-right: 2%;*!*/
+        /*!*padding-left: 3%;*!*/
+    /*!*}*!*/
+
+/*!*}*!*/
+
+/*!*.main .page-header{*!*/
+    /*!*margin-top: 0;*!*/
+/*!*}*!*/
+
+/*!*.breadcrumb{*!*/
+    /*!*height: 34px;*!*/
+    /*!*position: relative;*!*/
+    /*!*margin: 0 0 19px 0;*!*/
+    /*!*overflow: hidden;*!*/
+    /*!*background-color: white;*!*/
+/*!*}*!*/
+
+/*!*.breadcrumb-bg{*!*/
+    /*!*background-color: #e6e8ea;*!*/
+/*!*}*!*/
+
+/*.a1{*/
+    /*border-radius: 2px;*/
+    /*border: 1px solid #18BC9C;*/
+    /*cursor: pointer;*/
+    /*display: block;*/
+    /*text-align: center;*/
 /*}*/
 
-/*.breadcrumb-bg{*/
-    /*background-color: #e6e8ea;*/
+/*.a1:hover{*/
+    /*border: 1px solid white;*/
+    /*background: #18BC9C;*/
+    /*color: white;*/
 /*}*/
 
-.a1{
-    border-radius: 2px;
-    border: 1px solid #18BC9C;
-    cursor: pointer;
-    display: block;
-    text-align: center;
-}
+/*.a2-dish{*/
+    /*display: none;*/
+    /*cursor: pointer;*/
+    /*border: 1px solid #18BC9C;*/
+    /*border-radius: 2px;*/
+    /*text-align: center;*/
+/*}*/
 
-.a1:hover{
-    border: 1px solid white;
-    background: #18BC9C;
-    color: white;
-}
-
-.a2-dish{
-    display: none;
-    cursor: pointer;
-    border: 1px solid #18BC9C;
-    border-radius: 2px;
-    text-align: center;
-}
-
-.a2-dish:hover{
-    border: 1px solid white;
-    background: #18BC9C;
-    color: white;
-}
+/*.a2-dish:hover{*/
+    /*border: 1px solid white;*/
+    /*background: #18BC9C;*/
+    /*color: white;*/
+/*}*/
 
 
 

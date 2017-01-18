@@ -47,6 +47,12 @@ a{
     text-decoration: none;
 }
 
+/**ul的hover动画**/
+.ul-style li > a:hover{
+    color: black;
+}
+
+
 /**弹性图片大小设置**/
 #flexible-img{
     max-width: 100px;
@@ -80,16 +86,17 @@ a{
 
 
 .a2{
-    display: block;
+    display: none;
     cursor: pointer;
-    border: 1px solid #18BC9C;
+    border: 1px solid #EB65AE;
     border-radius: 2px;
+    color: #EB65AE;
     text-align: center;
 }
 
 .a2:hover{
     border: 1px solid white;
-    background: #18BC9C;
+    background: #EB65AE;
     color: white;
 }
 
@@ -105,5 +112,12 @@ a{
     border: 1px solid white;
     background: #18BC9C;
     color: white;
+}
+
+
+.nav-sidebar{
+    margin-right: -21px;
+    margin-bottom: 60px;
+    margin-left: -20px;
 }
 
