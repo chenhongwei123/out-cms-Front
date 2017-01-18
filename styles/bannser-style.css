@@ -1,11 +1,13 @@
-.sidebar-banner{
-    width: 10%;
-}
+/*.sidebar-banner{*/
+    /*width: 10%;*/
+/*}*/
 
 .main-banner{
-    margin-left: 7%;
+    /*margin-left: 18%;*/
     width: 95%;
     overflow-x: auto;
+    z-index: -10000;
+    /*position: relative;*/
 }
 
 #ctrl-img{
@@ -22,6 +24,10 @@
     border-radius: 5px;
 }
 
+.table{
+    overflow-x: auto;
+}
+
 .addBanner a{
     color: white;
     font-size: 13px;
@@ -31,4 +37,20 @@
 .file1{
     margin-left: 20%;
     margin-top: 10%;
+}
+
+#upload-img{
+    width: 200px;
+    height: 100px;
+}
+
+#url,#upload-img,#sort{
+    border: 1px solid #dce4ec;
+    border-radius: 5px;
+    width: 247.5px;
+}
+
+#url,#sort{
+    height: 45px;
+    font-size: 15px;
 }

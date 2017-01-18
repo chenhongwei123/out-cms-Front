@@ -19,12 +19,12 @@ tbody tr{
     height: 100%;
     overflow:hidden;
     background-color: #F5F5F5;
-    z-index: 12;
+    z-index: 100;
 }
 
 /**设置操作面板的样式**/
 .main-console{
-    position: fixed;
+    position: absolute;
     overflow-x: auto;
     background-color: #e6e8ea;
     width: 95%;
