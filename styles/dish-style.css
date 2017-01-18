@@ -8,7 +8,7 @@
     float: left;
     position: fixed;
     top: 60px;
-    width: 20%;
+    width: 10%;
     height: 100%;
     overflow:hidden;
     background-color: #F5F5F5;
@@ -61,17 +61,17 @@
     margin-top: 0;
 }
 
-.breadcrumb{
-    height: 34px;
-    position: relative;
-    margin: 0 0 19px 0;
-    overflow: hidden;
-    background-color: white;
-}
+/*.breadcrumb{*/
+    /*height: 34px;*/
+    /*position: relative;*/
+    /*margin: 0 0 19px 0;*/
+    /*overflow: hidden;*/
+    /*background-color: white;*/
+/*}*/
 
-.breadcrumb-bg{
-    background-color: #e6e8ea;
-}
+/*.breadcrumb-bg{*/
+    /*background-color: #e6e8ea;*/
+/*}*/
 
 .a1{
     border-radius: 2px;

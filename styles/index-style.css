@@ -4,22 +4,22 @@
  *侧边栏样式
  *
  */
-.sidebar{
-    float: left;
-    position: fixed;
-    top: 60px;
-    width: 20%;
-    height: 100%;
-    overflow:hidden;
-    background-color: #F5F5F5;
-    z-index: 12;
-}
+/*.sidebar{*/
+    /*float: left;*/
+    /*position: fixed;*/
+    /*top: 60px;*/
+    /*width: 20%;*/
+    /*height: 100%;*/
+    /*overflow:hidden;*/
+    /*background-color: #F5F5F5;*/
+    /*z-index: 12;*/
+/*}*/
 
-.nav-sidebar{
-    margin-right: -21px;
-    margin-bottom: 60px;
-    margin-left: -20px;
-}
+/*.nav-sidebar{*/
+    /*margin-right: -21px;*/
+    /*margin-bottom: 60px;*/
+    /*margin-left: -20px;*/
+/*}*/
 
 .ul-style li > a:hover{
     color: black;
@@ -31,15 +31,15 @@
  *
  */
 
-.main{
-    background-color: #e6e8ea;
-    position: absolute;
-    margin-top: 55px;
-    padding: 20px;
-    overflow-y:auto;
-    overflow-x:hidden;
-    height: 100%;
-}
+/*.main{*/
+    /*background-color: #e6e8ea;*/
+    /*position: absolute;*/
+    /*margin-top: 55px;*/
+    /*padding: 20px;*/
+    /*overflow-y:auto;*/
+    /*overflow-x:hidden;*/
+    /*height: 100%;*/
+/*}*/
 
 @media (min-width: 768px){
     .main{
@@ -53,13 +53,7 @@
     margin-top: 0;
 }
 
-.breadcrumb{
-    height: 34px;
-    position: relative;
-    margin: 0 0 19px 0;
-    overflow: hidden;
-    background-color: white;
-}
+
 
 /**
  *统计信息显示盒子
