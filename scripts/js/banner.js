@@ -293,7 +293,11 @@ $(document).ready(function () {
         switch(e) {
 
             case 1:
-                return '1-充值优惠'
+                return '1-充值优惠';
+                break;
+
+            case 2:
+                return '2-跳转官网';
                 break;
         };
     };

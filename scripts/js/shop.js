@@ -85,7 +85,7 @@ $(document).ready(function () {
 
                 $tr=("<tr >"+
                 "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a2' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                 +"<td><div class='box1'>"
                 +"<ul class='adddishesUl'>"
                 +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
@@ -266,7 +266,7 @@ $(document).ready(function () {
                     var b=data.data.objs[index].type
                     $tr=("<tr >"+
                     "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                    +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a2' href='#modal'></a></td>"
+                    +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'></a></td>"
                     +"<td><div class='box1'>"
                     +"<ul class='adddishesUl'>"
                     +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
@@ -302,13 +302,13 @@ $(document).ready(function () {
                     +"</tr>")
                     $("#tbody1").append($tr)
                     if($("#type1").val().substring(0,1)==0){
-                        $(".a2").html("审核")
+                        $(".a3").html("审核")
 //		                       	 $(".a2").attr("href","#modal")
 //		                       	 console.log($('.a2').parents('tr').children("td").eq(0).attr('goodid'))
                     }else{
-                        $(".a2").html("已审核")
-                        $(".a2").css("color","green")
-                        $(".a2").attr("href","#")
+                        $(".a3").html("已审核");
+                        // $(".a2").css("color","green")
+                        $(".a3").attr("href","#")
                     }
                 });
                 //--------------------------------------------------------
@@ -453,7 +453,7 @@ $(document).ready(function () {
 
                         $tr=("<tr >"+
                         "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a2' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                         +"<td><div class='box1'>"
                         +"<ul class='adddishesUl'>"
                         +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
@@ -624,7 +624,7 @@ $(document).ready(function () {
 
                         $tr=("<tr >"+
                         "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a2' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                         +"<td><div class='box1'>"
                         +"<ul class='adddishesUl'>"
                         +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
@@ -808,7 +808,7 @@ $(document).ready(function () {
                     var b=data.data.objs[index].type
                     $tr=("<tr >"+
                     "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                    +"<td class='q'><a  class='a1'>更多</a></td></td> <td class='jump'><a class='a2' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                    +"<td class='q'><a  class='a1'>更多</a></td></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                     +"<td><div class='box1'>"
                     +"<ul class='adddishesUl'>"
                     +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
@@ -981,7 +981,7 @@ $(document).ready(function () {
                     var b=data.data.objs[index].type
                     $tr=("<tr >"+
                     "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                    +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a2' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                    +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                     +"<td><div class='box1'>"
                     +"<ul class='adddishesUl'>"
                     +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"

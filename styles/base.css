@@ -5,7 +5,6 @@
 
 /**表格分割线**/
 tbody tr{
-    /*vertical-align: middle;*/
     border-top: 2px solid #18bc9c;
 }
 
@@ -29,7 +28,7 @@ tbody tr{
     background-color: #e6e8ea;
     width: 95%;
     height: 100%;
-    left: -9%;
+    left: -8%;
     padding: 40px;
 }
 
