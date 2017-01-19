@@ -249,7 +249,7 @@ $(document).ready(function () {
         }
     })
 //-------------------新增banner条目-----------------------------------------------------------------------
-    $(".remodal-confirm").on("click",function(){
+    $(".add-banner").on("click",function(){
 //            console.log($("#name2").val())
         $.ajax({
             type:"post",
