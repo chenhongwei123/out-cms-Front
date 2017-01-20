@@ -64,7 +64,39 @@ $(document).ready(function () {
             console.log(data)
             $.each(data.data.objs, function(index) {
                 var a=data.data.objs[index].id
-                var $tr=("<tr> <td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td><select  disabled='disabled'><option>"+active(data.data.objs[index].type)+"</option><option>1-充值优惠</option></select></td> <td><img id='ctrl-img' src='"+data.data.objs[index].img+"'/><input class='file' type='file'  /></td> <td><input disabled type='text' value='"+data.data.objs[index].sort+"'/></td> <td><select disabled><option>"+terrace(data.data.objs[index].kind)+"</option><option>1-护工平台</option><option>2-用户app</option><option>3-订餐商户平台</option></select></td> <td><input disabled type='text' value='"+data.data.objs[index].url+"'/></td> <td>"+formatDate(data.data.objs[index].createTime)+"</td> <td>"+formatDate(data.data.objs[index].updateTime)+"</td> <td class='amend' ><a  class='a1'>修改</a><a class='a2' >保存</a></td></td> <td class='delete'><a class='a3'>删除</a></td> </tr>")
+                var $tr=("<tr> <td goodid=" + a + ">"+data.data.objs[index].id+"</td> " +
+                "<td>" +
+                "<select  disabled='disabled'>" +
+                "<option>"+active(data.data.objs[index].type)+"</option>" +
+                "<option>1-充值优惠</option>" +
+                "</select>" +
+                "</td> " +
+                "<td>" +
+                "<img id='ctrl-img' src='"+data.data.objs[index].img+"'/>" +
+                "<input disabled class='file' type='file'/>" +
+                "</td>" +
+                " <td>" +
+                "<input disabled type='text' value='"+data.data.objs[index].sort+"'/>" +
+                "</td> " +
+                "<td>" +
+                "<select disabled>" +
+                "<option>"+terrace(data.data.objs[index].kind)+"</option>" +
+                "<option>1-护工平台</option>" +
+                "<option>2-用户app</option>" +
+                "<option>3-订餐商户平台</option>" +
+                "</select>" +
+                "</td> " +
+                "<td>" +
+                "<input disabled type='text' value='"+data.data.objs[index].url+"'/>" +
+                "</td> " +
+                "<td>"+formatDate(data.data.objs[index].createTime)+"</td> " +
+                "<td>"+formatDate(data.data.objs[index].updateTime)+"</td> " +
+                "<td class='amend' >" +
+                "<a  class='a1'>修改</a>" +
+                "<a class='a2' >保存</a>" +
+                "</td>" +
+                "</td> " +
+                "<td class='delete'><a class='a3'>删除</a></td> </tr>")
                 $("#tbody1").append($tr)
             });
 
@@ -134,7 +166,8 @@ $(document).ready(function () {
                 $(this).parent().children("td").eq(4).children('select').eq(0).attr("disabled",false)
                 $(this).parent().children("td").eq(4).children('select').eq(0).css("border","1px solid")
 
-                $(this).parent().children("td").eq(2).children('input').eq(0).css("display","block")
+                $(this).parent().children("td").eq(2).children('input').eq(0).attr("disabled",false);
+                console.log($(this).parent().children("td").eq(2).children('input').eq(1));
             })
 
             //------------------------保存-----------------------------
