@@ -632,7 +632,9 @@ $(document).ready(function () {
                         $tr=("<tr >"+
                         "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
-                        +"<td><div class='box1'>"
+                        +"<td><div class='box1'>" +
+                        "<h3>商户详细内容</h3>" +
+                        "<br/>"
                         +"<ul class='adddishesUl'>"
                         +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
                         +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"

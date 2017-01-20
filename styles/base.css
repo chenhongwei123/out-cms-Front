@@ -128,3 +128,9 @@ a{
     height: 25px;
     cursor: pointer;
 }
+
+/**li样式**/
+
+ul li{
+    list-style: none;
+}
