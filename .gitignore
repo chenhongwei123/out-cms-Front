@@ -8,5 +8,5 @@ dist
 # node
 node_modules
 
-#vscode
+# vscode
 .vscode
