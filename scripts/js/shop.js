@@ -421,6 +421,9 @@ $(document).ready(function () {
 
     //----------------------------搜索-------------------------------------------------
 
+    /**
+     * 食堂名称搜索
+     */
     $("#searchOrder").on("click",function(){
         $("#audit1").css("display","none")
         $("#audit2").css("display","none")
@@ -546,6 +549,7 @@ $(document).ready(function () {
 
                         $("#button2-3").on("click",function(){
                             if($("#textarea3").val()==''){
+                                console.log($("#textarea3").val());
                                 alert("请填写审核失败的原因")
                             }else{
                                 $.ajax({
@@ -587,6 +591,9 @@ $(document).ready(function () {
 
                     })
 //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
+                    /**
+                     * 联系方式搜索
+                     */
                     $(".a1").on("click",function(){
                         console.log($(this).parents('tr').children("td").eq(10))
                         $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
@@ -678,9 +685,9 @@ $(document).ready(function () {
                         $(".remodal-wrapper").css("display","block")
                         $(".remodal-overlay").css("display","block")
                         var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
-                        console.log($("#select1").val().substring(0,1))
+                        console.log($("#select3").val().substring(0,1))
 
-                        $("#button1").on("click",function(){
+                        $("#button1-3").on("click",function(){
                             $.ajax({
                                 type:"post",
                                 url:"http://admin.honganjk.com/admin/verifyBusiness.action",
@@ -692,7 +699,7 @@ $(document).ready(function () {
                                 data:{
 
                                     "id":index1,
-                                    "type":$("#select1").val().substring(0,1)
+                                    "type":$("#select3").val().substring(0,1)
                                 },
                                 success: function(data){
                                     console.log(data)
@@ -715,8 +722,9 @@ $(document).ready(function () {
                             });//审核成功
                         })
 
-                        $("#button2").on("click",function(){
-                            if($("#textarea1").val()==''){
+                        $("#button2-3").on("click",function(){
+                            if($("#textarea3").val()==''){
+                                console.log($("#textarea3").val());
                                 alert("请填写审核失败的原因")
                             }else{
                                 $.ajax({
@@ -730,7 +738,7 @@ $(document).ready(function () {
                                     data:{
 
                                         "id":index1,
-                                        "reason":$("#textarea1").val()
+                                        "reason":$("#textarea3").val()
                                     },
                                     success: function(data){
                                         console.log(data)
