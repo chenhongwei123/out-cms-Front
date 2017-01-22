@@ -86,7 +86,12 @@ $(document).ready(function () {
                 $tr=("<tr >"+
                 "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                 +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
-                +"<td><div class='box1'>"
+                +"<td><div class='box1'>" +
+                "<div class='jumbotron jumbotron-style'>" +
+                "<div class='container'>" +
+                "<h3>商户详细信息</h3>" +
+                "</div> " +
+                "</div> "
                 +"<ul class='adddishesUl'>"
                 +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
                 +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"
@@ -95,20 +100,20 @@ $(document).ready(function () {
                 +"<li><span>地址:</span><input type='text'value='"+data.data.objs[index].address+"'/></li>"
                 +"<li><span>经度:</span><input type='text'value='"+data.data.objs[index].longitude+"'/></li>"
                 +"<li><span>纬度:</span><input type='text'value='"+data.data.objs[index].latitude+"'/></li>"
-                +"<li><span>简介:</span><textarea>"+data.data.objs[index].descs+"</textarea></li>"
+                +"<li><span>简介:</span><textarea disabled='disabled'>"+data.data.objs[index].descs+"</textarea></li>"
                 +"<li><span>服务范围:</span><input type='text'value='"+data.data.objs[index].extent+"'/>公里</li>"
                 +"<li><span>联系电话:</span><input type='text'value='"+data.data.objs[index].contact+"'/></li>"
                 +"<li><span>营业时间:</span><input type='text'value='"+data.data.objs[index].hours+"'/></li>"
                 +"<li><span>起送价:</span><input type='text'value='"+data.data.objs[index].lowest+"'/></li>"
                 +"<li><span>配送费:</span><input type='text'value='"+data.data.objs[index].fare+"'/></li>"
-                +"<li><span>公告:</span><textarea>"+data.data.objs[index].bulletin+"</textarea></li>"
+                +"<li><span>公告:</span><textarea disabled='disabled'>"+data.data.objs[index].bulletin+"</textarea></li>"
                 +"<li><span>商户联系人:</span><input type='text'value='"+data.data.objs[index].owner+"'/></li>"
                 +"<li><span>联系人号码:</span><input type='text'value='"+data.data.objs[index].mobile+"'/></li>"
                 +"<li><span>银行卡号:</span><input type='text'value='"+data.data.objs[index].card+"'/></li>"
                 +"<li><span>支行信息:</span><input type='text'value='"+data.data.objs[index].bank+"'/></li>"
                 +"<li><span>账号:</span><input type='text'value='"+data.data.objs[index].account+"'/></li>"
                 +"<li><span>密码:</span><input type='text'value='"+data.data.objs[index].password+"'/></li>"
-                +"<li><span>备注:</span><textarea>"+data.data.objs[index].remark+"</textarea></li>"
+                +"<li><span>备注:</span><textarea disabled='disabled'>"+data.data.objs[index].remark+"</textarea></li>"
                 +"<li><span>营业执照图:</span><img src='"+data.data.objs[index].license_img_url+"'/></li><br>"
                 +"<li><span>许可证图片:</span><img src='"+data.data.objs[index].permit_img_url+"'/></li><br>"
                 +"<li><span>身份证正面:</span><img src='"+data.data.objs[index].positive_img_url+"'/></li><br>"
@@ -267,7 +272,12 @@ $(document).ready(function () {
                     $tr=("<tr >"+
                     "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                     +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'></a></td>"
-                    +"<td><div class='box1'>"
+                    +"<td><div class='box1'>" +
+                    "<div class='jumbotron jumbotron-style'>" +
+                    "<div class='container'>" +
+                    "<h3>商户详细信息</h3>" +
+                    "</div> " +
+                    "</div> "
                     +"<ul class='adddishesUl'>"
                     +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
                     +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"
@@ -282,14 +292,14 @@ $(document).ready(function () {
                     +"<li><span>营业时间:</span><input type='text'value='"+data.data.objs[index].hours+"'/></li>"
                     +"<li><span>起送价:</span><input type='text'value='"+data.data.objs[index].lowest+"'/></li>"
                     +"<li><span>配送费:</span><input type='text'value='"+data.data.objs[index].fare+"'/></li>"
-                    +"<li><span>公告:</span><textarea>"+data.data.objs[index].bulletin+"</textarea></li>"
+                    +"<li><span>公告:</span><textarea disabled='disabled'>"+data.data.objs[index].bulletin+"</textarea></li>"
                     +"<li><span>商户联系人:</span><input type='text'value='"+data.data.objs[index].owner+"'/></li>"
                     +"<li><span>联系人号码:</span><input type='text'value='"+data.data.objs[index].mobile+"'/></li>"
                     +"<li><span>银行卡号:</span><input type='text'value='"+data.data.objs[index].card+"'/></li>"
                     +"<li><span>支行信息:</span><input type='text'value='"+data.data.objs[index].bank+"'/></li>"
                     +"<li><span>账号:</span><input type='text'value='"+data.data.objs[index].account+"'/></li>"
                     +"<li><span>密码:</span><input type='text'value='"+data.data.objs[index].password+"'/></li>"
-                    +"<li><span>备注:</span><textarea>"+data.data.objs[index].remark+"</textarea></li>"
+                    +"<li><span>备注:</span><textarea disabled='disabled'>"+data.data.objs[index].remark+"</textarea></li>"
                     +"<li><span>营业执照图:</span><img src='"+data.data.objs[index].license_img_url+"'/></li><br>"
                     +"<li><span>许可证图片:</span><img src='"+data.data.objs[index].permit_img_url+"'/></li><br>"
                     +"<li><span>身份证正面:</span><img src='"+data.data.objs[index].positive_img_url+"'/></li><br>"
@@ -457,7 +467,12 @@ $(document).ready(function () {
                         $tr=("<tr >"+
                         "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
-                        +"<td><div class='box1'>"
+                        +"<td><div class='box1'>" +
+                        "<div class='jumbotron jumbotron-style'>" +
+                        "<div class='container'>" +
+                        "<h3>商户详细信息</h3>" +
+                        "</div> " +
+                        "</div> "
                         +"<ul class='adddishesUl'>"
                         +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
                         +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"
@@ -466,7 +481,7 @@ $(document).ready(function () {
                         +"<li><span>地址:</span><input type='text'value='"+data.data.objs[index].address+"'/></li>"
                         +"<li><span>经度:</span><input type='text'value='"+data.data.objs[index].longitude+"'/></li>"
                         +"<li><span>纬度:</span><input type='text'value='"+data.data.objs[index].latitude+"'/></li>"
-                        +"<li><span>简介:</span><textarea>"+data.data.objs[index].descs+"</textarea></li>"
+                        +"<li><span>简介:</span><textarea disabled='disabled'>"+data.data.objs[index].descs+"</textarea></li>"
                         +"<li><span>服务范围:</span><input type='text'value='"+data.data.objs[index].extent+"'/>公里</li>"
                         +"<li><span>联系电话:</span><input type='text'value='"+data.data.objs[index].contact+"'/></li>"
                         +"<li><span>营业时间:</span><input type='text'value='"+data.data.objs[index].hours+"'/></li>"
@@ -479,7 +494,7 @@ $(document).ready(function () {
                         +"<li><span>支行信息:</span><input type='text'value='"+data.data.objs[index].bank+"'/></li>"
                         +"<li><span>账号:</span><input type='text'value='"+data.data.objs[index].account+"'/></li>"
                         +"<li><span>密码:</span><input type='text'value='"+data.data.objs[index].password+"'/></li>"
-                        +"<li><span>备注:</span><textarea>"+data.data.objs[index].remark+"</textarea></li>"
+                        +"<li><span>备注:</span><textarea disabled='disabled'>"+data.data.objs[index].remark+"</textarea></li>"
                         +"<li><span>营业执照图:</span><img src='"+data.data.objs[index].license_img_url+"'/></li><br>"
                         +"<li><span>许可证图片:</span><img src='"+data.data.objs[index].permit_img_url+"'/></li><br>"
                         +"<li><span>身份证正面:</span><img src='"+data.data.objs[index].positive_img_url+"'/></li><br>"
@@ -633,8 +648,11 @@ $(document).ready(function () {
                         "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                         +"<td><div class='box1'>" +
-                        "<h3>商户详细内容</h3>" +
-                        "<br/>"
+                        "<div class='jumbotron jumbotron-style'>" +
+                        "<div class='container'>" +
+                        "<h3>商户详细信息</h3>" +
+                        "</div> " +
+                        "</div> "
                         +"<ul class='adddishesUl'>"
                         +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
                         +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"
@@ -643,20 +661,20 @@ $(document).ready(function () {
                         +"<li><span>地址:</span><input type='text'value='"+data.data.objs[index].address+"'/></li>"
                         +"<li><span>经度:</span><input type='text'value='"+data.data.objs[index].longitude+"'/></li>"
                         +"<li><span>纬度:</span><input type='text'value='"+data.data.objs[index].latitude+"'/></li>"
-                        +"<li><span>简介:</span><textarea>"+data.data.objs[index].descs+"</textarea></li>"
+                        +"<li><span>简介:</span><textarea disabled>"+data.data.objs[index].descs+"</textarea></li>"
                         +"<li><span>服务范围:</span><input type='text'value='"+data.data.objs[index].extent+"'/>公里</li>"
                         +"<li><span>联系电话:</span><input type='text'value='"+data.data.objs[index].contact+"'/></li>"
                         +"<li><span>营业时间:</span><input type='text'value='"+data.data.objs[index].hours+"'/></li>"
                         +"<li><span>起送价:</span><input type='text'value='"+data.data.objs[index].lowest+"'/></li>"
                         +"<li><span>配送费:</span><input type='text'value='"+data.data.objs[index].fare+"'/></li>"
-                        +"<li><span>公告:</span><textarea>"+data.data.objs[index].bulletin+"</textarea></li>"
+                        +"<li><span>公告:</span><textarea disabled='disabled'>"+data.data.objs[index].bulletin+"</textarea></li>"
                         +"<li><span>商户联系人:</span><input type='text'value='"+data.data.objs[index].owner+"'/></li>"
                         +"<li><span>联系人号码:</span><input type='text'value='"+data.data.objs[index].mobile+"'/></li>"
                         +"<li><span>银行卡号:</span><input type='text'value='"+data.data.objs[index].card+"'/></li>"
                         +"<li><span>支行信息:</span><input type='text'value='"+data.data.objs[index].bank+"'/></li>"
                         +"<li><span>账号:</span><input type='text'value='"+data.data.objs[index].account+"'/></li>"
                         +"<li><span>密码:</span><input type='text'value='"+data.data.objs[index].password+"'/></li>"
-                        +"<li><span>备注:</span><textarea>"+data.data.objs[index].remark+"</textarea></li>"
+                        +"<li><span>备注:</span><textarea disabled='disabled'>"+data.data.objs[index].remark+"</textarea></li>"
                         +"<li><span>营业执照图:</span><img src='"+data.data.objs[index].license_img_url+"'/></li><br>"
                         +"<li><span>许可证图片:</span><img src='"+data.data.objs[index].permit_img_url+"'/></li><br>"
                         +"<li><span>身份证正面:</span><img src='"+data.data.objs[index].positive_img_url+"'/></li><br>"
@@ -819,7 +837,12 @@ $(document).ready(function () {
                     $tr=("<tr >"+
                     "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                     +"<td class='q'><a  class='a1'>更多</a></td></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
-                    +"<td><div class='box1'>"
+                    +"<td><div class='box1'>" +
+                    "<div class='jumbotron jumbotron-style'>" +
+                    "<div class='container'>" +
+                    "<h3>商户详细信息</h3>" +
+                    "</div> " +
+                    "</div> "
                     +"<ul class='adddishesUl'>"
                     +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
                     +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"
@@ -828,20 +851,20 @@ $(document).ready(function () {
                     +"<li><span>地址:</span><input type='text'value='"+data.data.objs[index].address+"'/></li>"
                     +"<li><span>经度:</span><input type='text'value='"+data.data.objs[index].longitude+"'/></li>"
                     +"<li><span>纬度:</span><input type='text'value='"+data.data.objs[index].latitude+"'/></li>"
-                    +"<li><span>简介:</span><textarea>"+data.data.objs[index].descs+"</textarea></li>"
+                    +"<li><span>简介:</span><textarea disabled='disabled'>"+data.data.objs[index].descs+"</textarea></li>"
                     +"<li><span>服务范围:</span><input type='text'value='"+data.data.objs[index].extent+"'/>公里</li>"
                     +"<li><span>联系电话:</span><input type='text'value='"+data.data.objs[index].contact+"'/></li>"
                     +"<li><span>营业时间:</span><input type='text'value='"+data.data.objs[index].hours+"'/></li>"
                     +"<li><span>起送价:</span><input type='text'value='"+data.data.objs[index].lowest+"'/></li>"
                     +"<li><span>配送费:</span><input type='text'value='"+data.data.objs[index].fare+"'/></li>"
-                    +"<li><span>公告:</span><textarea>"+data.data.objs[index].bulletin+"</textarea></li>"
+                    +"<li><span>公告:</span><textarea disabled='disabled'>"+data.data.objs[index].bulletin+"</textarea></li>"
                     +"<li><span>商户联系人:</span><input type='text'value='"+data.data.objs[index].owner+"'/></li>"
                     +"<li><span>联系人号码:</span><input type='text'value='"+data.data.objs[index].mobile+"'/></li>"
                     +"<li><span>银行卡号:</span><input type='text'value='"+data.data.objs[index].card+"'/></li>"
                     +"<li><span>支行信息:</span><input type='text'value='"+data.data.objs[index].bank+"'/></li>"
                     +"<li><span>账号:</span><input type='text'value='"+data.data.objs[index].account+"'/></li>"
                     +"<li><span>密码:</span><input type='text'value='"+data.data.objs[index].password+"'/></li>"
-                    +"<li><span>备注:</span><textarea>"+data.data.objs[index].remark+"</textarea></li>"
+                    +"<li><span>备注:</span><textarea disabled='disabled'>"+data.data.objs[index].remark+"</textarea></li>"
                     +"<li><span>营业执照图:</span><img src='"+data.data.objs[index].license_img_url+"'/></li><br>"
                     +"<li><span>许可证图片:</span><img src='"+data.data.objs[index].permit_img_url+"'/></li><br>"
                     +"<li><span>身份证正面:</span><img src='"+data.data.objs[index].positive_img_url+"'/></li><br>"
@@ -992,7 +1015,12 @@ $(document).ready(function () {
                     $tr=("<tr >"+
                     "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                     +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
-                    +"<td><div class='box1'>"
+                    +"<td><div class='box1'>" +
+                    "<div class='jumbotron jumbotron-style'>" +
+                    "<div class='container'>" +
+                    "<h3>商户详细信息</h3>" +
+                    "</div> " +
+                    "</div> "
                     +"<ul class='adddishesUl'>"
                     +"<img class='xx' src='../images/xxafter.png'/><li><span>食堂名称:</span><input type='text'value='"+data.data.objs[index].name+"'/></li>"
                     +"<li><span>商户类型:</span><input type='text'value='"+shanghu(data.data.objs[index].type)+"'/></li>"
@@ -1001,20 +1029,20 @@ $(document).ready(function () {
                     +"<li><span>地址:</span><input type='text'value='"+data.data.objs[index].address+"'/></li>"
                     +"<li><span>经度:</span><input type='text'value='"+data.data.objs[index].longitude+"'/></li>"
                     +"<li><span>纬度:</span><input type='text'value='"+data.data.objs[index].latitude+"'/></li>"
-                    +"<li><span>简介:</span><textarea>"+data.data.objs[index].descs+"</textarea></li>"
+                    +"<li><span>简介:</span><textarea disabled='disabled'>"+data.data.objs[index].descs+"</textarea></li>"
                     +"<li><span>服务范围:</span><input type='text'value='"+data.data.objs[index].extent+"'/>公里</li>"
                     +"<li><span>联系电话:</span><input type='text'value='"+data.data.objs[index].contact+"'/></li>"
                     +"<li><span>营业时间:</span><input type='text'value='"+data.data.objs[index].hours+"'/></li>"
                     +"<li><span>起送价:</span><input type='text'value='"+data.data.objs[index].lowest+"'/></li>"
                     +"<li><span>配送费:</span><input type='text'value='"+data.data.objs[index].fare+"'/></li>"
-                    +"<li><span>公告:</span><textarea>"+data.data.objs[index].bulletin+"</textarea></li>"
+                    +"<li><span>公告:</span><textarea disabled='disabled'>"+data.data.objs[index].bulletin+"</textarea></li>"
                     +"<li><span>商户联系人:</span><input type='text'value='"+data.data.objs[index].owner+"'/></li>"
                     +"<li><span>联系人号码:</span><input type='text'value='"+data.data.objs[index].mobile+"'/></li>"
                     +"<li><span>银行卡号:</span><input type='text'value='"+data.data.objs[index].card+"'/></li>"
                     +"<li><span>支行信息:</span><input type='text'value='"+data.data.objs[index].bank+"'/></li>"
                     +"<li><span>账号:</span><input type='text'value='"+data.data.objs[index].account+"'/></li>"
                     +"<li><span>密码:</span><input type='text'value='"+data.data.objs[index].password+"'/></li>"
-                    +"<li><span>备注:</span><textarea>"+data.data.objs[index].remark+"</textarea></li>"
+                    +"<li><span>备注:</span><textarea disabled='disabled'>"+data.data.objs[index].remark+"</textarea></li>"
                     +"<li><span>营业执照图:</span><img src='"+data.data.objs[index].license_img_url+"'/></li><br>"
                     +"<li><span>许可证图片:</span><img src='"+data.data.objs[index].permit_img_url+"'/></li><br>"
                     +"<li><span>身份证正面:</span><img src='"+data.data.objs[index].positive_img_url+"'/></li><br>"

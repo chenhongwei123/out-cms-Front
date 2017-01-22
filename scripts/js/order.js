@@ -92,7 +92,6 @@ $(document).ready(function () {
                 +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                 +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                 +"<td>"+data.data.objs[index].fare+"</td>"
-                +"<td>"+data.data.objs[index].day+"</td>"
                 +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                 +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                 +"</tr>")
@@ -162,7 +161,6 @@ $(document).ready(function () {
                     +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                     +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                     +"<td>"+data.data.objs[index].fare+"</td>"
-                    +"<td>"+data.data.objs[index].day+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                     +"</tr>")
@@ -221,7 +219,6 @@ $(document).ready(function () {
                     +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                     +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                     +"<td>"+data.data.objs[index].fare+"</td>"
-                    +"<td>"+data.data.objs[index].day+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                     +"</tr>")
@@ -284,7 +281,6 @@ $(document).ready(function () {
                     +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                     +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                     +"<td>"+data.data.objs[index].fare+"</td>"
-                    +"<td>"+data.data.objs[index].day+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                     +"</tr>")
@@ -351,7 +347,6 @@ $(document).ready(function () {
                     +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                     +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                     +"<td>"+data.data.objs[index].fare+"</td>"
-                    +"<td>"+data.data.objs[index].day+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                     +"</tr>")
@@ -412,7 +407,6 @@ $(document).ready(function () {
                     +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                     +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                     +"<td>"+data.data.objs[index].fare+"</td>"
-                    +"<td>"+data.data.objs[index].day+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                     +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                     +"</tr>")
@@ -478,7 +472,6 @@ $(document).ready(function () {
                         +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                         +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                         +"<td>"+data.data.objs[index].fare+"</td>"
-                        +"<td>"+data.data.objs[index].day+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"</tr>")
@@ -534,7 +527,6 @@ $(document).ready(function () {
                         +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                         +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                         +"<td>"+data.data.objs[index].fare+"</td>"
-                        +"<td>"+data.data.objs[index].day+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"</tr>")
@@ -590,7 +582,6 @@ $(document).ready(function () {
                         +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                         +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                         +"<td>"+data.data.objs[index].fare+"</td>"
-                        +"<td>"+data.data.objs[index].day+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"</tr>")
@@ -646,7 +637,6 @@ $(document).ready(function () {
                         +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                         +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                         +"<td>"+data.data.objs[index].fare+"</td>"
-                        +"<td>"+data.data.objs[index].day+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"</tr>")
@@ -702,7 +692,6 @@ $(document).ready(function () {
                         +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                         +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                         +"<td>"+data.data.objs[index].fare+"</td>"
-                        +"<td>"+data.data.objs[index].day+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"</tr>")
@@ -758,7 +747,6 @@ $(document).ready(function () {
                         +"<td>"+pay(data.data.objs[index].pay)+"</td>"
                         +"<td>"+stateRep(data.data.objs[index].state)+"</td>"
                         +"<td>"+data.data.objs[index].fare+"</td>"
-                        +"<td>"+data.data.objs[index].day+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].create_time)+"</td>"
                         +"<td>"+formatDate(data.data.objs[index].update_time)+"</td>"
                         +"</tr>")
