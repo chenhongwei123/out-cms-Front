@@ -124,9 +124,9 @@ $(document).ready(function () {
             //-------------------上传图片--------------------------------------------------
             var uploader = uploadJSSDK;
             $(".file").on("change",function(e){
-                console.log( $(this).parents('tr').children("td").eq(2).children('img').eq(0))
-                var $img= $(this).parents('tr').children("td").eq(2).children('img').eq(0)
-                $img.attr('src',"../images/jiazai0.gif")
+                console.log( $(this).parents('tr').children("td").eq(2).children('img').eq(0));
+                var $img= $(this).parents('tr').children("td").eq(2).children('img').eq(0);
+                $img.attr('src',"../images/jiazai0.gif");
                 var files = e.target.files;
                 for(var i=0;i<files.length;i++){
                     uploader({
@@ -150,12 +150,12 @@ $(document).ready(function () {
             //---------------------------修改------------------------
             $(".amend").on('click',function(e){
                 //console.log($(this).parents().children("td").eq(1).children('select').eq(0).val())
-                console.log($(this).parents('tr').children("td").eq(2).children('img').eq(0).attr("src"))
+                console.log($(this).parents('tr').children("td").eq(2).children('img').eq(0).attr("src"));
 
-                index1 = $(this).parents('tr').children("td").eq(0).attr('goodid')
-                console.log(index1)
-                $(this).children("a").eq(0).css("display","none")
-                $(this).children("a").eq(1).css("display","block")
+                index1 = $(this).parents('tr').children("td").eq(0).attr('goodid');
+                console.log(index1);
+                $(this).children("a").eq(0).css("display","none");
+                $(this).children("a").eq(1).css("display","block");
                 $(this).parent().children("td").eq(3).children('input').eq(0).attr("disabled",false)
 
                 $(this).parent().children("td").eq(5).children('input').eq(0).attr("disabled",false)
@@ -168,7 +168,7 @@ $(document).ready(function () {
 
                 $(this).parent().children("td").eq(2).children('input').eq(0).attr("disabled",false);
                 console.log($(this).parent().children("td").eq(2).children('input').eq(1));
-            })
+            });
 
             //------------------------保存-----------------------------
             $(".a2").on("click",function(e){
