@@ -1,0 +1,176 @@
+<!--
+ ━━━━━━神兽出没━━━━━━
+  　　　┏┓　　　┏┓
+  　　┏┛┻━━━┛┻┓
+  　　┃　　　　　　　┃
+  　　┃　　　━　　　┃
+  　　┃　┳┛　┗┳　┃
+  　　┃　　　　　　　┃
+  　　┃　　　┻　　　┃
+  　　┃　　　　　　　┃
+  　　┗━┓　　　┏━┛Code is far away from bug with the animal protecting
+  　　　　┃　　　┃    神兽保佑,代码无bug
+  　　　　┃　　　┃
+  　　　　┃　　　┗━━━┓
+  　　　　┃　　　　　　　┣┓
+  　　　　┃　　　　　　　┏┛
+  　　　　┗┓┓┏━┳┓┏┛
+  　　　　　┃┫┫　┃┫┫
+  　　　　　┗┻┛　┗┻┛
+  ━━━━━━感觉萌萌哒━━━━━━
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../styles/bootstrap/bootstrap.css" rel="stylesheet">
+    <style>
+        .base-container{
+            width: 598px;
+        }
+
+        .base-size{
+            margin-top: 3%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .base-btn{
+            position: relative;
+            margin-top: 3%;
+            margin-left: 25%;
+            width: 284px;
+        }
+
+        .base-alert{
+            margin-top: 3%;
+            margin-left: -2%;
+            width: 558px;
+        }
+
+        .base-textara{
+            margin-left: -2%;
+            width: 558px;
+        }
+
+    </style>
+</head>
+<body>
+    <a data-toggle="modal" data-target="#myModal">审核</a>
+    <a data-toggle="modal" data-target="#outModal">下架</a>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="jumbotron">
+                        <div class="container">
+                            <h3>审核面板</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                        <div class="bs-example bs-example-tabs">
+                            <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#success" id="success-tab" role="tab" data-toggle="tab" aria-controls="success" aria-expanded="true">Successed</a>
+
+                                </li>
+                                <li role="presentation" class="active">
+                                    <a href="#faile" id="faile-tab" role="tab" data-toggle="tab" aria-controls="faile" aria-expanded="true">Faile</a>
+                                </li>
+
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade active in" id="success" aria-labelledby="success-tab">
+                                    <div class="container base-container">
+                                        <select class="form-control base-size">
+                                            <option>1-审核为杭州食堂</option>
+                                        </select>
+                                        <button type="button" class="btn btn-success base-btn">审核成功</button>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="faile" aria-labelledby="faile-tab">
+                                    <div class="container base-container">
+                                        <div class="alert alert-warning base-alert">
+                                            如果审核失败请在以下填写失败原因,系统会自动发送短信至用户
+                                        </div>
+                                        <textarea class="form-control base-textara" rows="3">
+
+                                        </textarea>
+                                        <button type="button" class="btn btn-danger base-btn">审核失败</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="outModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="jumbotron">
+                        <div class="container">
+                            <h3>下架面板</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <div class="bs-example bs-example-tabs">
+                                <div class="container base-container">
+                                    <div class="alert alert-warning base-alert">
+                                        如果需要下架请在以下填写下架原因,系统会自动发送短信至用户
+                                    </div>
+                                        <textarea id="testTextArea" class="form-control base-textara" rows="3"></textarea>
+                                    <button type="button" class="btn btn-danger base-btn">下架商户</button>
+                                </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../scripts/jQuery/jquery.min.js"></script>
+<script src="../scripts/bootstrap/bootstrap.min.js"></script>
+<script>
+    $('#myTabs').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show');
+    });
+
+    $('.btn-danger').on('click',function () {
+        if($('#testTextArea').val().length == ''){
+            alert('空了');
+        }
+        console.log($('#testTextArea').val().length);
+    });
+
+//    function isNull(str) {
+//        if(str.length)
+//    }
+
+</script>
+</html>

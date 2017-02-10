@@ -84,8 +84,8 @@ $(document).ready(function () {
                 console.log(data.data.objs[index].ctype)
 
                 $tr=("<tr >"+
-                "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].mobile+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
+                +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' data-toggle='modal' data-target='#myModal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                 +"<td><div class='box1'>" +
                 "<div class='jumbotron jumbotron-style'>" +
                 "<div class='container'>" +
@@ -123,7 +123,7 @@ $(document).ready(function () {
 
                 +"</ul>"
                 +"</div></td>"
-                +"</tr>")
+                +"</tr>");
 
                 $("#tbody1").append($tr)
 
@@ -141,72 +141,129 @@ $(document).ready(function () {
             }
             //------------------------------------进行审核-------------------------------------------------
             $(".jump").on('click',function(){
-                $(".remodal-wrapper").css("display","block")
-                $(".remodal-overlay").css("display","block")
-                var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
-                console.log($("#select1").val().substring(0,1))
 
-                $("#button1").on("click",function(){
-                    $.ajax({
-                        type:"post",
-                        url:"http://admin.honganjk.com/admin/verifyBusiness.action",
-                        headers:{
-                            "code":$.cookie("code"),
-                            "token":$.cookie("token")
-                        },
-                        dataType: "json",
-                        data:{
+                var index1=$(this).parent('tr').children("td").eq(0).attr('goodid');
+                console.log(index1);
+                console.log($("#select1").val().substring(0,1));
+                console.log($(this).parent().children("td").eq(9).children('a').text());
 
-                            "id":index1,
-                            "type":$("#select1").val().substring(0,1)
-                        },
-                        success: function(data){
-                            console.log(data)
-                            switch(JSON.stringify(data.code))
-                            {
-                                case '"A00000"':
-                                    alert("审核成功")
-                                    $(".remodal-wrapper").css("display","none")
-                                    $(".remodal-overlay").css("display","none")
-                                    location.reload()
-                                    break;
-                                default:
-                                    alert("请求失败")
+                if($(this).parent().children("td").eq(9).children('a').text()==='已审核'){
+                    $('.a3').attr('data-target','#outModal');
 
-                            }
-                        },
-                        error:function(XmlHttpRequest,textStatus, errorThrown){
-                            console.log("请求失败"+XmlHttpRequest.responseText);
+                    // $(".remodal-wrapper").css("display","none");
+                    // $("#audit4").css("display","block");
+
+                    $(this).parent().children("td").eq(9).children('a').eq(0).attr("href","#modal2")
+                    $(".Xbutton").on("click",function(){
+                        if($("#outTextArea").val().length==''){
+                            console.log($("#outTextArea").val());
+                            swal("请填写下架原因!!");
+                            // alert("请填写下 架的原因")
+                        }else{
+                            $.ajax({
+                                type:"post",
+                                url:"http://admin.honganjk.com/admin/unShelveBusiness.action",
+                                headers:{
+                                    "code":$.cookie("code"),
+                                    "token":$.cookie("token")
+                                },
+                                dataType: "json",
+                                data:{
+
+                                    "id":index1,
+                                    "reason":$("#outTextArea").val()
+                                },
+                                success: function(data){
+                                    console.log(data)
+                                    switch(JSON.stringify(data.code))
+                                    {
+                                        case '"A00000"':
+
+                                            alert("短信已发送至客户")
+
+                                            location.reload();
+                                            // $(".remodal-wrapper").css("display","none")
+                                            // $(".remodal-overlay").css("display","none")
+
+                                            break;
+                                        default:
+                                            alert("请求失败")
+
+                                    }
+                                },
+                                error:function(XmlHttpRequest,textStatus, errorThrown){
+                                    console.log("请求失败"+XmlHttpRequest.responseText);
+                                }
+                            });//下架
                         }
-                    });//审核成功
-                })
 
-                $("#button2").on("click",function(){
-                    if($("#textarea1").val()==''){
-                        alert("请填写审核失败的原因")
-                    }else{
+                    });
+                    /**解绑**/
+                    $(".Xbutton").unbind('click').click(function(e){
+                        if($("#outTextArea").val().length==''){
+                            swal("请填写下架原因!!");
+                        }else{
+                            $.ajax({
+                                type:"post",
+                                url:"http://admin.honganjk.com/admin/unShelveBusiness.action",
+                                headers:{
+                                    "code":$.cookie("code"),
+                                    "token":$.cookie("token")
+                                },
+                                dataType: "json",
+                                data:{
+
+                                    "id":index1,
+                                    "reason":$("#outTextArea").val()
+                                },
+                                success: function(data){
+                                    console.log(data)
+                                    switch(JSON.stringify(data.code))
+                                    {
+                                        case '"A00000"':
+
+                                            alert("短信已发送至客户")
+
+                                            location.reload();
+                                            // $(".remodal-wrapper").css("display","none")
+                                            // $(".remodal-overlay").css("display","none")
+
+                                            break;
+                                        default:
+                                            alert("请求失败")
+
+                                    }
+                                },
+                                error:function(XmlHttpRequest,textStatus, errorThrown){
+                                    console.log("请求失败"+XmlHttpRequest.responseText);
+                                }
+                            });//下架
+                        }
+
+                    })
+                } else {
+                    $('.a3').attr('data-target','#myModal');
+                    $(".btn1").on("click", function () {
                         $.ajax({
-                            type:"post",
-                            url:"http://admin.honganjk.com/admin/forbidBusiness.action",
-                            headers:{
-                                "code":$.cookie("code"),
-                                "token":$.cookie("token")
+                            type: "post",
+                            url: "http://admin.honganjk.com/admin/verifyBusiness.action",
+                            headers: {
+                                "code": $.cookie("code"),
+                                "token": $.cookie("token")
                             },
                             dataType: "json",
-                            data:{
+                            data: {
 
-                                "id":index1,
-                                "reason":$("#textarea1").val()
+                                "id": index1,
+                                "type": $("#select1").val().substring(0, 1)
                             },
-                            success: function(data){
+                            success: function (data) {
                                 console.log(data)
-                                switch(JSON.stringify(data.code))
-                                {
+                                switch (JSON.stringify(data.code)) {
                                     case '"A00000"':
-
-                                        alert("短信已发送至客户")
-                                        $(".remodal-wrapper").css("display","none")
-                                        $(".remodal-overlay").css("display","none")
+                                        alert("审核成功")
+                                        // $(".remodal-wrapper").css("display", "none")
+                                        // $(".remodal-overlay").css("display", "none")
                                         location.reload()
                                         break;
                                     default:
@@ -214,25 +271,139 @@ $(document).ready(function () {
 
                                 }
                             },
-                            error:function(XmlHttpRequest,textStatus, errorThrown){
-                                console.log("请求失败"+XmlHttpRequest.responseText);
+                            error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                console.log("请求失败" + XmlHttpRequest.responseText);
                             }
-                        });//审核失败
-                    }
+                        });//审核成功
+                    });
+                    /**解绑**/
+                    $(".btn1").unbind('click').click(function () {
+                        $.ajax({
+                            type: "post",
+                            url: "http://admin.honganjk.com/admin/verifyBusiness.action",
+                            headers: {
+                                "code": $.cookie("code"),
+                                "token": $.cookie("token")
+                            },
+                            dataType: "json",
+                            data: {
 
-                })
+                                "id": index1,
+                                "type": $("#select1").val().substring(0, 1)
+                            },
+                            success: function (data) {
+                                console.log(data)
+                                switch (JSON.stringify(data.code)) {
+                                    case '"A00000"':
+                                        alert("审核成功")
+                                        // $(".remodal-wrapper").css("display", "none")
+                                        // $(".remodal-overlay").css("display", "none")
+                                        location.reload()
+                                        break;
+                                    default:
+                                        alert("请求失败")
+
+                                }
+                            },
+                            error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                console.log("请求失败" + XmlHttpRequest.responseText);
+                            }
+                        });//审核成功
+                    });
+                    /**************/
+
+                    $(".btn2").on("click", function () {
+                        if ($("#bustTextArea").val().length == '') {
+                            swal("请填写审核失败的原因");
+                        } else {
+                            $.ajax({
+                                type: "post",
+                                url: "http://admin.honganjk.com/admin/forbidBusiness.action",
+                                headers: {
+                                    "code": $.cookie("code"),
+                                    "token": $.cookie("token")
+                                },
+                                dataType: "json",
+                                data: {
+
+                                    "id": index1,
+                                    "reason": $("#bustTextArea").val()
+                                },
+                                success: function (data) {
+                                    console.log(data)
+                                    switch (JSON.stringify(data.code)) {
+                                        case '"A00000"':
+
+                                            alert("短信已发送至客户")
+                                            // $(".remodal-wrapper").css("display", "none")
+                                            // $(".remodal-overlay").css("display", "none")
+                                            location.reload()
+                                            break;
+                                        default:
+                                            alert("请求失败")
+
+                                    }
+                                },
+                                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                    console.log("请求失败" + XmlHttpRequest.responseText);
+                                }
+                            });//审核失败
+                        }
+
+                    });
+                    /**解绑click事件**/
+                    $(".btn2").unbind('click').click(function (e) {
+                        if ($("#bustTextArea").val().length == '') {
+                            swal("请填写审核失败的原因");
+                        } else {
+                            $.ajax({
+                                type: "post",
+                                url: "http://admin.honganjk.com/admin/forbidBusiness.action",
+                                headers: {
+                                    "code": $.cookie("code"),
+                                    "token": $.cookie("token")
+                                },
+                                dataType: "json",
+                                data: {
+
+                                    "id": index1,
+                                    "reason": $("#bustTextArea").val()
+                                },
+                                success: function (data) {
+                                    console.log(data)
+                                    switch (JSON.stringify(data.code)) {
+                                        case '"A00000"':
+
+                                            alert("短信已发送至客户")
+                                            // $(".remodal-wrapper").css("display", "none")
+                                            // $(".remodal-overlay").css("display", "none")
+                                            location.reload()
+                                            break;
+                                        default:
+                                            alert("请求失败")
+
+                                    }
+                                },
+                                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                    console.log("请求失败" + XmlHttpRequest.responseText);
+                                }
+                            });//审核失败
+                        }
+
+                    })
+                }
 
             })
             //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
-            $(".a1").on("click",function(){
-                console.log($(this).parents('tr').children("td").eq(10))
-                $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
-                $("#cover").addClass("cover1")
-            })
-            $(".xx").on("click",function(){
-                $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
-                $("#cover").removeClass("cover1")
-            })
+            // $(".a1").on("click",function(){
+            //     console.log($(this).parents('tr').children("td").eq(10))
+            //     $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
+            //     $("#cover").addClass("cover1")
+            // })
+            // $(".xx").on("click",function(){
+            //     $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
+            //     $("#cover").removeClass("cover1")
+            // })
 
         }
     })
@@ -240,10 +411,10 @@ $(document).ready(function () {
     $("#type1").on("change",function(){
         var $tr=null;
         $("#tbody1").empty($tr)
-        $("#audit1").css("display","none")
-        $("#audit2").css("display","block")
+        // $("#audit1").css("display","none")
+        // $("#audit2").css("display","block")
         $("#Paging").css("display","none")
-//      	$("#Paging1").css("display","block")
+     	// $("#Paging1").css("display","block")
         //console.log($("#type1").val().substring(0,1))
 
         $.ajax({
@@ -260,7 +431,7 @@ $(document).ready(function () {
             data: {
                 "start":0,
                 "size":1000,
-                "type":$("#type1").val().substring(0,1)
+                "type":$("#type1").val().substring(0,2)
                 //"type":0
             },
             success:function(data){
@@ -270,8 +441,8 @@ $(document).ready(function () {
                     var a=data.data.objs[index].id
                     var b=data.data.objs[index].type
                     $tr=("<tr >"+
-                    "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                    +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'></a></td>"
+                    "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].mobile+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
+                    +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' data-toggle='modal' data-target='#myModal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a></td>"
                     +"<td><div class='box1'>" +
                     "<div class='jumbotron jumbotron-style'>" +
                     "<div class='container'>" +
@@ -311,14 +482,16 @@ $(document).ready(function () {
                     +"</div></td>"
                     +"</tr>")
                     $("#tbody1").append($tr)
-                    if($("#type1").val().substring(0,1)==0){
+                    if($("#type1").val().substring(0,2)==0){
                         $(".a3").html("审核")
 //		                       	 $(".a2").attr("href","#modal")
 //		                       	 console.log($('.a2').parents('tr').children("td").eq(0).attr('goodid'))
-                    }else{
+                    }else if($("#type1").val().substring(0,2)==1 ){
                         $(".a3").html("已审核");
                         // $(".a2").css("color","green")
-                        $(".a3").attr("href","#")
+                        $(".a3").attr("href","#");
+                    }else if($("#type1").val().substring(0,2)==-1){
+                        $(".a2").html("下架食堂")
                     }
                 });
                 //--------------------------------------------------------
@@ -332,72 +505,126 @@ $(document).ready(function () {
                 }
                 //------------------------------------进行审核-------------------------------------------------
                 $(".jump").on('click',function(){
-                    $(".remodal-wrapper").css("display","block")
-                    $(".remodal-overlay").css("display","block")
+
                     var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
-                    console.log($("#select2").val().substring(0,1))
+                    console.log($(this).parent().children("td").eq(9).children('a').text());
 
-                    $("#button1-2").on("click",function(){
-                        $.ajax({
-                            type:"post",
-                            url:"http://admin.honganjk.com/admin/verifyBusiness.action",
-                            headers:{
-                                "code":$.cookie("code"),
-                                "token":$.cookie("token")
-                            },
-                            dataType: "json",
-                            data:{
+                    if($(this).parent().children("td").eq(9).children('a').text()==='已审核'){
+                        // $(".remodal-wrapper").css("display","none");
+                        // $("#audit4").css("display","block");
+                        $('.a3').attr('data-target','#outModal');
 
-                                "id":index1,
-                                "type":$("#select2").val().substring(0,1)
-                            },
-                            success: function(data){
-                                console.log(data)
-                                switch(JSON.stringify(data.code))
-                                {
-                                    case '"A00000"':
-                                        alert("审核成功")
-                                        $(".remodal-wrapper").css("display","none")
-                                        $(".remodal-overlay").css("display","none")
-                                        location.reload()
-                                        break;
-                                    default:
-                                        alert("请求失败")
+                        $(this).parent().children("td").eq(9).children('a').eq(0).attr("href","#modal2")
+                        $(".Xbutton").on("click",function(){
+                            if($("#outTextArea").val().length == ''){
+                                swal("请填写下架的原因");
+                            }else{
+                                $.ajax({
+                                    type:"post",
+                                    url:"http://admin.honganjk.com/admin/unShelveBusiness.action",
+                                    headers:{
+                                        "code":$.cookie("code"),
+                                        "token":$.cookie("token")
+                                    },
+                                    dataType: "json",
+                                    data:{
 
-                                }
-                            },
-                            error:function(XmlHttpRequest,textStatus, errorThrown){
-                                console.log("请求失败"+XmlHttpRequest.responseText);
+                                        "id":index1,
+                                        "reason":$("#outTextArea").val()
+                                    },
+                                    success: function(data){
+                                        console.log(data)
+                                        switch(JSON.stringify(data.code))
+                                        {
+                                            case '"A00000"':
+
+                                                alert("短信已发送至客户")
+                                                // $(".remodal-wrapper").css("display","none")
+                                                // $(".remodal-overlay").css("display","none")
+                                                location.reload()
+                                                break;
+                                            default:
+                                                alert("请求失败")
+
+                                        }
+                                    },
+                                    error:function(XmlHttpRequest,textStatus, errorThrown){
+                                        console.log("请求失败"+XmlHttpRequest.responseText);
+                                    }
+                                });//下架
                             }
-                        });//审核成功
-                    })
 
-                    $("#button2-2").on("click",function(){
-                        if($("#textarea2").val()==''){
-                            alert("请填写审核失败的原因")
-                        }else{
+                        });
+
+                        /**解绑**/
+                        $(".Xbutton").unbind('click').click(function(e){
+                            if($("#outTextArea").val().length == ''){
+                                swal("请填写下 架的原因");
+                            }else{
+                                $.ajax({
+                                    type:"post",
+                                    url:"http://admin.honganjk.com/admin/unShelveBusiness.action",
+                                    headers:{
+                                        "code":$.cookie("code"),
+                                        "token":$.cookie("token")
+                                    },
+                                    dataType: "json",
+                                    data:{
+
+                                        "id":index1,
+                                        "reason":$("#outTextArea").val()
+                                    },
+                                    success: function(data){
+                                        console.log(data)
+                                        switch(JSON.stringify(data.code))
+                                        {
+                                            case '"A00000"':
+
+                                                alert("短信已发送至客户")
+
+                                                location.reload();
+                                                // $(".remodal-wrapper").css("display","none")
+                                                // $(".remodal-overlay").css("display","none")
+
+                                                break;
+                                            default:
+                                                alert("请求失败")
+
+                                        }
+                                    },
+                                    error:function(XmlHttpRequest,textStatus, errorThrown){
+                                        console.log("请求失败"+XmlHttpRequest.responseText);
+                                    }
+                                });//下架
+                            }
+
+                        });
+
+                    } else {
+                        // $(".remodal-wrapper").css("display","block")
+                        // $(".remodal-overlay").css("display","block")
+
+                        $(".btn1").on("click", function () {
                             $.ajax({
-                                type:"post",
-                                url:"http://admin.honganjk.com/admin/forbidBusiness.action",
-                                headers:{
-                                    "code":$.cookie("code"),
-                                    "token":$.cookie("token")
+                                type: "post",
+                                url: "http://admin.honganjk.com/admin/verifyBusiness.action",
+                                headers: {
+                                    "code": $.cookie("code"),
+                                    "token": $.cookie("token")
                                 },
                                 dataType: "json",
-                                data:{
+                                data: {
 
-                                    "id":index1,
-                                    "reason":$("#textarea2").val()
+                                    "id": index1,
+                                    "type": $("#select1").val().substring(0, 1)
                                 },
-                                success: function(data){
+                                success: function (data) {
                                     console.log(data)
-                                    switch(JSON.stringify(data.code))
-                                    {
+                                    switch (JSON.stringify(data.code)) {
                                         case '"A00000"':
-
-                                            alert("短信已发送至客户")
-                                            $(".remodal-wrapper").css("display","none")
-                                            $(".remodal-overlay").css("display","none")
+                                            alert("审核成功")
+                                            // $(".remodal-wrapper").css("display", "none")
+                                            // $(".remodal-overlay").css("display", "none")
                                             location.reload()
                                             break;
                                         default:
@@ -405,15 +632,131 @@ $(document).ready(function () {
 
                                     }
                                 },
-                                error:function(XmlHttpRequest,textStatus, errorThrown){
-                                    console.log("请求失败"+XmlHttpRequest.responseText);
+                                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                    console.log("请求失败" + XmlHttpRequest.responseText);
                                 }
-                            });//审核失败
-                        }
+                            });//审核成功
+                        });
 
-                    })
+                        /**解绑**/
+                        $(".btn1").unbind('click').click(function () {
+                            $.ajax({
+                                type: "post",
+                                url: "http://admin.honganjk.com/admin/verifyBusiness.action",
+                                headers: {
+                                    "code": $.cookie("code"),
+                                    "token": $.cookie("token")
+                                },
+                                dataType: "json",
+                                data: {
 
-                })
+                                    "id": index1,
+                                    "type": $("#select1").val().substring(0, 1)
+                                },
+                                success: function (data) {
+                                    console.log(data)
+                                    switch (JSON.stringify(data.code)) {
+                                        case '"A00000"':
+                                            alert("审核成功")
+                                            // $(".remodal-wrapper").css("display", "none")
+                                            // $(".remodal-overlay").css("display", "none")
+                                            location.reload()
+                                            break;
+                                        default:
+                                            alert("请求失败")
+
+                                    }
+                                },
+                                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                    console.log("请求失败" + XmlHttpRequest.responseText);
+                                }
+                            });//审核成功
+                        });
+                        /**************/
+
+                        $(".btn2").on("click", function () {
+                            if ($("#bustTextArea").val().length == '') {
+                                swal("请填写审核失败的原因");
+                            } else {
+                                $.ajax({
+                                    type: "post",
+                                    url: "http://admin.honganjk.com/admin/forbidBusiness.action",
+                                    headers: {
+                                        "code": $.cookie("code"),
+                                        "token": $.cookie("token")
+                                    },
+                                    dataType: "json",
+                                    data: {
+
+                                        "id": index1,
+                                        "reason": $("#bustTextArea").val()
+                                    },
+                                    success: function (data) {
+                                        console.log(data)
+                                        switch (JSON.stringify(data.code)) {
+                                            case '"A00000"':
+
+                                                alert("短信已发送至客户")
+                                                // $(".remodal-wrapper").css("display", "none")
+                                                // $(".remodal-overlay").css("display", "none")
+                                                location.reload()
+                                                break;
+                                            default:
+                                                alert("请求失败")
+
+                                        }
+                                    },
+                                    error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                        console.log("请求失败" + XmlHttpRequest.responseText);
+                                    }
+                                });//审核失败
+                            }
+
+                        });
+
+                        /**解绑click事件**/
+                        $(".btn2").unbind('click').click(function (e) {
+                            if ($("#bustTextArea").val().length == '') {
+                                swal("请填写审核失败的原因");
+                            } else {
+                                $.ajax({
+                                    type: "post",
+                                    url: "http://admin.honganjk.com/admin/forbidBusiness.action",
+                                    headers: {
+                                        "code": $.cookie("code"),
+                                        "token": $.cookie("token")
+                                    },
+                                    dataType: "json",
+                                    data: {
+
+                                        "id": index1,
+                                        "reason": $("#bustTextArea").val()
+                                    },
+                                    success: function (data) {
+                                        console.log(data)
+                                        switch (JSON.stringify(data.code)) {
+                                            case '"A00000"':
+
+                                                alert("短信已发送至客户")
+                                                // $(".remodal-wrapper").css("display", "none")
+                                                // $(".remodal-overlay").css("display", "none")
+                                                location.reload()
+                                                break;
+                                            default:
+                                                alert("请求失败")
+
+                                        }
+                                    },
+                                    error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                        console.log("请求失败" + XmlHttpRequest.responseText);
+                                    }
+                                });//审核失败
+                            }
+
+                        })
+                    }
+
+                });
                 //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
                 $(".a1").on("click",function(){
                     console.log($(this).parents('tr').children("td").eq(10).children('div').eq(0))
@@ -435,9 +778,9 @@ $(document).ready(function () {
      * 食堂名称搜索
      */
     $("#searchOrder").on("click",function(){
-        $("#audit1").css("display","none")
-        $("#audit2").css("display","none")
-        $("#audit3").css("display","block")
+        // $("#audit1").css("display","none")
+        // $("#audit2").css("display","none")
+        // $("#audit3").css("display","block")
 //              	$("#dishpageval").val(0);
         $("#Paging").css("display","none")
         $("#tbody1").empty($tr)
@@ -465,8 +808,8 @@ $(document).ready(function () {
                         console.log(data.data.objs[index].ctype)
 
                         $tr=("<tr >"+
-                        "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                        "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].mobile+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
+                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' data-toggle='modal' data-target='#myModal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                         +"<td><div class='box1'>" +
                         "<div class='jumbotron jumbotron-style'>" +
                         "<div class='container'>" +
@@ -522,73 +865,133 @@ $(document).ready(function () {
                     }
                     //------------------------------------进行审核-------------------------------------------------
                     $(".jump").on('click',function(){
-                        $(".remodal-wrapper").css("display","block")
-                        $(".remodal-overlay").css("display","block")
+                        // $(".remodal-wrapper").css("display","block")
+                        // $(".remodal-overlay").css("display","block")
                         var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
-                        console.log($("#select3").val().substring(0,1))
+                        // console.log($("#select3").val().substring(0,1))
 
-                        $("#button1-3").on("click",function(){
-                            $.ajax({
-                                type:"post",
-                                url:"http://admin.honganjk.com/admin/verifyBusiness.action",
-                                headers:{
-                                    "code":$.cookie("code"),
-                                    "token":$.cookie("token")
-                                },
-                                dataType: "json",
-                                data:{
+                        if($(this).parent().children("td").eq(9).children('a').eq(0).html()=="已审核"){
 
-                                    "id":index1,
-                                    "type":$("#select3").val().substring(0,1)
-                                },
-                                success: function(data){
-                                    console.log(data)
-                                    switch(JSON.stringify(data.code))
-                                    {
-                                        case '"A00000"':
-                                            alert("审核成功")
-                                            $(".remodal-wrapper").css("display","none")
-                                            $(".remodal-overlay").css("display","none")
-                                            location.reload()
-                                            break;
-                                        default:
-                                            alert("请求失败")
+                            $('.a3').attr('data-target','#outModal');
 
-                                    }
-                                },
-                                error:function(XmlHttpRequest,textStatus, errorThrown){
-                                    console.log("请求失败"+XmlHttpRequest.responseText);
+                            // $(".remodal-wrapper").css("display","none");
+                            // $('.audit').css("display",'none');
+                            // $("#audit4").css("display","block");
+
+                            // $(this).parent().children("td").eq(9).children('a').eq(0).attr("href","#modal2")
+                            $(".Xbutton").on("click",function(){
+                                if($("#outTextArea").val().length==''){
+                                    swal("请填写下架的原因");
+                                }else{
+                                    $.ajax({
+                                        type:"post",
+                                        url:"http://admin.honganjk.com/admin/unShelveBusiness.action",
+                                        headers:{
+                                            "code":$.cookie("code"),
+                                            "token":$.cookie("token")
+                                        },
+                                        dataType: "json",
+                                        data:{
+
+                                            "id":index1,
+                                            "reason":$("#outTextArea").val()
+                                        },
+                                        success: function(data){
+                                            console.log(data)
+                                            switch(JSON.stringify(data.code))
+                                            {
+                                                case '"A00000"':
+
+                                                    swal("短信已发送至客户");
+                                                    // $(".remodal-wrapper").css("display","none")
+                                                    // $(".remodal-overlay").css("display","none")
+                                                    location.reload()
+                                                    break;
+                                                default:
+                                                    alert("请求失败")
+
+                                            }
+                                        },
+                                        error:function(XmlHttpRequest,textStatus, errorThrown){
+                                            console.log("请求失败"+XmlHttpRequest.responseText);
+                                        }
+                                    });//下架
                                 }
-                            });//审核成功
-                        })
 
-                        $("#button2-3").on("click",function(){
-                            if($("#textarea3").val()==''){
-                                console.log($("#textarea3").val());
-                                alert("请填写审核失败的原因")
-                            }else{
+                            })
+
+                            /**解绑**/
+
+                            $(".Xbutton").unbind('click').click(function(e){
+                                if($("#outTextArea").val().length==''){
+                                    swal("请填写下架的原因");
+                                }else{
+                                    $.ajax({
+                                        type:"post",
+                                        url:"http://admin.honganjk.com/admin/unShelveBusiness.action",
+                                        headers:{
+                                            "code":$.cookie("code"),
+                                            "token":$.cookie("token")
+                                        },
+                                        dataType: "json",
+                                        data:{
+
+                                            "id":index1,
+                                            "reason":$("#outTextArea").val()
+                                        },
+                                        success: function(data){
+                                            console.log(data)
+                                            switch(JSON.stringify(data.code))
+                                            {
+                                                case '"A00000"':
+
+                                                    alert("短信已发送至客户")
+                                                    $(".remodal-wrapper").css("display","none")
+                                                    $(".remodal-overlay").css("display","none")
+                                                    location.reload()
+                                                    break;
+                                                default:
+                                                    alert("请求失败")
+
+                                            }
+                                        },
+                                        error:function(XmlHttpRequest,textStatus, errorThrown){
+                                            console.log("请求失败"+XmlHttpRequest.responseText);
+                                        }
+                                    });//下架
+                                }
+
+                            });
+
+                        } else {
+                            // $(".remodal-wrapper").css("display","block");
+                            // $(".remodal-overlay").css("display","block");
+
+                            $('.a3').attr('data-target','#myModal');
+
+                            // $(".sold-out").css('display','none');
+
+                            $(".btn1").on("click", function () {
                                 $.ajax({
-                                    type:"post",
-                                    url:"http://admin.honganjk.com/admin/forbidBusiness.action",
-                                    headers:{
-                                        "code":$.cookie("code"),
-                                        "token":$.cookie("token")
+                                    type: "post",
+                                    url: "http://admin.honganjk.com/admin/verifyBusiness.action",
+                                    headers: {
+                                        "code": $.cookie("code"),
+                                        "token": $.cookie("token")
                                     },
                                     dataType: "json",
-                                    data:{
+                                    data: {
 
-                                        "id":index1,
-                                        "reason":$("#textarea3").val()
+                                        "id": index1,
+                                        "type": $("#select1").val().substring(0, 1)
                                     },
-                                    success: function(data){
+                                    success: function (data) {
                                         console.log(data)
-                                        switch(JSON.stringify(data.code))
-                                        {
+                                        switch (JSON.stringify(data.code)) {
                                             case '"A00000"':
-
-                                                alert("短信已发送至客户")
-                                                $(".remodal-wrapper").css("display","none")
-                                                $(".remodal-overlay").css("display","none")
+                                                alert("审核成功")
+                                                $(".remodal-wrapper").css("display", "none")
+                                                $(".remodal-overlay").css("display", "none")
                                                 location.reload()
                                                 break;
                                             default:
@@ -596,13 +999,131 @@ $(document).ready(function () {
 
                                         }
                                     },
-                                    error:function(XmlHttpRequest,textStatus, errorThrown){
-                                        console.log("请求失败"+XmlHttpRequest.responseText);
+                                    error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                        console.log("请求失败" + XmlHttpRequest.responseText);
                                     }
-                                });//审核失败
-                            }
+                                });//审核成功
+                            });
 
-                        })
+                            /**解绑**/
+                            $(".btn1").unbind('click').click(function (e) {
+                                $.ajax({
+                                    type: "post",
+                                    url: "http://admin.honganjk.com/admin/verifyBusiness.action",
+                                    headers: {
+                                        "code": $.cookie("code"),
+                                        "token": $.cookie("token")
+                                    },
+                                    dataType: "json",
+                                    data: {
+
+                                        "id": index1,
+                                        "type": $("#select1").val().substring(0, 1)
+                                    },
+                                    success: function (data) {
+                                        console.log(data)
+                                        switch (JSON.stringify(data.code)) {
+                                            case '"A00000"':
+                                                alert("审核成功")
+                                                $(".remodal-wrapper").css("display", "none")
+                                                $(".remodal-overlay").css("display", "none")
+                                                location.reload()
+                                                break;
+                                            default:
+                                                alert("请求失败")
+
+                                        }
+                                    },
+                                    error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                        console.log("请求失败" + XmlHttpRequest.responseText);
+                                    }
+                                });//审核成功
+                            });
+
+                            $(".btn2").on("click", function () {
+                                if ($("#bustTextArea").val().length == '') {
+                                    // console.log($("#textarea3").val());
+                                    swal("请填写审核失败的原因");
+                                } else {
+                                    $.ajax({
+                                        type: "post",
+                                        url: "http://admin.honganjk.com/admin/forbidBusiness.action",
+                                        headers: {
+                                            "code": $.cookie("code"),
+                                            "token": $.cookie("token")
+                                        },
+                                        dataType: "json",
+                                        data: {
+
+                                            "id": index1,
+                                            "reason": $("#bustTextArea").val()
+                                        },
+                                        success: function (data) {
+                                            console.log(data)
+                                            switch (JSON.stringify(data.code)) {
+                                                case '"A00000"':
+
+                                                    alert("短信已发送至客户")
+                                                    $(".remodal-wrapper").css("display", "none")
+                                                    $(".remodal-overlay").css("display", "none")
+                                                    location.reload()
+                                                    break;
+                                                default:
+                                                    alert("请求失败")
+
+                                            }
+                                        },
+                                        error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                            console.log("请求失败" + XmlHttpRequest.responseText);
+                                        }
+                                    });//审核失败
+                                }
+
+                            });
+
+
+                            /**解绑事件**/
+                            $(".btn2").unbind('click').click(function (e) {
+                                if ($("#bustTextArea").val().length == '') {
+                                    // console.log($("#textarea3").val());
+                                    swal("请填写审核失败的原因");
+                                } else {
+                                    $.ajax({
+                                        type: "post",
+                                        url: "http://admin.honganjk.com/admin/forbidBusiness.action",
+                                        headers: {
+                                            "code": $.cookie("code"),
+                                            "token": $.cookie("token")
+                                        },
+                                        dataType: "json",
+                                        data: {
+
+                                            "id": index1,
+                                            "reason": $("#bustTextArea").val()
+                                        },
+                                        success: function (data) {
+                                            console.log(data)
+                                            switch (JSON.stringify(data.code)) {
+                                                case '"A00000"':
+
+                                                    alert("短信已发送至客户")
+                                                    $(".remodal-wrapper").css("display", "none")
+                                                    $(".remodal-overlay").css("display", "none")
+                                                    location.reload()
+                                                    break;
+                                                default:
+                                                    alert("请求失败")
+
+                                            }
+                                        },
+                                        error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                            console.log("请求失败" + XmlHttpRequest.responseText);
+                                        }
+                                    });//审核失败
+                                }
+
+                            });
+                        }
 
                     })
 //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
@@ -645,8 +1166,8 @@ $(document).ready(function () {
                         console.log(data.data.objs[index].ctype)
 
                         $tr=("<tr >"+
-                        "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                        "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].mobile+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
+                        +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' data-toggle='modal' data-taget='#myModal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                         +"<td><div class='box1'>" +
                         "<div class='jumbotron jumbotron-style'>" +
                         "<div class='container'>" +
@@ -702,73 +1223,126 @@ $(document).ready(function () {
                     }
                     //------------------------------------进行审核-------------------------------------------------
                     $(".jump").on('click',function(){
-                        $(".remodal-wrapper").css("display","block")
-                        $(".remodal-overlay").css("display","block")
+                        // $(".remodal-wrapper").css("display","block")
+                        // $(".remodal-overlay").css("display","block")
                         var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
-                        console.log($("#select3").val().substring(0,1))
+                        // console.log($("#select3").val().substring(0,1))
 
-                        $("#button1-3").on("click",function(){
-                            $.ajax({
-                                type:"post",
-                                url:"http://admin.honganjk.com/admin/verifyBusiness.action",
-                                headers:{
-                                    "code":$.cookie("code"),
-                                    "token":$.cookie("token")
-                                },
-                                dataType: "json",
-                                data:{
+                        if($(this).parent().children("td").eq(9).children('a').text()==='已审核'){
+                            $('.a3').attr('data-target','#outModal');
 
-                                    "id":index1,
-                                    "type":$("#select3").val().substring(0,1)
-                                },
-                                success: function(data){
-                                    console.log(data)
-                                    switch(JSON.stringify(data.code))
-                                    {
-                                        case '"A00000"':
-                                            alert("审核成功")
-                                            $(".remodal-wrapper").css("display","none")
-                                            $(".remodal-overlay").css("display","none")
-                                            location.reload()
-                                            break;
-                                        default:
-                                            alert("请求失败")
+                            // $(".remodal-wrapper").css("display","none");
+                            // $("#audit4").css("display","block");
 
-                                    }
-                                },
-                                error:function(XmlHttpRequest,textStatus, errorThrown){
-                                    console.log("请求失败"+XmlHttpRequest.responseText);
+                            $(this).parent().children("td").eq(9).children('a').eq(0).attr("href","#modal2")
+                            $(".Xbutton").on("click",function(){
+                                if($("#outTextArea").val().length==''){
+                                    console.log($("#outTextArea").val());
+                                    swal("请填写下架原因!!");
+                                    // alert("请填写下 架的原因")
+                                }else{
+                                    $.ajax({
+                                        type:"post",
+                                        url:"http://admin.honganjk.com/admin/unShelveBusiness.action",
+                                        headers:{
+                                            "code":$.cookie("code"),
+                                            "token":$.cookie("token")
+                                        },
+                                        dataType: "json",
+                                        data:{
+
+                                            "id":index1,
+                                            "reason":$("#outTextArea").val()
+                                        },
+                                        success: function(data){
+                                            console.log(data)
+                                            switch(JSON.stringify(data.code))
+                                            {
+                                                case '"A00000"':
+
+                                                    alert("短信已发送至客户")
+
+                                                    location.reload();
+                                                    // $(".remodal-wrapper").css("display","none")
+                                                    // $(".remodal-overlay").css("display","none")
+
+                                                    break;
+                                                default:
+                                                    alert("请求失败")
+
+                                            }
+                                        },
+                                        error:function(XmlHttpRequest,textStatus, errorThrown){
+                                            console.log("请求失败"+XmlHttpRequest.responseText);
+                                        }
+                                    });//下架
                                 }
-                            });//审核成功
-                        })
 
-                        $("#button2-3").on("click",function(){
-                            if($("#textarea3").val()==''){
-                                console.log($("#textarea3").val());
-                                alert("请填写审核失败的原因")
-                            }else{
+                            });
+                            /**解绑**/
+                            $(".Xbutton").unbind('click').click(function(e){
+                                if($("#outTextArea").val().length==''){
+                                    swal("请填写下架原因!!");
+                                }else{
+                                    $.ajax({
+                                        type:"post",
+                                        url:"http://admin.honganjk.com/admin/unShelveBusiness.action",
+                                        headers:{
+                                            "code":$.cookie("code"),
+                                            "token":$.cookie("token")
+                                        },
+                                        dataType: "json",
+                                        data:{
+
+                                            "id":index1,
+                                            "reason":$("#outTextArea").val()
+                                        },
+                                        success: function(data){
+                                            console.log(data)
+                                            switch(JSON.stringify(data.code))
+                                            {
+                                                case '"A00000"':
+
+                                                    alert("短信已发送至客户")
+
+                                                    location.reload();
+                                                    // $(".remodal-wrapper").css("display","none")
+                                                    // $(".remodal-overlay").css("display","none")
+
+                                                    break;
+                                                default:
+                                                    alert("请求失败")
+
+                                            }
+                                        },
+                                        error:function(XmlHttpRequest,textStatus, errorThrown){
+                                            console.log("请求失败"+XmlHttpRequest.responseText);
+                                        }
+                                    });//下架
+                                }
+
+                            })
+                        } else {
+                            $('.a3').attr('data-target', '#myModal');
+                            $(".btn1").on("click", function () {
                                 $.ajax({
-                                    type:"post",
-                                    url:"http://admin.honganjk.com/admin/forbidBusiness.action",
-                                    headers:{
-                                        "code":$.cookie("code"),
-                                        "token":$.cookie("token")
+                                    type: "post",
+                                    url: "http://admin.honganjk.com/admin/verifyBusiness.action",
+                                    headers: {
+                                        "code": $.cookie("code"),
+                                        "token": $.cookie("token")
                                     },
                                     dataType: "json",
-                                    data:{
+                                    data: {
 
-                                        "id":index1,
-                                        "reason":$("#textarea3").val()
+                                        "id": index1,
+                                        "type": $("#select1").val().substring(0, 1)
                                     },
-                                    success: function(data){
+                                    success: function (data) {
                                         console.log(data)
-                                        switch(JSON.stringify(data.code))
-                                        {
+                                        switch (JSON.stringify(data.code)) {
                                             case '"A00000"':
-
-                                                alert("短信已发送至客户")
-                                                $(".remodal-wrapper").css("display","none")
-                                                $(".remodal-overlay").css("display","none")
+                                                swal("审核成功");
                                                 location.reload()
                                                 break;
                                             default:
@@ -776,25 +1350,141 @@ $(document).ready(function () {
 
                                         }
                                     },
-                                    error:function(XmlHttpRequest,textStatus, errorThrown){
-                                        console.log("请求失败"+XmlHttpRequest.responseText);
+                                    error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                        console.log("请求失败" + XmlHttpRequest.responseText);
                                     }
-                                });//审核失败
-                            }
+                                });//审核成功
+                            });
 
-                        })
+                            /**解绑**/
+                            $(".btn1").unbind('click').click(function (e) {
+                                $.ajax({
+                                    type: "post",
+                                    url: "http://admin.honganjk.com/admin/verifyBusiness.action",
+                                    headers: {
+                                        "code": $.cookie("code"),
+                                        "token": $.cookie("token")
+                                    },
+                                    dataType: "json",
+                                    data: {
 
-                    })
+                                        "id": index1,
+                                        "type": $("#select1").val().substring(0, 1)
+                                    },
+                                    success: function (data) {
+                                        console.log(data)
+                                        switch (JSON.stringify(data.code)) {
+                                            case '"A00000"':
+                                                swal("审核成功");
+                                                location.reload()
+                                                break;
+                                            default:
+                                                alert("请求失败")
+
+                                        }
+                                    },
+                                    error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                        console.log("请求失败" + XmlHttpRequest.responseText);
+                                    }
+                                });//审核成功
+                            });
+
+                            $(".btn2").on("click", function () {
+                                if ($("#bustTextArea").val().length == '') {
+                                    // console.log($("#textarea3").val());
+                                    swal("请填写审核失败的原因");
+                                } else {
+                                    $.ajax({
+                                        type: "post",
+                                        url: "http://admin.honganjk.com/admin/forbidBusiness.action",
+                                        headers: {
+                                            "code": $.cookie("code"),
+                                            "token": $.cookie("token")
+                                        },
+                                        dataType: "json",
+                                        data: {
+
+                                            "id": index1,
+                                            "reason": $("#bustTextArea").val()
+                                        },
+                                        success: function (data) {
+                                            console.log(data)
+                                            switch (JSON.stringify(data.code)) {
+                                                case '"A00000"':
+
+                                                    swal("短信已发送至客户");
+                                                    // $(".remodal-wrapper").css("display","none")
+                                                    // $(".remodal-overlay").css("display","none")
+                                                    location.reload()
+                                                    break;
+                                                default:
+                                                    alert("请求失败")
+
+                                            }
+                                        },
+                                        error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                            console.log("请求失败" + XmlHttpRequest.responseText);
+                                        }
+                                    });//审核失败
+                                }
+
+                            });
+
+                            /**解绑**/
+
+
+                            $(".btn2").unbind('click').click(function (e) {
+                                if ($("#bustTextArea").val().length == '') {
+                                    // console.log($("#textarea3").val());
+                                    swal("请填写审核失败的原因");
+                                } else {
+                                    $.ajax({
+                                        type: "post",
+                                        url: "http://admin.honganjk.com/admin/forbidBusiness.action",
+                                        headers: {
+                                            "code": $.cookie("code"),
+                                            "token": $.cookie("token")
+                                        },
+                                        dataType: "json",
+                                        data: {
+
+                                            "id": index1,
+                                            "reason": $("#bustTextArea").val()
+                                        },
+                                        success: function (data) {
+                                            console.log(data)
+                                            switch (JSON.stringify(data.code)) {
+                                                case '"A00000"':
+
+                                                    swal("短信已发送至客户");
+                                                    // $(".remodal-wrapper").css("display","none")
+                                                    // $(".remodal-overlay").css("display","none")
+                                                    location.reload()
+                                                    break;
+                                                default:
+                                                    alert("请求失败")
+
+                                            }
+                                        },
+                                        error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                            console.log("请求失败" + XmlHttpRequest.responseText);
+                                        }
+                                    });//审核失败
+                                }
+
+                            });
+                        }
+                    });
                     //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
-                    $(".a1").on("click",function(){
-                        console.log($(this).parents('tr').children("td").eq(10))
-                        $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
-                        $("#cover").addClass("cover1")
-                    })
-                    $(".xx").on("click",function(){
-                        $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
-                        $("#cover").removeClass("cover1")
-                    })
+                    // $(".a1").on("click",function(){
+                    //     console.log($(this).parents('tr').children("td").eq(10))
+                    //     $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
+                    //     $("#cover").addClass("cover1")
+                    // })
+                    // $(".xx").on("click",function(){
+                    //     $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
+                    //     $("#cover").removeClass("cover1")
+                    // })
                 },
                 error:function(XmlHttpRequest,textStatus,errorThrown){
                     console.log("请求失败"+XmlHttpRequest.responseText);
@@ -835,8 +1525,8 @@ $(document).ready(function () {
                     var a=data.data.objs[index].id
                     var b=data.data.objs[index].type
                     $tr=("<tr >"+
-                    "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                    +"<td class='q'><a  class='a1'>更多</a></td></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                    "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].mobile+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
+                    +"<td class='q'><a  class='a1'>更多</a></td></td> <td class='jump'><a class='a3' data-toggle='modal' data-target='#myModal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                     +"<td><div class='box1'>" +
                     "<div class='jumbotron jumbotron-style'>" +
                     "<div class='container'>" +
@@ -885,22 +1575,23 @@ $(document).ready(function () {
                 }
 
                 //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
-                $(".a1").on("click",function(){
-                    $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
-                    $("#cover").addClass("cover1")
-                })
-                $(".xx").on("click",function(){
-                    $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
-                    $("#cover").removeClass("cover1")
-                })
+                // $(".a1").on("click",function(){
+                //     $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
+                //     $("#cover").addClass("cover1")
+                // })
+                // $(".xx").on("click",function(){
+                //     $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
+                //     $("#cover").removeClass("cover1")
+                // })
                 //------------------------------------进行审核-------------------------------------------------
                 $(".jump").on('click',function(){
-                    $(".remodal-wrapper").css("display","block")
-                    $(".remodal-overlay").css("display","block")
+                    // $(".remodal-wrapper").css("display","block")
+                    // $(".remodal-overlay").css("display","block")
                     var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
-                    console.log($("#select1").val().substring(0,1))
+                    // console.log($("#select1").val().substring(0,1))
+                    $('.a3').attr('data-target','#myModal');
+                    $(".btn1").on("click",function(){
 
-                    $("#button1").on("click",function(){
                         $.ajax({
                             type:"post",
                             url:"http://admin.honganjk.com/admin/verifyBusiness.action",
@@ -919,9 +1610,9 @@ $(document).ready(function () {
                                 switch(JSON.stringify(data.code))
                                 {
                                     case '"A00000"':
-                                        alert("审核成功")
-                                        $(".remodal-wrapper").css("display","none")
-                                        $(".remodal-overlay").css("display","none")
+                                        swal("审核成功");
+                                        // $(".remodal-wrapper").css("display","none")
+                                        // $(".remodal-overlay").css("display","none")
                                         location.reload()
                                         break;
                                     default:
@@ -933,11 +1624,48 @@ $(document).ready(function () {
                                 console.log("请求失败"+XmlHttpRequest.responseText);
                             }
                         });//审核成功
-                    })
+                    });
 
-                    $("#button2").on("click",function(){
-                        if($("#textarea1").val()==''){
-                            alert("请填写审核失败的原因")
+                    /**解绑**/
+                    $(".btn1").unbind('click').click(function(e){
+
+                        $.ajax({
+                            type:"post",
+                            url:"http://admin.honganjk.com/admin/verifyBusiness.action",
+                            headers:{
+                                "code":$.cookie("code"),
+                                "token":$.cookie("token")
+                            },
+                            dataType: "json",
+                            data:{
+
+                                "id":index1,
+                                "type":$("#select1").val().substring(0,1)
+                            },
+                            success: function(data){
+                                console.log(data)
+                                switch(JSON.stringify(data.code))
+                                {
+                                    case '"A00000"':
+                                        swal("审核成功");
+                                        // $(".remodal-wrapper").css("display","none")
+                                        // $(".remodal-overlay").css("display","none")
+                                        location.reload()
+                                        break;
+                                    default:
+                                        alert("请求失败")
+
+                                }
+                            },
+                            error:function(XmlHttpRequest,textStatus, errorThrown){
+                                console.log("请求失败"+XmlHttpRequest.responseText);
+                            }
+                        });//审核成功
+                    });
+
+                    $(".btn2").on("click",function(){
+                        if($("#bustTextArea").val().length==''){
+                            swal("请填写审核失败的原因");
                         }else{
                             $.ajax({
                                 type:"post",
@@ -950,7 +1678,7 @@ $(document).ready(function () {
                                 data:{
 
                                     "id":index1,
-                                    "reason":$("#textarea1").val()
+                                    "reason":$("#bustTextArea").val()
                                 },
                                 success: function(data){
                                     console.log(data)
@@ -958,9 +1686,9 @@ $(document).ready(function () {
                                     {
                                         case '"A00000"':
 
-                                            alert("短信已发送至客户")
-                                            $(".remodal-wrapper").css("display","none")
-                                            $(".remodal-overlay").css("display","none")
+                                            swal("短信已发送至客户");
+                                            // $(".remodal-wrapper").css("display","none")
+                                            // $(".remodal-overlay").css("display","none")
                                             location.reload()
                                             break;
                                         default:
@@ -974,7 +1702,49 @@ $(document).ready(function () {
                             });//审核失败
                         }
 
-                    })
+                    });
+
+                    /**解绑**/
+                    $(".btn2").unbind('click').click(function(e){
+                        if($("#bustTextArea").val().length==''){
+                            swal("请填写审核失败的原因");
+                        }else{
+                            $.ajax({
+                                type:"post",
+                                url:"http://admin.honganjk.com/admin/forbidBusiness.action",
+                                headers:{
+                                    "code":$.cookie("code"),
+                                    "token":$.cookie("token")
+                                },
+                                dataType: "json",
+                                data:{
+
+                                    "id":index1,
+                                    "reason":$("#bustTextArea").val()
+                                },
+                                success: function(data){
+                                    console.log(data)
+                                    switch(JSON.stringify(data.code))
+                                    {
+                                        case '"A00000"':
+
+                                            swal("短信已发送至客户");
+                                            // $(".remodal-wrapper").css("display","none")
+                                            // $(".remodal-overlay").css("display","none")
+                                            location.reload()
+                                            break;
+                                        default:
+                                            alert("请求失败")
+
+                                    }
+                                },
+                                error:function(XmlHttpRequest,textStatus, errorThrown){
+                                    console.log("请求失败"+XmlHttpRequest.responseText);
+                                }
+                            });//审核失败
+                        }
+
+                    });
 
                 })
 
@@ -1013,8 +1783,8 @@ $(document).ready(function () {
                     var a=data.data.objs[index].id
                     var b=data.data.objs[index].type
                     $tr=("<tr >"+
-                    "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].contact+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
-                    +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' href='#modal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
+                    "<td goodid=" + a + ">"+data.data.objs[index].id+"</td> <td goodid2=" + b + ">"+shanghu(data.data.objs[index].type)+"</td> <td>"+data.data.objs[index].name+"</td> <td>"+data.data.objs[index].area+"</td> <td>"+data.data.objs[index].mobile+"</td> <td>"+data.data.objs[index].owner+"</td> <td>"+formatDate(data.data.objs[index].create_time)+"</td> <td>"+formatDate(data.data.objs[index].update_time)+"</td>"
+                    +"<td class='q'><a  class='a1'>更多</a></td> <td class='jump'><a class='a3' data-toggle='modal' data-target='#myModal'>"+zhuangtai1(data.data.objs[index].ctype)+"</a>"
                     +"<td><div class='box1'>" +
                     "<div class='jumbotron jumbotron-style'>" +
                     "<div class='container'>" +
@@ -1061,22 +1831,22 @@ $(document).ready(function () {
                     $("#PrevPage").attr("disabled",true);
                 }
                 //-----------------------------------显示遮罩层与更多信息---------------------------------------------------------
-                $(".a1").on("click",function(){
-                    $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
-                    $("#cover").addClass("cover1")
-                })
-                $(".xx").on("click",function(){
-                    $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
-                    $("#cover").removeClass("cover1")
-                })
+                // $(".a1").on("click",function(){
+                //     $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','block')
+                //     $("#cover").addClass("cover1")
+                // })
+                // $(".xx").on("click",function(){
+                //     $(this).parents('tr').children("td").eq(10).children('div').eq(0).css('display','none')
+                //     $("#cover").removeClass("cover1")
+                // })
                 //------------------------------------进行审核-------------------------------------------------
                 $(".jump").on('click',function(){
-                    $(".remodal-wrapper").css("display","block")
-                    $(".remodal-overlay").css("display","block")
+                    // $(".remodal-wrapper").css("display","block")
+                    // $(".remodal-overlay").css("display","block")
                     var index1=$(this).parent('tr').children("td").eq(0).attr('goodid')
-                    console.log($("#select1").val().substring(0,1))
-
-                    $("#button1").on("click",function(){
+                    // console.log($("#select1").val().substring(0,1))
+                    $('.a3').attr('data-target','#myModal');
+                    $(".btn1").on("click",function(){
                         $.ajax({
                             type:"post",
                             url:"http://admin.honganjk.com/admin/verifyBusiness.action",
@@ -1095,9 +1865,9 @@ $(document).ready(function () {
                                 switch(JSON.stringify(data.code))
                                 {
                                     case '"A00000"':
-                                        alert("审核成功")
-                                        $(".remodal-wrapper").css("display","none")
-                                        $(".remodal-overlay").css("display","none")
+                                        swal("审核成功");
+                                        // $(".remodal-wrapper").css("display","none")
+                                        // $(".remodal-overlay").css("display","none")
                                         location.reload()
                                         break;
                                     default:
@@ -1109,11 +1879,50 @@ $(document).ready(function () {
                                 console.log("请求失败"+XmlHttpRequest.responseText);
                             }
                         });//审核成功
-                    })
+                    });
 
-                    $("#button2").on("click",function(){
-                        if($("#textarea1").val()==''){
-                            alert("请填写审核失败的原因")
+
+                    /**解绑**/
+                    $(".btn1").unbind('click').click(function(e){
+                        $.ajax({
+                            type:"post",
+                            url:"http://admin.honganjk.com/admin/verifyBusiness.action",
+                            headers:{
+                                "code":$.cookie("code"),
+                                "token":$.cookie("token")
+                            },
+                            dataType: "json",
+                            data:{
+
+                                "id":index1,
+                                "type":$("#select1").val().substring(0,1)
+                            },
+                            success: function(data){
+                                console.log(data)
+                                switch(JSON.stringify(data.code))
+                                {
+                                    case '"A00000"':
+                                        swal("审核成功");
+                                        // $(".remodal-wrapper").css("display","none")
+                                        // $(".remodal-overlay").css("display","none")
+                                        location.reload()
+                                        break;
+                                    default:
+                                        alert("请求失败")
+
+                                }
+                            },
+                            error:function(XmlHttpRequest,textStatus, errorThrown){
+                                console.log("请求失败"+XmlHttpRequest.responseText);
+                            }
+                        });//审核成功
+                    });
+
+
+
+                    $(".btn2").on("click",function(){
+                        if($("#bustTextArea").val().length==''){
+                            swal("请填写审核失败的原因");
                         }else{
                             $.ajax({
                                 type:"post",
@@ -1126,7 +1935,7 @@ $(document).ready(function () {
                                 data:{
 
                                     "id":index1,
-                                    "reason":$("#textarea1").val()
+                                    "reason":$("#bustTextArea").val()
                                 },
                                 success: function(data){
                                     console.log(data)
@@ -1134,10 +1943,9 @@ $(document).ready(function () {
                                     {
                                         case '"A00000"':
 
-                                            alert("短信已发送至客户")
-                                            $(".remodal-wrapper").css("display","none")
-                                            $(".remodal-overlay").css("display","none")
-                                            location.reload()
+                                            swal("短信已发送至客户");
+
+                                            location.reload();
                                             break;
                                         default:
                                             alert("请求失败")
@@ -1150,7 +1958,49 @@ $(document).ready(function () {
                             });//审核失败
                         }
 
-                    })
+                    });
+
+
+                    /**解绑**/
+                    $(".btn2").on("click",function(){
+                        if($("#bustTextArea").val().length==''){
+                            swal("请填写审核失败的原因");
+                        }else{
+                            $.ajax({
+                                type:"post",
+                                url:"http://admin.honganjk.com/admin/forbidBusiness.action",
+                                headers:{
+                                    "code":$.cookie("code"),
+                                    "token":$.cookie("token")
+                                },
+                                dataType: "json",
+                                data:{
+
+                                    "id":index1,
+                                    "reason":$("#bustTextArea").val()
+                                },
+                                success: function(data){
+                                    console.log(data)
+                                    switch(JSON.stringify(data.code))
+                                    {
+                                        case '"A00000"':
+
+                                            swal("短信已发送至客户");
+
+                                            location.reload();
+                                            break;
+                                        default:
+                                            alert("请求失败")
+
+                                    }
+                                },
+                                error:function(XmlHttpRequest,textStatus, errorThrown){
+                                    console.log("请求失败"+XmlHttpRequest.responseText);
+                                }
+                            });//审核失败
+                        }
+
+                    });
 
                 })
             },
@@ -1160,6 +2010,13 @@ $(document).ready(function () {
             }
         });
     });//上一页
+
+
+
+
+
+
+
 
 
 
@@ -1183,6 +2040,9 @@ $(document).ready(function () {
     function zhuangtai(e) {
         switch(e) {
 
+            case -1:
+                return '下架食堂'
+                break;
             case 0:
                 return '未审核食堂'
                 break;
@@ -1198,6 +2058,9 @@ $(document).ready(function () {
     function zhuangtai1(e) {
         switch(e) {
 
+            case -1:
+                return '下架食堂'
+                break;
             case 0:
                 return '未审核'
                 break;
@@ -1215,6 +2078,10 @@ $(document).ready(function () {
 
     function formatDate(data) {
         return $.myTime.UnixToDate(data,true,8);
+    }
+    
+    function showAlert() {
+
     }
 
 

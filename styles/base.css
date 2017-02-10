@@ -134,3 +134,33 @@ a{
 ul li{
     list-style: none;
 }
+
+/**Modal样式**/
+.base-container{
+    width: 598px;
+}
+
+.base-size{
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.base-btn{
+    position: relative;
+    margin-top: 3%;
+    margin-left: 25%;
+    width: 284px;
+}
+
+.base-alert{
+    margin-top: 3%;
+    margin-left: -2%;
+    width: 558px;
+}
+
+.base-textara{
+    margin-left: 18%;
+    width: 558px;
+}
