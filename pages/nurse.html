@@ -24,12 +24,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>菜品管理</title>
+    <title>护工审核</title>
     <link href="../styles/bootstrap/bootstrap.css" rel="stylesheet">
-    <link href="../styles/remodal-default-theme.css" rel="stylesheet">
-    <link href="../styles/remodal.css" rel="stylesheet">
+    <link href="../styles/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../styles/base.css" rel="stylesheet">
     <link href="../styles/dish-style.css" rel="stylesheet">
+    <link href="../styles/remodal-default-theme.css" rel="stylesheet">
     <style>
         textarea{
             border-radius: 5px;
@@ -171,12 +171,13 @@
         <div style="display: block;" id="cover">
 
         </div>
+
         <!--当前位置显示-->
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header h3-style">
                     <img src="../images/nurseMax.png">
-                    <a href="shop.html">护工认证</a>
+                    <a href="nurse.html">护工认证</a>
                 </h3>
                 <ol class="breadcrumb breadcrumb-bg">
                     <li>
@@ -195,20 +196,20 @@
             <div class="col-md-12">
                 <select id="type1" class="stateSelect">
                     <option>请点击下拉选择类型</option>
-                    <option>0-未审核食堂</option>
-                    <option>1-杭州地区食堂(已审核)</option>
-                    <option>2-暂无</option>
+                    <option>+0-未审核护工</option>
+                    <option>+1-杭州地区护工(已审核)</option>
+                    <option>-1-下架护工</option>
                 </select>
 
-                    <select class="select1 stateSelect select" >
-                        <!--  <option>点击下拉显示需要搜索的类型</option>-->
-                        <option>通过食堂名称搜索</option>
-                        <option>通过手机号搜索</option>
-                    </select>
-                    <div class="form-group serch-input">
-                        <input type="text" class="form-control wd" name="wd" placeholder="输入要搜索的值">
-                    </div>
-                    <button class="btn btn-default searchsub" id="searchOrder" onclick="return false">搜索</button>
+                <select class="select1 stateSelect select" >
+                    <!--  <option>点击下拉显示需要搜索的类型</option>-->
+                    <option>通过护工姓名搜索</option>
+                    <option>通过护工手机号搜索</option>
+                </select>
+                <div class="form-group serch-input">
+                    <input type="text" class="form-control wd" name="wd" placeholder="输入要搜索的值">
+                </div>
+                <button class="btn btn-default searchsub" id="searchOrder" onclick="return false">搜索</button>
 
             </div>
         </div>
@@ -218,11 +219,12 @@
                     <thead>
                     <tr>
                         <th>数据id</th>
-                        <th>商户类型</th>
-                        <th>食堂名称</th>
-                        <th>区域</th>
-                        <th>联系电话</th>
-                        <th>联系人</th>
+                        <th>服务时间类型</th>
+                        <th>护工姓名</th>
+                        <th>手机号</th>
+                        <th>性别</th>
+                        <th>身份证号</th>
+                        <th>工作年限</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
                         <th>详情</th>
@@ -245,44 +247,145 @@
                 </div>
             </div>
 
-            <div class="remodal" data-remodal-id="modal">
-                <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
-                <ul class="adddishesUl" id="audit1" style="display: block;">
+            <!--<div class="remodal audit" data-remodal-id="modal">-->
+            <!--<button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>-->
+            <!--<ul class="adddishesUl" id="audit1" style="display: block;">-->
 
-                    <h3>如果审核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />
-                    <select id="select1"><option>1-审核通过为杭州食堂</option></select><br /><br />
-                    <input type="button" id="button1" class="remodal-confirm" value="审核成功"></input>
-                    <br /><br /><br />
-                    <p>==================================================================</p>
-                    <h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>
-                    <textarea id="textarea1" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>
-                    <input type="button" id="button2" class="remodal-confirm" value="审核失败"></input>
+            <!--<h3>如果审a核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />-->
+            <!--<select id="select1"><option>1-审核通过为杭州食堂</option></select><br /><br />-->
+            <!--<input type="button" id="button1" class="remodal-confirm" value="审核成功"></input>-->
+            <!--<br /><br /><br />-->
+            <!--<p>==================================================================</p>-->
+            <!--<h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>-->
+            <!--<textarea id="textarea1" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>-->
+            <!--<input type="button" id="button2" class="remodal-confirm" value="审核失败"></input>-->
 
-                </ul>
-                <ul class="adddishesUl" id="audit2" style="display: none;">
+            <!--</ul>-->
+            <!--<ul class="adddishesUl" id="audit2" style="display: none;">-->
 
-                    <h3>如果审核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />
-                    <select id="select2"><option>1-审核通过为杭州食堂</option></select><br /><br />
-                    <input type="button" id="button1-2" class="remodal-confirm" value="审核成功"></input>
-                    <br /><br /><br />
-                    <p>==================================================================</p>
-                    <h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>
-                    <textarea id="textarea2" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>
-                    <input type="button" id="button2-2" class="remodal-confirm" value="审核失败"></input>
+            <!--<h3>如果审核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />-->
+            <!--<select id="select2"><option>1-审核通过为杭州食堂</option></select><br /><br />-->
+            <!--<input type="button" id="button1-2" class="remodal-confirm" value="审核成功"></input>-->
+            <!--<br /><br /><br />-->
+            <!--<p>==================================================================</p>-->
+            <!--<h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>-->
+            <!--<textarea id="textarea2" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>-->
+            <!--<input type="button" id="button2-2" class="remodal-confirm" value="审核失败"></input>-->
 
-                </ul>
-                <ul class="adddishesUl" id="audit3" style="display: none;">
+            <!--</ul>-->
+            <!--<ul class="adddishesUl" id="audit3" style="display: none;">-->
 
-                    <h3>如果审核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />
-                    <select id="select3"><option>1-审核通过为杭州食堂</option></select><br /><br />
-                    <input type="button" id="button1-3" class="remodal-confirm" value="审核成功"></input>
-                    <br /><br /><br />
-                    <p>==================================================================</p>
-                    <h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>
-                    <textarea id="textarea3" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>
-                    <input type="button" id="button2-3" class="remodal-confirm" value="审核失败"></input>
+            <!--<h3>如果审核成功，请先选择审核通过的地区，再请点击下方【审核成功】按钮</h3><br />-->
+            <!--<select id="select3"><option>1-审核通过为杭州食堂</option></select><br /><br />-->
+            <!--<input type="button" id="button1-3" class="remodal-confirm" value="审核成功"></input>-->
+            <!--<br /><br /><br />-->
+            <!--<p>==================================================================</p>-->
+            <!--<h3 style="color: red;">如果审核失败，请先填写审核失败的原因发给客户，填写完后再点击下方【审核失败】按钮</h3>-->
+            <!--<textarea id="textarea3" rows="10" cols="10" placeholder="请填写审核失败的原因"></textarea><br>-->
+            <!--<input type="button" id="button2-3" class="remodal-confirm" value="审核失败"></input>-->
 
-                </ul>
+            <!--</ul>-->
+            <!--</div>-->
+
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div class="jumbotron">
+                                <div class="container">
+                                    <h3>审核面板</h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="bs-example bs-example-tabs">
+                                <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#success" id="success-tab" role="tab" data-toggle="tab" aria-controls="success" aria-expanded="true">Successed</a>
+
+                                    </li>
+                                    <li role="presentation" class="active">
+                                        <a href="#faile" id="faile-tab" role="tab" data-toggle="tab" aria-controls="faile" aria-expanded="true">Faile</a>
+                                    </li>
+
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="success" aria-labelledby="success-tab">
+                                        <div class="container base-container">
+                                            <select id="select1" class="form-control base-size">
+                                                <option>1-审核为杭州地区护工</option>
+                                            </select>
+                                            <button type="button" class="btn btn1 btn-success base-btn">审核成功</button>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="faile" aria-labelledby="faile-tab">
+                                        <div class="container base-container">
+                                            <div class="alert alert-warning base-alert">
+                                                如果审核失败请在以下填写失败原因,系统会自动发送短信至该护工手机
+                                            </div>
+                                            <div class="alert alert-danger base-alert" id="nullAlert" style="display: none" role="alert"></div>
+                                            <textarea id="bustTextArea" class="form-control base-textara Xtextarea" rows="3"></textarea>
+                                            <button type="button" class="btn btn2 btn-danger base-btn">审核失败</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<div class="remodal sold-out" data-remodal-id="modal2">-->
+            <!--<button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>-->
+            <!--<ul class="adddishesUl" id="audit4" style="display: none">-->
+            <!--<h3 style="color: red;">如果商家有违规，请先填写违规的原因发给客户，填写完后再点击下方【下架】按钮</h3>-->
+            <!--<textarea id="Xtextarea" rows="10" cols="10" placeholder="请填写违规的原因"></textarea><br>-->
+            <!--<input type="button" id="Xbutton" class="remodal-confirm" value="下架"></input>-->
+
+            <!--</ul>-->
+            <!--</div>-->
+
+            <div class="modal fade" id="outModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div class="jumbotron">
+                                <div class="container">
+                                    <h3>下架面板</h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="bs-example bs-example-tabs">
+                                <div class="container base-container">
+                                    <div class="alert alert-warning base-alert">
+                                        如果需要下架护工请在以下填写下架原因,系统会自动发送短信至该护工手机
+                                    </div>
+                                    <textarea id="outTextArea" class="form-control base-textara Xtextarea" rows="3"></textarea>
+                                    <button type="button" class="btn btn-danger base-btn Xbutton">下架护工</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -293,7 +396,13 @@
 <script src="../scripts/jQuery/jquery.cookie.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../scripts/jQuery/jquery.md5.js" type="text/javascript" charset="utf-8"></script>
 <script src="../scripts/jQuery/jquery-time.js" type="text/javascript" charset="utf-8"></script>
-<script src="../scripts/jQuery/remodal.js" type="text/javascript" charset="utf-8"></script>
-<script src="../scripts/jQuery/upfile.js" type="text/javascript" charset="utf-8"></script>
-<script src="../scripts/js/shop.js"></script>
+<script src="../scripts/sweetalert/sweetalert-dev.js"></script>
+<script src="../scripts/jQuery/remodal.js"></script>
+<script src="../scripts/js/nurse.js"></script>
+<script>
+    $('#myTabs').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show');
+    });
+</script>
 </html>

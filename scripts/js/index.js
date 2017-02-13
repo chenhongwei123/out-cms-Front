@@ -128,11 +128,14 @@ $(document).ready(function () {
         }
 
     });
-    
+
+    /**
+     * 护工统计
+     */
     $.ajax({
 
         type:'get',
-        url:'http://admin.honganjk.com/admin/business.action',
+        url:'http://admin.honganjk.com/admin/nurses.action',
         async:true,
         headers:{
             "code":$.cookie("code"),
@@ -142,14 +145,12 @@ $(document).ready(function () {
 
         data: {
             "start":0,
-            "size":10
+            "size":20
         },
         success:function(data){
-            // console.log(data.data.objs);
-            dataArray = data.data.objs;
-            //数据存储在localStorage
-            window.localStorage.setItem("dataArray",dataArray);
-            console.log(dataArray);
+            var totla = data.data.total;
+            $('.nurse-count').append(totla);
+            console.log(totla);
         },
         error: function (msg) {
             alert("请求失败")
