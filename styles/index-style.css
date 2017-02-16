@@ -1,3 +1,9 @@
+@font-face {
+    font-family: NotoSans-Regular;
+    src: url('../fonts/NotoSans-Regular.ttf');
+}
+
+
 .ul-style li > a:hover{
     color: black;
 }
@@ -16,8 +22,14 @@
 }
 
 .main-index{
+    background-color: #FAFAFA;
     position: fixed;
     overflow-x: hidden;
+}
+
+.cms-breadcrub{
+    background-color: #EEEEEE;
+    color: #F95658;
 }
 
 /**
@@ -35,20 +47,25 @@
 
 .red-bg{
     color: #ffffff;
-    background: #d95043;
-    background-color: #d95043;
+    background: #FF5A5F;
+    background-color: #FF5A5F;
+    box-shadow: 2px 2px 16px #333333;
 }
 
 .green-bg{
     color: white;
-    background: #26c281;
-    background-color: #26c281;
+    background: #62B257;
+    background-color: #4BAE4F;
+    box-shadow: 2px 2px 16px #333333;
+
 }
 
 .blue-bg{
-    color: #ffffff;
-    background: #24a9e1;
-    background-color: #24a9e1;
+    color: #fdfdfd;
+    background: #46AEE6;
+    background-color: #46AEE6;
+    box-shadow: 2px 2px 16px #333333;
+
 }
 
 
@@ -57,7 +74,7 @@
     .info-box .count {
         float: right;
         margin-right: 25%;
-        margin-top: 20%;
+        margin-top: -23%;
         font-size: 30px;
     }
 
@@ -67,13 +84,30 @@
         font-size: 15px;
         font-weight: 600;
     }
+
+    .info-box-left{
+        width: 150px;
+        height: 130px;
+        display: block;
+        position: relative;
+        padding-top: 10%;
+        padding-bottom: -10%;
+    }
+
+    .user-title,.order-title,.shop-title{
+        margin-left: -13%;
+        text-align: center;
+    }
 }
 
+/*
+ *响应式设计
+**/
 @media screen and (min-width: 1903px) {
     .info-box .count {
         float: right;
         margin-right: 25%;
-        margin-top: 12%;
+        margin-top: -14%;
         font-size: 30px;
     }
 
@@ -83,8 +117,57 @@
         font-size: 15px;
         font-weight: 600;
     }
+
+    .info-box-left{
+        width: 150px;
+        height: 130px;
+        display: block;
+        position: relative;
+        padding-top: 6%;
+        padding-bottom: -10%;
+    }
+
+    .user-title,.order-title,.shop-title{
+        margin-left: -7%;
+        text-align: center;
+    }
+}
+
+.cms-navbar{
+    background-color: #009688;
+}
+
+.cms-shadow{
+    /*background-image: url("../images/shadow.png");*/
+    background-repeat: repeat-x;
+    background-size: 1px 12px;
+    height: 5px;
+    background: linear-gradient(#B3B3B3,#DDDDDD);
+    background: -webkit-linear-gradient(#B3B3B3,#DDDDDD);
+}
+
+.cms-font{
+    font-family: NotoSans-Regular;
 }
 
 
+
+.show-icon{
+    position: relative;
+    padding-top: -20%;
+    padding-left: 35%;
+    padding-right: 35%;
+
+}
+
+
+
+.active{
+    border-right: 6px solid #009688;
+}
+
+.active a:hover{
+    border-right: 6px solid #009688;
+}
 
 

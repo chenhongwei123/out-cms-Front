@@ -33,7 +33,7 @@
 </head>
 <body>
     <!--创建导航条-->
-    <nav class="navbar navbar-fixed-top navbar-inverse navbar-styles" role="navigation">
+    <nav class="navbar navbar-fixed-top navbar-inverse navbar-styles cms-navbar" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">鸿安CMS系统</a>
+                <a class="navbar-brand cms-font" href="index.html">鸿安CMS系统</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -61,6 +61,7 @@
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
+        <div class="cms-shadow"></div>
     </nav>
 
     <!--创建底部-->
@@ -72,55 +73,58 @@
                     <li class="active">
                         <a href="dish.html">
                             <img src="../images/dishmin.png">
-                            <span class="text">菜品管理</span>
+                            <span class="text cms-font">菜品管理</span>
                         </a>
 
                     </li>
                     <li class="active">
                         <a href="banner.html">
                             <img src="../images/banner.png">
-                            <span class="text">Banner管理</span>
+                            <span class="text cms-font">Banner管理</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="shop.html">
                             <img src="../images/shopMini.png">
-                            <span class="text">商户认证</span>
+                            <span class="text cms-font">商户认证</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="vision.html">
                             <img src="../images/visionMini.png">
-                            <span class="text">版本管理</span>
+                            <span class="text cms-font">版本管理</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="activity.html">
                             <img src="../images/actMin.png">
-                            <span class="text">充送活动</span>
+                            <span class="text cms-font">充送活动</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="user.html">
                             <img src="../images/userMin.png">
-                            <span class="text">用户管理</span>
+                            <span class="text cms-font">用户管理</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="order.html">
                             <img src="../images/orderMin.png">
-                            <span class="text">订单管理</span>
+                            <span class="text cms-font">订单管理</span>
                         </a>
                     </li>
-                    <li class="nurse">
+                    <li class="active">
                         <a href="nurse.html">
                             <img src="../images/nurseMin.png">
-                            <span class="text">护工审核</span>
+                            <span class="text cms-font">护工审核</span>
                         </a>
                     </li>
                 </ul>
+                <div class="sidebar-materia"></div>
             </div>
         </div>
+
+
         <!--创建操作面板-->
         <div class="col-sm-9 col-md-10 col-sm-offset-3 col-md-offset-2 main-console main-index">
             <!--当前位置显示-->
@@ -130,7 +134,7 @@
                         <img src="../images/wxbmain.png">
                         Dashboard
                     </h3>
-                    <ol class="breadcrumb">
+                    <ol class="breadcrumb cms-breadcrub">
                         <li>
                            <img src="../images/1.png">
                            <span>Dashboard</span>
@@ -143,33 +147,41 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <!--可以显示用户数-->
                     <div class="info-box red-bg">
-                        <img src="../images/user.png">
+                        <div class="info-box-left">
+                            <img class="show-icon" src="../images/user2.png">
+                            <div class="title user-title cms-font">用户统计</div>
+                        </div>
                         <div class="user-count count"></div>
-                        <div class="title">用户统计</div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <!--可以显示订单数-->
                     <div class="info-box green-bg">
-                        <img src="../images/orders.png">
+                        <div class="info-box-left">
+                            <img class="show-icon" src="../images/order50.png">
+                            <div class="title order-title cms-font">订单统计</div>
+                        </div>
                         <div class="order-count count"></div>
-                        <div class="title">订单统计</div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <!--显示注册店铺数-->
                     <div class="info-box blue-bg">
-                        <img src="../images/shop.png">
+                        <div class="info-box-left">
+                            <img class="show-icon" src="../images/shop50.png">
+                            <div class="title shop-title cms-font">食堂统计</div>
+                        </div>
                         <div class="shop-count count"></div>
-                        <div class="title">食堂统计</div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <!--显示护工人数-->
                     <div class="info-box blue-bg">
-                        <img src="../images/nurse.png">
+                        <div class="info-box-left">
+                            <img class="show-icon" src="../images/nurse50.png">
+                            <div class="title shop-title cms-font">护工统计</div>
+                        </div>
                         <div class="nurse-count count"></div>
-                        <div class="title">护工统计</div>
                     </div>
                 </div>
             </div>
